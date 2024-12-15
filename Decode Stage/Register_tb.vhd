@@ -40,7 +40,7 @@ begin
     -- Stimulus process
     stimulus : process
     begin
-        wait for 20 ns;
+        wait for 10 ns;
         
         reg_write_data <= "1010101010101010";
         reg_write_enable <= '1';

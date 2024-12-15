@@ -12,12 +12,15 @@ entity my_DFF is
 end entity my_DFF;
 
 architecture arch_my_DFF of my_DFF is
+    signal Q_int : std_logic := '1';  
 begin
+    Q <= Q_int;
+
     process (clk)
     begin
         if rising_edge(clk) then
             if enable = '1' then
-                Q <= D;
+                Q_int <= D;  
             end if;
         end if;
     end process;
