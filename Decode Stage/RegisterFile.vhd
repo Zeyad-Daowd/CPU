@@ -1,4 +1,3 @@
-
 library IEEE;
 USE IEEE.std_logic_1164.all;
 USE IEEE.numeric_std.all;
@@ -19,18 +18,17 @@ END ENTITY Register_File;
 ARCHITECTURE Register_File_Arch OF Register_File IS
     TYPE reg_file is Array(0 TO 7) of std_logic_vector(15 DOWNTO 0);
     signal my_reg_file: reg_file;
-
 BEGIN
     process (clk)
     begin
-        if rising_edge(clk) then
+        if falling_edge(clk) then
             if reg_write = '1' then
                 my_reg_file(to_integer(unsigned(write_addr))) <= write_data;
             end if;
-        end if;
+        end if;  
     end process;
 
     read_data_1 <= my_reg_file(to_integer(unsigned(read_addr_1)));
     read_data_2 <= my_reg_file(to_integer(unsigned(read_addr_2)));
-
+    
 END Register_File_Arch;

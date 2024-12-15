@@ -56,6 +56,7 @@ BEGIN
 
     stim_proc: process
     begin
+        wait for clk_period / 2;
         -- Test Case 1: Write to register 0
         reg_write <= '1';
         write_addr <= "000"; 
@@ -94,6 +95,7 @@ BEGIN
         read_addr_1 <= "011"; 
         wait for clk_period;
 
+        -- End simulation
         wait;
     end process;
 
