@@ -79,14 +79,17 @@ architecture Fetch_Block_arch OF Fetch_Block is
     signal int_pc: std_logic_vector(15 downto 0);
     signal INT_CTRL_sig: std_logic;
     signal mux_selector: std_logic_vector(2 downto 0);
+    signal index: std_logic_vector(15 downto 0);
 
 
 
 begin
 
     INT_CTRL_sig <= '1' when (instruction_tmp(15 downto 11) = "11110") else '0';
+    index <= "0000000000000010" when instruction_tmp(7) = '1' else "0000000000000001";
 
     mux_selector <= INT_CTRL_sig & ret_rti_sig & (call_sig or jmp_sig);
+
     
     pc0: PC PORT MAP(
         clk => clk,
@@ -119,7 +122,7 @@ begin
     );
 
     a_int : Adder PORT MAP(
-        input_value => pc_address_out_tmp,
+        input_value => index,
         immediate_value => "0000000000000110",
         result => int_pc
     );
