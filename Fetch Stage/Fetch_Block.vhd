@@ -86,7 +86,7 @@ architecture Fetch_Block_arch OF Fetch_Block is
 begin
 
     INT_CTRL_sig <= '1' when (instruction_tmp(15 downto 11) = "11110") else '0';
-    index <= "0000000000000010" when instruction_tmp(7) = '1' else "0000000000000001";
+    index <= "0000000000000010" when instruction_tmp(7) = '1' else "0000000000000000";
 
     mux_selector <= INT_CTRL_sig & ret_rti_sig & (call_sig or jmp_sig);
 
