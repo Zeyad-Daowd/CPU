@@ -80,7 +80,7 @@ begin
     HLT <= '1' when (instruction_tmp(15 downto 11) = "00001" and rst = '0') else '0';
     index <= "0000000000000010" when instruction_tmp(7) = '1' else "0000000000000000";
 
-    process(call_sig, jmp_sig, ret_rti_sig, INT_CTRL_sig, HLT, hazard_sig, exception_sig, rst, pc_address_in_tmp, next_pc_tmp, call_and_jmp_pc, ret_pc, int_pc, clk)
+    process(call_sig, jmp_sig, ret_rti_sig, INT_CTRL_sig, HLT, hazard_sig, exception_sig, rst, pc_address_in_tmp,pc_address_out_tmp, next_pc_tmp, call_and_jmp_pc, ret_pc, int_pc, clk)
     begin
         --choosing a pc
         if (call_sig = '1' or jmp_sig = '1') then
@@ -92,7 +92,7 @@ begin
         elsif (rst = '1') then --rst
             pc_address_in_tmp <= "0000000000000000"; 
         elsif (HLT = '1' or hazard_sig = '1') then --hlt or stall when hazard
-            pc_address_in_tmp <= pc_address_in_tmp;
+            pc_address_in_tmp <= pc_address_out_tmp;
         elsif (exception_sig = "01") then 
             pc_address_in_tmp <= "0000000000000011";
         elsif (exception_sig = "10") then 
