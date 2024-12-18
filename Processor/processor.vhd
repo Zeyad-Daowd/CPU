@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 
 entity processor is 
     port (
+		-- my_clk: in std_logic; -- uncommented when synthesis
         in_peripheral: in std_logic_vector(15 downto 0);
         out_peripheral: out std_logic_vector(15 downto 0)
     );
@@ -51,13 +52,13 @@ architecture arch_processor of processor is
 
     component decode is
         port (
-            clk : in std_logic; --
-            wb_reg_write: in std_logic; --
-            pipe_IF_out : in  std_logic_vector(4 downto 0); --
-            in_read_addr_1: in std_logic_vector(2 downto 0); --
-            in_read_addr_2: in std_logic_vector(2 downto 0); --
-            in_write_addr: in std_logic_vector(2 downto 0); -- 
-            in_write_data: in std_logic_vector(15 downto 0); --
+            clk : in std_logic; 
+            wb_reg_write: in std_logic; 
+            pipe_IF_out : in  std_logic_vector(4 downto 0); 
+            in_read_addr_1: in std_logic_vector(2 downto 0); 
+            in_read_addr_2: in std_logic_vector(2 downto 0); 
+            in_write_addr: in std_logic_vector(2 downto 0);  
+            in_write_data: in std_logic_vector(15 downto 0); 
             sp_plus_minus, sp_chosen: out std_logic_vector(15 downto 0);
             decode_push_pop: out std_logic;
             decode_int_or_rti: out std_logic;
@@ -82,13 +83,13 @@ architecture arch_processor of processor is
             decode_alu_op_code: out std_logic_vector(2 downto 0);
             decode_which_jmp: out std_logic_vector(1 downto 0);
             decode_which_r_src: out std_logic_vector(1 downto 0);
-            out_read_data_1: out std_logic_vector(15 downto 0); --
-            out_read_data_2: out std_logic_vector(15 downto 0) --
+            out_read_data_1: out std_logic_vector(15 downto 0); 
+            out_read_data_2: out std_logic_vector(15 downto 0) 
         );
     end component decode;
     -- TODO: to be removed signals 
     -- simulating clock -- 
-    signal my_clk: std_logic := '0';
+    signal my_clk: std_logic := '0'; -- commented when synthesis
     -- simulating hazards and exceptions 
     signal eden_hazard: std_logic := '0';
     signal exception_sig: std_logic_vector(1 downto 0) := (others => '0');
@@ -125,7 +126,7 @@ architecture arch_processor of processor is
     signal reset : std_logic := '0'; -- TODO: handle this
     
     begin
-        my_clk_process: process begin
+        clk_process: process begin -- commented when synthesis
             wait for 10 ns;
             my_clk <= not my_clk;
         end process;
