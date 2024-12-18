@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-ENTITY myDFF IS
+ENTITY zeyad_DFF IS
 PORT (
     clk : IN std_logic;   
     rst : IN std_logic;  
@@ -9,10 +9,13 @@ PORT (
     D : IN std_logic;     
     Q : OUT std_logic     
 );
-END myDFF;
+END zeyad_DFF;
 
-ARCHITECTURE mybehavior OF myDFF IS
+ARCHITECTURE mybehavior OF zeyad_DFF IS
+signal Q_temp : std_logic := '0';
 BEGIN
+
+    Q <= Q_temp; 
     PROCESS (clk, rst)
     BEGIN
         -- IF rst = '1' THEN
@@ -20,9 +23,9 @@ BEGIN
         -- ELS
         IF clk'event and clk = '0' THEN
             if rst = '1' then
-                Q <= '0';
+                Q_temp <= '0';
             elsIF enable = '1' THEN
-                Q <= D;  
+                Q_temp <= D;  
             END IF;
         END IF;
     END PROCESS;

@@ -14,12 +14,7 @@ ENTITY execute IS
         execForwardData: IN std_logic_vector (15 DOWNTO 0);
         fromIn: IN std_logic;
         inData: IN std_logic_vector (15 DOWNTO 0);
-        SPold: IN std_logic_vector (15 DOWNTO 0);
-        SPnew: IN std_logic_vector (15 DOWNTO 0);
-        SPsecondOperation: IN std_logic_vector (15 DOWNTO 0);
-        push_pop: IN std_logic; --push 0 pop 1
         dataBack       : OUT std_logic_vector (15 DOWNTO 0);
-        SPfirstOperation       : OUT std_logic_vector (15 DOWNTO 0);
         isJump: in std_logic;
         clk, rst: in std_logic;
         whichJump: in std_logic_vector(1 DOWNTO 0); -- 00 = always, 01 = zero, 10 = negative, 11 = carry
@@ -34,7 +29,7 @@ ENTITY execute IS
 END execute;
 
 ARCHITECTURE arch1 OF execute IS
-COMPONENT myDFF IS
+COMPONENT zeyad_DFF IS
     PORT (
         clk    : IN std_logic;   -- Clock input
         rst    : IN std_logic;   -- Reset input
@@ -60,9 +55,8 @@ signal carryFlagEnable, zeroFlagEnable, negativeFlagEnable : std_logic;
 signal carryFlagIN, zeroFlagIN, negativeFlagIN : std_logic;
 signal carryFlagOUT, zeroFlagOUT, negativeFlagOUT : std_logic;
 signal resetCarry, resetZero, resetNegative : std_logic;
-signal temp: std_logic;
 BEGIN
-    PROCESS (RegA, RegB, ALUop, imm_used, imm_loc, imm_value, memForward1, memForward2, execForward1, execForward2, memForwardData, execForwardData, fromIn, inData, SPold, SPnew, SPsecondOperation, push_pop, isJump, whichJump, carryFlagEn, zeroFlagEn, negativeFlagEn, RTI, set_C, carryFlagMem, zeroFlagMem, negativeFlagMem, aluRes, negativeFlagOUT, zeroFlagOUT, carryFlagOUT, clk)
+    PROCESS (RegA, RegB, ALUop, imm_used, imm_loc, imm_value, memForward1, memForward2, execForward1, execForward2, memForwardData, execForwardData, fromIn, inData, isJump, whichJump, carryFlagEn, zeroFlagEn, negativeFlagEn, RTI, set_C, carryFlagMem, zeroFlagMem, negativeFlagMem, aluRes, negativeFlagOUT, zeroFlagOUT, carryFlagOUT, clk)
     BEGIN
     ----- setting ALU INPUTS
 
@@ -94,12 +88,7 @@ BEGIN
     else
         dataBack <= aluRes;
     end if;
-    ----- setting SPfirstOperation
-    if (push_pop = '0') then
-        SPfirstOperation <= SPold;
-    else
-        SPfirstOperation <= SPnew;
-    end if;
+   
     ----- setting flags enables
     carryFlagEnable <= carryFlagEn or RTI or set_C;
     zeroFlagEnable <= zeroFlagEn or RTI;
@@ -143,14 +132,8 @@ BEGIN
             when "10" =>
                 if negativeFlagOUT = '1' then
                     jumpFlag <= '1';
-                    if (clk'event and clk = '0') then
-                        temp <= '1';
-                    end if;
                 else
                     jumpFlag <= '0';
-                    if (clk'event and clk = '0') then
-                        temp <= '0';
-                    end if;
                 end if;
 
             when "11" =>
@@ -176,21 +159,21 @@ ALU_component: ALU PORT MAP(
     zeroFlag => zeroFlagALU,
     negativeFlag => negativeFlagALU
 );
-zeroflag_Register: myDFF PORT MAP(
+zeroflag_Register: zeyad_DFF PORT MAP(
     clk => clk,
     rst => resetZero,
     enable => zeroFlagEnable,
     D => zeroFlagIN,
     Q => zeroFlagOUT
 );
-carryflag_Register: myDFF PORT MAP(
+carryflag_Register: zeyad_DFF PORT MAP(
     clk => clk,
     rst => resetCarry,
     enable => carryFlagEnable,
     D => carryFlagIN,
     Q => carryFlagOUT
 );
-negativeflag_Register: myDFF PORT MAP(
+negativeflag_Register: zeyad_DFF PORT MAP(
     clk => clk,
     rst => resetNegative,
     enable => negativeFlagEnable,
