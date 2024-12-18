@@ -19,7 +19,7 @@ entity Fetch_Block is
         call_and_jmp_pc: in std_logic_vector(15 downto 0);
         ret_pc: in std_logic_vector(15 downto 0);
 
-        --writing to instruction memory
+        -- writing to instruction memory
         im_write_enable: in std_logic;
         im_write_address: in std_logic_vector(15 downto 0);
         im_write_data: in std_logic_vector(15 downto 0);
@@ -34,7 +34,7 @@ end Fetch_Block;
 
 architecture Fetch_Block_arch OF Fetch_Block is
 
-    COMPONENT reg IS 
+    COMPONENT hana_reg IS 
         PORT(
             clk: in std_logic;
             reg_write_enable: in std_logic;
@@ -104,7 +104,7 @@ begin
 
 
     
-    pc0: reg PORT MAP(
+    pc0: hana_reg PORT MAP(
         clk => clk,
         reg_write_enable => '1',
         reg_write_data => pc_address_in_tmp,
