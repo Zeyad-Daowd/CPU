@@ -6,7 +6,7 @@ entity Instruction_Memory is
     port (
         clk: in std_logic; -- Clock 
         -- for reading the instructions
-        pc: in std_logic_vector(15 downto 0); -- read addres [PC]
+        pc: in std_logic_vector(15 downto 0); -- read address [PC]
         instruction: out std_logic_vector(15 downto 0); -- 16-bit instruction 
         -- for writing the instructions
         write_enable: in std_logic;  -- Write enable signal
@@ -19,14 +19,12 @@ architecture Behavioral of Instruction_Memory is
     -- memory array
     type memory_array is array (0 to 4095) of std_logic_vector(15 downto 0);
     signal memory: memory_array := (
-        -- to test interrupt instruction
-        -- 0 => "0000000000000000",   -- Instruction at index 0 
-        -- 1 => "0000000000000100",   -- Instruction at index 0
-        -- 2 => "1111000000000000",   -- Instruction at index 0 "int"
-        -- 3 => "0000100000000000",     -- Instruction at index 1 "hlt"
+        0 => "0001000000000000", -- 00010|xxxxxxxxxx|0
+        1 => "0001101001100000", -- 00011|010|011|xxxx|0
+        2 => "0011001100000000", -- 00110|011|xxxxxxx|0
+        3 => "0100110101000000", -- 01001|101 010 000|x|0 
         others => (others => '0')   -- Initialize the rest of the memory to 0
     );
-
 
     signal instruction_reg: std_logic_vector(15 downto 0); -- Register for instruction output
 begin
@@ -40,6 +38,7 @@ begin
             end if;
         end if;
     end process;
+
     instruction_reg <= memory(to_integer(unsigned(pc))) when to_integer(unsigned(pc)) < 4096 else (others => '0');
 
     -- Output the instruction
