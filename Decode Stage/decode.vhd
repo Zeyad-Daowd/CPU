@@ -4,7 +4,13 @@ use ieee.numeric_std.all;
 
 entity decode is
     port (
-        pipe_IF_out : in  std_logic_vector(31 downto 0);
+        clk : in std_logic; 
+        wb_reg_write: in std_logic;
+        pipe_IF_out : in  std_logic_vector(4 downto 0); 
+        in_read_addr_1: in std_logic_vector(2 downto 0); 
+        in_read_addr_2: in std_logic_vector(2 downto 0); 
+        in_write_addr: in std_logic_vector(2 downto 0);  
+        in_write_data: in std_logic_vector(15 downto 0); 
         sp_plus_minus, sp_chosen: out std_logic_vector(15 downto 0);
         decode_push_pop: out std_logic;
         decode_int_or_rti: out std_logic;
@@ -28,7 +34,9 @@ entity decode is
         decode_ret_or_rti: out std_logic;
         decode_alu_op_code: out std_logic_vector(2 downto 0);
         decode_which_jmp: out std_logic_vector(1 downto 0);
-        decode_which_r_src: out std_logic_vector(1 downto 0)
+        decode_which_r_src: out std_logic_vector(1 downto 0);
+        out_read_data_1: out std_logic_vector(15 downto 0); 
+        out_read_data_2: out std_logic_vector(15 downto 0)
     );
 end entity decode;
 architecture arch_decode of decode is
@@ -57,6 +65,19 @@ architecture arch_decode of decode is
             data_out: out std_logic_vector(15 downto 0)
         );
     end component Add_signed;
+
+    component Register_File is 
+        port (
+            clk: in std_logic;
+            reg_write: in std_logic;
+            read_addr_1: in std_logic_vector(2 downto 0);
+            read_addr_2: in std_logic_vector(2 downto 0);
+            write_addr: in std_logic_vector(2 downto 0);
+            write_data: in std_logic_vector(15 downto 0);
+            read_data_1: out std_logic_vector(15 downto 0);
+            read_data_2: out std_logic_vector(15 downto 0)
+        );
+    end component Register_File;
 
     component control_unit is 
         port (
@@ -155,10 +176,20 @@ begin
             selected => sp_chosen
         );
 
+    reg_file : Register_File port map (
+        clk => clk,
+        reg_write => wb_reg_write,
+        read_addr_1 => in_read_addr_1, 
+        read_addr_2 => in_read_addr_2,
+        write_addr => in_write_addr,
+        write_data => in_write_data,
+        read_data_1 => out_read_data_1,
+        read_data_2 => out_read_data_2
+    );
     
     control: control_unit 
         port map(
-            op_code => pipe_IF_out(7 downto 3),
+            op_code => pipe_IF_out,
             push_pop => sim_push_pop,
             int_or_rti => sim_int_or_rti,
             sp_wen => sim_sp_wen,
