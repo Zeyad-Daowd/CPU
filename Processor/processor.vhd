@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity processor is 
     port (
-		-- my_clk: in std_logic; -- uncommented when synthesis
+		  my_clk: in std_logic; -- uncommented when synthesis
         in_peripheral: in std_logic_vector(15 downto 0);
         out_peripheral: out std_logic_vector(15 downto 0)
     );
@@ -87,9 +87,36 @@ architecture arch_processor of processor is
             out_read_data_2: out std_logic_vector(15 downto 0) 
         );
     end component decode;
+
+    component execute IS
+        port (
+            RegA, RegB    : IN std_logic_vector (15 DOWNTO 0);
+            ALUop: IN std_logic_vector (2 DOWNTO 0);
+            imm_used: IN std_logic;
+            imm_loc: IN std_logic;
+            imm_value: IN std_logic_vector (15 DOWNTO 0);
+            memForward1, memForward2: IN std_logic;
+            execForward1, execForward2: IN std_logic;
+            memForwardData: IN std_logic_vector (15 DOWNTO 0);
+            execForwardData: IN std_logic_vector (15 DOWNTO 0);
+            fromIn: IN std_logic;
+            inData: IN std_logic_vector (15 DOWNTO 0);
+            dataBack       : OUT std_logic_vector (15 DOWNTO 0);
+            isJump: in std_logic;
+            clk, rst: in std_logic;
+            whichJump: in std_logic_vector(1 DOWNTO 0); -- 00 = always, 01 = zero, 10 = negative, 11 = carry
+            jumpFlag: OUT std_logic;
+            carryFlagEn, zeroFlagEn, negativeFlagEn: in std_logic;
+            RTI, set_C : in std_logic;
+            carryFlagMem    : in std_logic;
+            zeroFlagMem     : in std_logic;
+            negativeFlagMem : in std_logic;
+            carryFlagOutput, zeroFlagOutput, negativeFlagOutput : out std_logic
+        );
+    END component execute;
     -- TODO: to be removed signals 
     -- simulating clock -- 
-    signal my_clk: std_logic := '0'; -- commented when synthesis
+    --signal my_clk: std_logic := '0'; -- commented when synthesis
     -- simulating hazards and exceptions 
     signal eden_hazard: std_logic := '0';
     signal exception_sig: std_logic_vector(1 downto 0) := (others => '0');
@@ -119,37 +146,68 @@ architecture arch_processor of processor is
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
     signal out_decode_sp_plus_minus, out_decode_sp_chosen,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
-    signal d_idie : std_logic_vector(161 downto 0);
-    signal q_idie: std_logic_vector(161 downto 0) := (others => '0');
+    signal d_idie : std_logic_vector(163 downto 0);
+    signal q_idie: std_logic_vector(163 downto 0) := (others => '0');
     --------------------------------- Execute Signals ----------------------------
+    signal exec_data_out : std_logic_vector(15 downto 0);
+    signal exec_jumpFlag, exec_carryFlagOutput, exec_zeroFlagOutput, exec_negativeFlagOutput : std_logic := '0';
     
+        ----------------------------- IEMEM pipeline signals ---------------------
+    signal d_ex_mem : std_logic_vector(100 downto 0);
+    signal q_ex_mem : std_logic_vector(100 downto 0) := (others => '0');
+
+
+
     signal reset : std_logic := '0'; -- TODO: handle this
+    signal temp: std_logic := '0';
     
     begin
-        clk_process: process begin -- commented when synthesis
-            wait for 10 ns;
-            my_clk <= not my_clk;
-        end process;
+        --clk_process: process begin  -- commented when synthesis
+          --  wait for 10 ns;
+            --my_clk <= not my_clk;
+        --end process;
 
         d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;
-
-        q_ifid <= decode_pc & decode_next_pc & decode_instruction;
+        decode_pc <= q_ifid(47 downto 32);
+        decode_next_pc <= q_ifid(31 downto 16);
+        decode_instruction <= q_ifid(15 downto 0);
 
         d_idie <= (
-            out_decode_push_pop & out_decode_int_or_rti & out_decode_sp_wen & out_decode_Mem_addr & out_decode_zero_neg_flag_en &
-            out_decode_carry_flag_en & out_decode_reg_write & out_decode_is_jmp & out_decode_mem_read &
-            out_decode_mem_write & out_decode_imm_used & out_decode_imm_loc & out_decode_out_wen & out_decode_from_in & out_decode_mem_wr_data
-            & out_decode_call & out_decode_ret & out_decode_int & out_decode_rti & out_decode_ret_or_rti
-            & out_decode_alu_op_code & out_decode_which_r_src
-            & out_decode_sp_chosen & out_decode_sp_plus_minus 
-            & decode_pc & decode_next_pc
-            & decode_instruction(10 downto 8) & decode_instruction(7 downto 5) &  decode_instruction(4 downto 2) 
-            & out_decode_read_data_1 & out_decode_read_data_2
-            & immediate
-            & in_peripheral
+            out_decode_which_jmp -- [163, 162]
+            & fetch_instruction -- [161 -> 146] 
+            & in_peripheral -- [130 -> 145]
+            & out_decode_read_data_2 -- [114 -> 129]
+            & out_decode_read_data_1 -- [98 -> 113]
+            & decode_instruction(4 downto 2) -- [95 -> 97]
+            & decode_instruction(7 downto 5) -- [92 -> 94]
+            & decode_instruction(10 downto 8) -- [89 -> 91]
+            & decode_next_pc -- [73 -> 88]
+            & decode_pc -- [57 -> 72]
+            & out_decode_sp_plus_minus -- [41 -> 56]
+            & out_decode_sp_chosen -- [25 -> 40]
+            & out_decode_which_r_src -- 23, 24
+            & out_decode_alu_op_code -- 20, 21, 22
+            & out_decode_ret_or_rti -- 19
+            & out_decode_rti -- 18
+            & out_decode_int -- 17
+            & out_decode_ret -- 16
+            & out_decode_call -- 15
+            & out_decode_mem_wr_data -- 14
+            & out_decode_from_in -- 13
+            & out_decode_out_wen -- 12
+            & out_decode_imm_loc -- 11
+            & out_decode_imm_used -- 10
+            & out_decode_mem_write -- 9
+            & out_decode_mem_read -- 8
+            & out_decode_is_jmp -- 7
+            & out_decode_reg_write -- 6
+            & out_decode_carry_flag_en -- 5
+            & out_decode_zero_neg_flag_en -- 4
+            & out_decode_Mem_addr -- 3
+            & out_decode_sp_wen  -- 2
+            & out_decode_int_or_rti -- 1
+            & out_decode_push_pop -- 0
         );
-
-        q_idie <= decode_pc & decode_next_pc & decode_instruction & temp_idie;
 
         fetch_stage: Fetch_Block port map (
             clk => my_clk,
@@ -215,11 +273,46 @@ architecture arch_processor of processor is
             out_read_data_2 => out_decode_read_data_2 
         );
 
-        ID_IE: my_nDFF generic map (162) port map (
+        ID_IE: my_nDFF generic map (164) port map (
             Clk => my_clk,
             Rst => '0',
             writeEN => '1',
             d => d_idie,
             q => q_idie
         );
+
+        execute_stage: execute port map (
+            clk => my_clk,
+            rst => temp,
+            RegA => q_idie(113 downto 98),
+            RegB => q_idie(129 downto 114),
+            ALUop => q_idie(22 downto 20),
+            imm_used => q_idie(10),
+            imm_loc => q_idie(11),
+            imm_value => q_idie(161 downto 146),
+            memForward1 => temp, -- TODO
+            memForward2 => temp, -- TODO
+            execForward1 => temp, -- TODO
+            execForward2 => temp, -- TODO
+            memForwardData => "0000000000000000", -- TODO
+            execForwardData => "0000000000000000", -- TODO
+            fromIn => q_idie(13),
+            inData => q_idie(145 downto 130),
+            isJump => q_idie(7),
+            whichJump => q_idie(163 downto 162),
+            carryFlagEn => q_idie(5),
+            zeroFlagEn => q_idie(4),
+            negativeFlagEn => q_idie(4),
+            RTI => q_idie(18),
+            set_C => temp, -- TODO Decode
+            carryFlagMem => temp, -- TODO
+            zeroFlagMem => temp, -- TODO
+            negativeFlagMem => temp, -- TODO
+            jumpFlag => exec_jumpFlag,
+            carryFlagOutput => exec_carryFlagOutput, 
+            zeroFlagOutput => exec_zeroFlagOutput,
+            negativeFlagOutput => exec_negativeFlagOutput,
+            dataBack => exec_data_out
+        );
+
 end architecture;
