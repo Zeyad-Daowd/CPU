@@ -20,8 +20,14 @@ entity control_unit is
         out_wen: out std_logic;
         from_in: out std_logic;
         mem_wr_data: out std_logic;
+        call: out std_logic;
+        ret: out std_logic;
+        int: out std_logic;
+        rti: out std_logic;
+        ret_or_rti: out std_logic;
         alu_op_code: out std_logic_vector(2 downto 0);
-        which_jmp: out std_logic_vector(1 downto 0)
+        which_jmp: out std_logic_vector(1 downto 0);
+        which_r_src: out std_logic_vector(1 downto 0)
     );
 end entity;
 
@@ -88,6 +94,17 @@ begin
                     
     mem_wr_data <= (op_code(4) and op_code(3) and op_code(2));
 
+    call <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0));
+
+    ret <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0));
+
+    int <= (op_code(4) and op_code(3) and op_code(2) and op_code(1) and not op_code(0));
+
+    rti <= (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0));
+
+    ret_or_rti <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0)) or
+                    (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0));
+
     process(op_code) begin
         case op_code is
             when "00011" => alu_op_code <= "001";
@@ -107,4 +124,22 @@ begin
             when others => which_jmp <= "00";
         end case;
     end process;
+
+    process(op_code)
+    begin
+        case op_code is
+            when "11100" | "11011" | "11010" | "11001" | "11000" | 
+                 "10011" | "10000" | "01100" | "01000" | "00101" | 
+                 "00100" | "00011" =>
+                which_r_src <= "01";
+
+            when "10100" | "01011" | "01010" | "01001" =>
+                which_r_src <= "11";
+
+            when others =>
+                which_r_src <= "00"; 
+
+        end case;
+    end process;
+
 end architecture;
