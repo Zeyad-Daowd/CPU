@@ -115,10 +115,111 @@ architecture arch_processor of processor is
             carryFlagOutput, zeroFlagOutput, negativeFlagOutput : out std_logic
         );
     END component execute;
+
+    component forwarding_unit is
+        Port ( 
+            regWrite_ex_mem : in std_logic;
+            regWrite_mem_wb : in std_logic;
+            rd_ex_mem : in std_logic_vector(2 downto 0); 
+            rd_mem_wb : in std_logic_vector(2 downto 0); 
+            rs_id_ex : in std_logic_vector(2 downto 0); 
+            rt_id_ex : in std_logic_vector(2 downto 0); 
+            forward_a: out std_logic_vector(1 downto 0);
+            forward_b: out std_logic_vector(1 downto 0)
+        );
+    end component forwarding_unit;
+
+    component Exception_Unit IS 
+        PORT (
+            Mem_read_en : IN std_logic; -- read enable from inst.
+            Mem_write_en : IN std_logic; -- write enable from inst.
+            push : IN std_logic; -- 1 for push inst.
+            pop : IN std_logic; -- 1 for pop inst.
+            Mem_read_en_exception : OUT std_logic; -- read enable from excep.
+            Mem_write_en_exception : OUT std_logic; -- write enable from excep.
+            mem_address : IN std_logic_vector(15 DOWNTO 0); -- memory address to be accessed
+            sp : IN std_logic_vector(15 DOWNTO 0); -- stack pointer
+            pc : IN std_logic_vector(15 DOWNTO 0); -- program counter of current inst.
+            epc : OUT std_logic_vector(15 DOWNTO 0); -- epc "=pc if exception found"
+            -- FLUSH FETCH IF STACK EXCEPTION
+            -- FLUSH F/D/E IF MEMORY EXCEPTION 
+            IF_D_flush : OUT std_logic;
+            D_EX_flush : OUT std_logic;
+            EX_M_flush : OUT std_logic;
+            -- CHOOSE PC = SUITABLE EXCEPTION HANDLER 
+            pc_sel :OUT std_logic_vector(1 DOWNTO 0) -- 00 "NO" 01 "INVALID ADDRESS" 10 "EMPTY STACK" 11 "FULL STACK"
+        );
+    END component Exception_Unit;
+
+    component Memory_Stage IS 
+    PORT (
+        clk : IN std_logic;
+        rst : IN std_logic;
+        Mem_reg : IN std_logic; -- write back to memory or to reg
+        RegWrite : IN std_logic; -- is there a write back or not
+        Mem_read_en : IN std_logic; -- read enable from inst.
+        Mem_write_en : IN std_logic; -- write enable from inst.
+        Mem_read_en_exception : IN std_logic; -- read enable from excep.
+        Mem_write_en_exception : IN std_logic; -- write enable from excep.
+        PC : IN std_logic_vector(15 DOWNTO 0); -- PC + 1
+        FLAGS : IN std_logic_vector(15 DOWNTO 0); -- FLAGS to be stored in memory (INT)
+        SP : IN std_logic_vector(15 DOWNTO 0); --     SP     OR    SP+1
+        SP_SEC : IN std_logic_vector(15 DOWNTO 0); -- SP-1   OR    SP+2
+        R_Rsrc : IN std_logic_vector(15 DOWNTO 0); -- reg data may be written to memory
+        Data_back : IN std_logic_vector(15 DOWNTO 0); -- calculated offset from ALU
+        mem_address : IN std_logic; -- MUX Selector to choose address "sp or offset"
+        Mem_write_data : IN std_logic; -- MUX Selector to choose data "(pc or flags) or reg data"
+
+        Rdst : IN std_logic_vector(2 DOWNTO 0); -- Rdst of inst.
+        -- FLAGS_WR : IN std_logic_vector(2 DOWNTO 0); -- in case of popping flags ??
+        Mem_Data_Out : OUT std_logic_vector(15 DOWNTO 0); -- data out from memory
+
+        -- needed to be passed to Mem-WB Reg
+        Mem_reg_Out : OUT std_logic;
+        RegWrite_Out : OUT std_logic;
+        Data_back_Out : OUT std_logic_vector(15 DOWNTO 0);
+        -- FLAGS_WR_Out : OUT std_logic_vector(2 DOWNTO 0);  -- ??
+
+        PC_Out : OUT std_logic; -- when popping pc
+        Flags_Out : OUT std_logic; -- when popping flags
+
+        -- Call
+        -- Flags_reserved
+        -- RET
+        Call : IN std_logic;
+        INT : IN std_logic;
+        RET : IN std_logic;
+        RTI : IN std_logic);
+
+    END component Memory_Stage;
+    component Write_Back is
+        port (
+            --signals
+            memToReg: in std_logic;
+        
+            --write data
+            dataBack: in std_logic_vector(15 downto 0);
+            mem: in std_logic_vector(15 downto 0);
+            --outputs
+            --write data
+            write_data: out std_logic_vector(15 downto 0)
+            --stack data or mem forwarding
+        
+        );
+    end component Write_Back;
+    component hazardUnit IS
+    PORT (
+        memRead : IN std_logic;   -- from execute reg i guess
+        Rdst : IN std_logic_vector (2 DOWNTO 0); -- from execute reg
+        Rsrc1, Rsrc2 : IN std_logic_vector (2 DOWNTO 0);  -- from decode reg
+        Rsrc1Used, Rsrc2Used : IN std_logic; -- from decoder
+        hazard_detected : OUT std_logic     
+    );
+    END component;
     -- TODO: to be removed signals 
     -- simulating hazards and exceptions 
     signal eden_hazard: std_logic := '0';
-    signal exception_sig: std_logic_vector(1 downto 0) := (others => '0');
+    
     -- simulating data from wb stage
     signal write_addr_from_wb : std_logic_vector(2 downto 0);
     signal write_data_from_wb : std_logic_vector(15 downto 0);
@@ -145,18 +246,30 @@ architecture arch_processor of processor is
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
     signal out_decode_sp_plus_minus, out_decode_sp_chosen,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
-    signal d_idie : std_logic_vector(164 downto 0);
+    signal d_idie : std_logic_vector(164 downto 0); 
     signal q_idie: std_logic_vector(164 downto 0) := (others => '0');
+    -------------------------------- Forward Unit ----------------------------
+    signal forward_a_signal, forward_b_signal : std_logic_vector(1 downto 0) := (others => '0');
+    -------------------------------- Exception Unit --------------------------
+    signal Mem_read_en_exception_signal, Mem_write_en_exception_signal : std_logic := '1';
+    signal exception_sig: std_logic_vector(1 downto 0) := (others => '0');
+    signal zeros_16: std_logic_vector(15 downto 0) := (others => '0');
+    signal epc_signal: std_logic_vector(15 downto 0) := (others => '0');
+    signal IF_D_flush_signal, D_EX_flush_signal, EX_M_flush_signal : std_logic := '0';
     --------------------------------- Execute Signals ----------------------------
     signal exec_data_out : std_logic_vector(15 downto 0);
     signal exec_jumpFlag, exec_carryFlagOutput, exec_zeroFlagOutput, exec_negativeFlagOutput : std_logic := '0';
     
         ----------------------------- IEMEM pipeline signals ---------------------
-    signal d_ex_mem : std_logic_vector(100 downto 0);
-    signal q_ex_mem : std_logic_vector(100 downto 0) := (others => '0');
-
-
-
+    signal d_ex_mem : std_logic_vector(116 downto 0);
+    signal q_ex_mem : std_logic_vector(116 downto 0) := (others => '0');
+    signal zeros: std_logic_vector(12 downto 0) := (others => '0');
+        ----------------------------- IMEMWB pipeline signals ---------------------
+    signal d_mem_wb : std_logic_vector(36 downto 0);
+    signal q_mem_wb : std_logic_vector(36 downto 0) := (others => '0');
+    signal pcOutFromMemory: std_logic;
+    signal dataOutFromMemory, writeBackOut: std_logic_vector(15 downto 0);
+    signal writeFlagsFromMemory: std_logic;
     signal reset : std_logic := '0'; -- TODO: handle this
     signal temp: std_logic := '0';
     
@@ -204,6 +317,36 @@ architecture arch_processor of processor is
             & out_decode_int_or_rti -- 1
             & out_decode_push_pop -- 0
         );
+        d_ex_mem <= (
+            q_idie (97 downto 95) --- 114 to 116 (2nd addr)
+            & q_idie (94 downto 92) -- 111 to 113 (first reg addr)
+            & q_idie(18) -- 110
+            & q_idie(16) -- 109
+            & q_idie(17) -- 108
+            & q_idie(15) -- 107
+            & q_idie(91 downto 89) -- 104 to 106
+            & q_idie(14) -- 103
+            & q_idie(3) -- 102
+            & exec_data_out --86 to 101
+            & q_idie(113 downto 98) -- 70 to 85
+            & q_idie(56 downto 41) -- 54 to 69
+            & q_idie(40 downto 25) -- 38 to 53
+            & zeros & exec_carryFlagOutput & exec_zeroFlagOutput & exec_negativeFlagOutput -- 22 to 37
+            & q_idie(88 downto 73) -- 6 to 21
+            & temp      --5
+            & temp      --4
+            & q_idie(9) --3
+            & q_idie(8) -- 2
+            & q_idie(6) -- 1
+            & temp -- 0
+        );
+        d_mem_wb <= (
+            q_ex_mem(1) -- 36
+            & q_ex_mem (106 downto 104) -- 33 to 35
+            & dataOutFromMemory -- 17 to 32
+            & q_ex_mem(101 downto 86) -- 1 to 16
+            & q_ex_mem(0) -- 0
+        );
 
         fetch_stage: Fetch_Block port map (
             clk => my_clk,
@@ -234,12 +377,12 @@ architecture arch_processor of processor is
 
         decode_stage: decode port map ( 
             clk => my_clk,
-            wb_reg_write => reg_write_from_wb, -- TODO: come from wb
+            wb_reg_write => q_mem_wb(36), -- TODO: come from wb
             pipe_IF_out => decode_instruction(15 downto 11),
             in_read_addr_1 => decode_instruction(7 downto 5),
             in_read_addr_2 => decode_instruction(4 downto 2),
-            in_write_addr => write_addr_from_wb,
-            in_write_data => write_data_from_wb, 
+            in_write_addr => q_mem_wb(35 downto 33), -- from wb
+            in_write_data => writeBackOut, --from wb
             sp_plus_minus => out_decode_sp_plus_minus,
             sp_chosen => out_decode_sp_chosen,
             decode_push_pop => out_decode_push_pop,
@@ -278,6 +421,46 @@ architecture arch_processor of processor is
             q => q_idie
         );
 
+        forward_unit: forwarding_unit port map (
+            regWrite_ex_mem => q_ex_mem(1), 
+            regWrite_mem_wb => q_mem_wb(36), 
+            rd_ex_mem => q_ex_mem(106 downto 104),  
+            rd_mem_wb => q_ex_mem(35 downto 33),  
+            rs_id_ex => q_ex_mem(113 downto 111),  
+            rt_id_ex => q_ex_mem(116 downto 114),  
+            forward_a => forward_a_signal, 
+            forward_b => forward_b_signal
+        );
+        
+        nathan_hazard_unit: hazardUnit port map (
+            memRead => q_ex_mem(2),   -- from executeMem reg i guess
+            Rdst => q_ex_mem(106 downto 104),-- from executeMem reg
+            Rsrc1 => q_ex_mem(113 downto 111), 
+            Rsrc2 => q_ex_mem(116 downto 114),  -- from decodeEX reg
+            Rsrc1Used => q_idie(23),
+            Rsrc2Used => q_idie(24), -- from decoder
+            hazard_detected => eden_hazard  
+        );
+
+
+        except_unit: Exception_Unit port map (
+            Mem_read_en => q_ex_mem(2), 
+            Mem_write_en => q_ex_mem(3),
+            push => temp, -- 1 for push inst.
+            pop => temp, -- 1 for pop inst.
+            Mem_read_en_exception => Mem_read_en_exception_signal, -- read enable from excep.
+            Mem_write_en_exception => Mem_write_en_exception_signal, -- write enable from excep.
+            mem_address => q_ex_mem(101 downto 86), -- memory address to be accessed
+            sp => out_decode_sp_chosen, -- TODO decode -- stack pointer
+            pc => zeros_16, -- TODO: Fatma -- program counter of current inst.
+            epc => epc_signal, -- TODO m4 awy: Fatma epc "=pc if exception found"
+            IF_D_flush => IF_D_flush_signal,
+            D_EX_flush => D_EX_flush_signal,
+            EX_M_flush => EX_M_flush_signal, 
+            -- CHOOSE PC = SUITABLE EXCEPTION HANDLER 
+            pc_sel => exception_sig -- 00 "NO" 01 "INVALID ADDRESS" 10 "EMPTY STACK" 11 "FULL STACK"
+        );
+
         execute_stage: execute port map (
             clk => my_clk,
             rst => temp,
@@ -287,12 +470,12 @@ architecture arch_processor of processor is
             imm_used => q_idie(10),
             imm_loc => q_idie(11),
             imm_value => q_idie(161 downto 146),
-            memForward1 => temp, -- TODO
-            memForward2 => temp, -- TODO
-            execForward1 => temp, -- TODO
-            execForward2 => temp, -- TODO
-            memForwardData => "0000000000000000", -- TODO
-            execForwardData => "0000000000000000", -- TODO
+            memForward1 => forward_a_signal(0), -- TODO
+            memForward2 => forward_b_signal(0), -- TODO
+            execForward1 => forward_a_signal(1), -- TODO
+            execForward2 => forward_b_signal(1), -- TODO
+            memForwardData => q_mem_wb(32 downto 17), -- TODO
+            execForwardData => q_ex_mem(101 downto 86), -- TODO
             fromIn => q_idie(13),
             inData => q_idie(145 downto 130),
             isJump => q_idie(7),
@@ -300,11 +483,11 @@ architecture arch_processor of processor is
             carryFlagEn => q_idie(5),
             zeroFlagEn => q_idie(4),
             negativeFlagEn => q_idie(4),
-            RTI => q_idie(18),
-            set_C => d_idie(164), -- TODO Decode
-            carryFlagMem => temp, -- TODO
-            zeroFlagMem => temp, -- TODO
-            negativeFlagMem => temp, -- TODO
+            RTI => writeFlagsFromMemory,  -- from memory stage
+            set_C => d_idie(164), 
+            carryFlagMem => dataOutFromMemory(2),
+            zeroFlagMem => dataOutFromMemory(1),
+            negativeFlagMem => dataOutFromMemory(0),
             jumpFlag => exec_jumpFlag,
             carryFlagOutput => exec_carryFlagOutput, 
             zeroFlagOutput => exec_zeroFlagOutput,
@@ -312,4 +495,52 @@ architecture arch_processor of processor is
             dataBack => exec_data_out
         );
 
+        IE_mem: my_nDFF generic map (117) port map (
+            Clk => my_clk,
+            Rst => '0',
+            writeEN => '1',
+            d => d_ex_mem,
+            q => q_ex_mem
+        );
+
+        mem_stage: Memory_Stage port map (
+            clk => my_clk,
+            rst => temp,
+            Mem_reg => q_ex_mem(0), --e3mlha ya samora
+            RegWrite => q_ex_mem(1),
+            Mem_read_en => q_ex_mem(2),
+            Mem_write_en => q_ex_mem(3),
+            Mem_read_en_exception => Mem_read_en_exception_signal,
+            Mem_write_en_exception => Mem_write_en_exception_signal,
+            PC => q_ex_mem(21 downto 6),
+            FLAGS => q_ex_mem(37 downto 22),
+            SP => q_ex_mem(53 downto 38),
+            SP_SEC => q_ex_mem(69 downto 54),
+            R_Rsrc => q_ex_mem(85 downto 70),
+            Data_back => q_ex_mem(101 downto 86),
+            mem_address => q_ex_mem(102),
+            Mem_write_data => q_ex_mem(103),
+            Rdst => q_ex_mem(106 downto 104),
+            Mem_Data_Out => dataOutFromMemory, -- data out from memory
+            PC_Out => pcOutFromMemory,
+            Flags_Out => writeFlagsFromMemory,
+            Call => q_ex_mem(107),
+            INT => q_ex_mem(108),
+            RET => q_ex_mem(109),
+            RTI => q_ex_mem(110)
+        );
+        Imem_wb: my_nDFF generic map (37) port map (
+            Clk => my_clk,
+            Rst => '0',
+            writeEN => '1',
+            d => d_mem_wb,
+            q => q_mem_wb
+        );
+        wb_stage: Write_Back port map (
+            memToReg => q_mem_wb(0),
+            dataBack => q_mem_wb(16 downto 1),
+            mem => q_mem_wb(32 downto 17),
+            write_data => writeBackOut
+
+        );
 end architecture;

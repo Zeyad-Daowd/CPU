@@ -23,15 +23,14 @@ ENTITY Memory_Stage IS
     Mem_write_data : IN std_logic; -- MUX Selector to choose data "(pc or flags) or reg data"
 
     Rdst : IN std_logic_vector(2 DOWNTO 0); -- Rdst of inst.
-    FLAGS_WR : IN std_logic_vector(2 DOWNTO 0); -- in case of popping flags ??
+    -- FLAGS_WR : IN std_logic_vector(2 DOWNTO 0); -- in case of popping flags ??
     Mem_Data_Out : OUT std_logic_vector(15 DOWNTO 0); -- data out from memory
 
     -- needed to be passed to Mem-WB Reg
     Mem_reg_Out : OUT std_logic;
     RegWrite_Out : OUT std_logic;
     Data_back_Out : OUT std_logic_vector(15 DOWNTO 0);
-    Rdst_Out : OUT std_logic_vector(2 DOWNTO 0);
-    FLAGS_WR_Out : OUT std_logic_vector(2 DOWNTO 0);  -- ??
+    -- FLAGS_WR_Out : OUT std_logic_vector(2 DOWNTO 0);  -- ??
 
     PC_Out : OUT std_logic; -- when popping pc
     Flags_Out : OUT std_logic; -- when popping flags
@@ -183,8 +182,7 @@ BEGIN
       Mem_reg_Out <= '0';
       RegWrite_Out <= '0';
       Data_back_Out <= (OTHERS => '0');
-      Rdst_Out <= (OTHERS => '0');
-      FLAGS_WR_Out <= (OTHERS => '0');
+      -- FLAGS_WR_Out <= (OTHERS => '0');
       PC_Out <= '0';
       Flags_Out  <= '0';
     ELSIF rising_edge(clk) THEN
@@ -203,8 +201,7 @@ BEGIN
       -- Pass-through signals
       Data_back_Out <= Data_back;
       RegWrite_Out <= RegWrite;
-      Rdst_Out <= Rdst;
-      FLAGS_WR_Out <= FLAGS_WR;
+      -- FLAGS_WR_Out <= FLAGS_WR;
       Mem_reg_Out <= Mem_reg;
     END IF;
   END PROCESS;

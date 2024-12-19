@@ -19,7 +19,7 @@ architecture Behavioral of Instruction_Memory is
     -- memory array
     type memory_array is array (0 to 4095) of std_logic_vector(15 downto 0);
     signal memory: memory_array := (
-        0 => "0001000000000000", -- 00010|xxxxxxxxxx|0
+        0 => "0001011000000000", -- 00010|xxxxxxxxxx|0
         1 => "0001101001100000", -- 00011|010|011|xxxx|0
         2 => "0011001100000000", -- 00110|011|xxxxxxx|0
         3 => "0100110101000000", -- 01001|101 010 000|x|0 
