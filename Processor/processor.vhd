@@ -66,6 +66,7 @@ architecture arch_processor of processor is
             decode_Mem_addr: out std_logic;
             decode_zero_neg_flag_en: out std_logic;
             decode_carry_flag_en: out std_logic;
+            decode_set_carry: out std_logic;
             decode_reg_write: out std_logic;
             decode_is_jmp: out std_logic;
             decode_mem_read: out std_logic;
@@ -140,14 +141,14 @@ architecture arch_processor of processor is
                 out_decode_carry_flag_en, out_decode_reg_write, out_decode_is_jmp, out_decode_mem_read,
                 out_decode_mem_write, out_decode_imm_used, out_decode_imm_loc, out_decode_out_wen, out_decode_from_in, out_decode_mem_wr_data,
                 out_decode_call, out_decode_ret, out_decode_int,out_decode_rti,
-                out_decode_ret_or_rti : std_logic := '0';
+                out_decode_ret_or_rti, out_decode_set_carry : std_logic := '0';
 
     signal out_decode_which_r_src, out_decode_which_jmp : std_logic_vector(1 downto 0);
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
     signal out_decode_sp_plus_minus, out_decode_sp_chosen,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
-    signal d_idie : std_logic_vector(163 downto 0);
-    signal q_idie: std_logic_vector(163 downto 0) := (others => '0');
+    signal d_idie : std_logic_vector(164 downto 0);
+    signal q_idie: std_logic_vector(164 downto 0) := (others => '0');
     --------------------------------- Execute Signals ----------------------------
     signal exec_data_out : std_logic_vector(15 downto 0);
     signal exec_jumpFlag, exec_carryFlagOutput, exec_zeroFlagOutput, exec_negativeFlagOutput : std_logic := '0';
@@ -173,7 +174,8 @@ architecture arch_processor of processor is
         decode_instruction <= q_ifid(15 downto 0);
 
         d_idie <= (
-            out_decode_which_jmp -- [163, 162]
+            out_decode_set_carry -- [164]
+            & out_decode_which_jmp -- [163, 162]
             & fetch_instruction -- [161 -> 146] 
             & in_peripheral -- [130 -> 145]
             & out_decode_read_data_2 -- [114 -> 129]
@@ -252,6 +254,7 @@ architecture arch_processor of processor is
             decode_Mem_addr => out_decode_Mem_addr,
             decode_zero_neg_flag_en => out_decode_zero_neg_flag_en,
             decode_carry_flag_en => out_decode_carry_flag_en,
+            decode_set_carry => out_decode_set_carry,
             decode_reg_write => out_decode_reg_write,
             decode_is_jmp => out_decode_is_jmp,
             decode_mem_read => out_decode_mem_read,
@@ -273,7 +276,7 @@ architecture arch_processor of processor is
             out_read_data_2 => out_decode_read_data_2 
         );
 
-        ID_IE: my_nDFF generic map (164) port map (
+        ID_IE: my_nDFF generic map (165) port map (
             Clk => my_clk,
             Rst => '0',
             writeEN => '1',
@@ -304,7 +307,7 @@ architecture arch_processor of processor is
             zeroFlagEn => q_idie(4),
             negativeFlagEn => q_idie(4),
             RTI => q_idie(18),
-            set_C => temp, -- TODO Decode
+            set_C => d_idie(164), -- TODO Decode
             carryFlagMem => temp, -- TODO
             zeroFlagMem => temp, -- TODO
             negativeFlagMem => temp, -- TODO

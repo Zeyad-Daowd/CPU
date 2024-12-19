@@ -18,6 +18,7 @@ entity decode is
         decode_Mem_addr: out std_logic;
         decode_zero_neg_flag_en: out std_logic;
         decode_carry_flag_en: out std_logic;
+        decode_set_carry: out std_logic;
         decode_reg_write: out std_logic;
         decode_is_jmp: out std_logic;
         decode_mem_read: out std_logic;
@@ -88,6 +89,7 @@ architecture arch_decode of decode is
             Mem_addr: out std_logic;
             zero_neg_flag_en: out std_logic;
             carry_flag_en: out std_logic;
+            set_carry: out std_logic;
             reg_write: out std_logic;
             is_jmp: out std_logic;
             mem_read: out std_logic;
@@ -196,6 +198,7 @@ begin
             Mem_addr => decode_Mem_addr,
             zero_neg_flag_en => decode_zero_neg_flag_en,
             carry_flag_en => decode_carry_flag_en,
+            set_carry => decode_set_carry,
             reg_write => decode_reg_write,
             is_jmp => decode_is_jmp,
             mem_read => decode_mem_read,

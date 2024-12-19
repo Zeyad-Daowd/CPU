@@ -11,6 +11,7 @@ entity control_unit is
         Mem_addr: out std_logic;
         zero_neg_flag_en: out std_logic;
         carry_flag_en: out std_logic;
+        set_carry: out std_logic;
         reg_write: out std_logic;
         is_jmp: out std_logic;
         mem_read: out std_logic;
@@ -56,6 +57,8 @@ begin
                     (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0)) or
                     (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and not op_code(0)) or
                     (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0));
+    
+    set_carry <= (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and not op_code(0));
     
     reg_write <= (op_code(4) and not op_code(3) and not op_code(2) and op_code(1)) or
                  (not op_code(4) and op_code(3)) or
