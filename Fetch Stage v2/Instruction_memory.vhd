@@ -23,6 +23,8 @@ architecture Behavioral of Instruction_Memory is
         1 => "0001101001100000", -- 00011|010|011|xxxx|0
         2 => "0011001100000000", -- 00110|011|xxxxxxx|0
         3 => "0100110101000000", -- 01001|101 010 000|x|0 
+        4 => "1000000001000000", -- push
+        5 => "1000100000000000", -- pop
         others => (others => '0')   -- Initialize the rest of the memory to 0
     );
 
