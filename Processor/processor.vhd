@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity processor is 
     port (
-		  my_clk: in std_logic; -- uncommented when synthesis
+		my_clk: in std_logic; 
         in_peripheral: in std_logic_vector(15 downto 0);
         out_peripheral: out std_logic_vector(15 downto 0)
     );
@@ -116,8 +116,6 @@ architecture arch_processor of processor is
         );
     END component execute;
     -- TODO: to be removed signals 
-    -- simulating clock -- 
-    --signal my_clk: std_logic := '0'; -- commented when synthesis
     -- simulating hazards and exceptions 
     signal eden_hazard: std_logic := '0';
     signal exception_sig: std_logic_vector(1 downto 0) := (others => '0');
@@ -163,10 +161,6 @@ architecture arch_processor of processor is
     signal temp: std_logic := '0';
     
     begin
-        --clk_process: process begin  -- commented when synthesis
-          --  wait for 10 ns;
-            --my_clk <= not my_clk;
-        --end process;
 
         d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;
         decode_pc <= q_ifid(47 downto 32);
