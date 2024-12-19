@@ -26,6 +26,9 @@ entity control_unit is
         int: out std_logic;
         rti: out std_logic;
         ret_or_rti: out std_logic;
+        push: out std_logic; 
+        pop: out std_logic; 
+        mem_to_reg: out std_logic; 
         alu_op_code: out std_logic_vector(2 downto 0);
         which_jmp: out std_logic_vector(1 downto 0);
         which_r_src: out std_logic_vector(1 downto 0)
@@ -107,6 +110,12 @@ begin
 
     ret_or_rti <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0)) or
                     (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0));
+    
+    mem_to_reg <= (op_code(4) and not op_code(3) and not op_code(2)) and (op_code(1) or op_code(0));
+
+    push <= (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and not op_code(0));
+
+    pop <= (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and op_code(0));
 
     process(op_code) begin
         case op_code is

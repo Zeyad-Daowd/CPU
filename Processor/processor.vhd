@@ -81,6 +81,9 @@ architecture arch_processor of processor is
             decode_int: out std_logic;
             decode_rti: out std_logic;
             decode_ret_or_rti: out std_logic;
+            decode_push: out std_logic; 
+            decode_pop: out std_logic; 
+            decode_mem_to_reg: out std_logic; 
             decode_alu_op_code: out std_logic_vector(2 downto 0);
             decode_which_jmp: out std_logic_vector(1 downto 0);
             decode_which_r_src: out std_logic_vector(1 downto 0);
@@ -180,12 +183,8 @@ architecture arch_processor of processor is
         Data_back_Out : OUT std_logic_vector(15 DOWNTO 0);
         -- FLAGS_WR_Out : OUT std_logic_vector(2 DOWNTO 0);  -- ??
 
-        PC_Out : OUT std_logic; -- when popping pc
-        Flags_Out : OUT std_logic; -- when popping flags
-
-        -- Call
-        -- Flags_reserved
-        -- RET
+        PC_Out : OUT std_logic; 
+        Flags_Out : OUT std_logic;
         Call : IN std_logic;
         INT : IN std_logic;
         RET : IN std_logic;
@@ -194,38 +193,33 @@ architecture arch_processor of processor is
     END component Memory_Stage;
     component Write_Back is
         port (
-            --signals
             memToReg: in std_logic;
-        
-            --write data
             dataBack: in std_logic_vector(15 downto 0);
             mem: in std_logic_vector(15 downto 0);
-            --outputs
-            --write data
-            write_data: out std_logic_vector(15 downto 0)
-            --stack data or mem forwarding
-        
+            write_data: out std_logic_vector(15 downto 0)        
         );
     end component Write_Back;
     component hazardUnit IS
     PORT (
-        memRead : IN std_logic;   -- from execute reg i guess
-        Rdst : IN std_logic_vector (2 DOWNTO 0); -- from execute reg
-        Rsrc1, Rsrc2 : IN std_logic_vector (2 DOWNTO 0);  -- from decode reg
-        Rsrc1Used, Rsrc2Used : IN std_logic; -- from decoder
+        memRead : IN std_logic;   
+        Rdst : IN std_logic_vector (2 DOWNTO 0); 
+        Rsrc1, Rsrc2 : IN std_logic_vector (2 DOWNTO 0);  
+        Rsrc1Used, Rsrc2Used : IN std_logic; 
         hazard_detected : OUT std_logic     
     );
     END component;
     -- TODO: to be removed signals 
     -- simulating hazards and exceptions 
     signal eden_hazard: std_logic := '0';
-    
+
     -- simulating data from wb stage
     signal write_addr_from_wb : std_logic_vector(2 downto 0);
     signal write_data_from_wb : std_logic_vector(15 downto 0);
     signal reg_write_from_wb: std_logic; -- TODO: come from wb
+
     -- simulating data from IF stage
     signal immediate: std_logic_vector(15 downto 0) := (others => '0');
+
     -- simulating IDIE
     signal temp_idie: std_logic_vector(113 downto 0) := (others => '0');
 
@@ -240,14 +234,15 @@ architecture arch_processor of processor is
                 out_decode_carry_flag_en, out_decode_reg_write, out_decode_is_jmp, out_decode_mem_read,
                 out_decode_mem_write, out_decode_imm_used, out_decode_imm_loc, out_decode_out_wen, out_decode_from_in, out_decode_mem_wr_data,
                 out_decode_call, out_decode_ret, out_decode_int,out_decode_rti,
-                out_decode_ret_or_rti, out_decode_set_carry : std_logic := '0';
+                out_decode_ret_or_rti, out_decode_set_carry,
+                out_decode_push, out_decode_pop, out_decode_mem_to_reg : std_logic := '0';
 
     signal out_decode_which_r_src, out_decode_which_jmp : std_logic_vector(1 downto 0);
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
     signal out_decode_sp_plus_minus, out_decode_sp_chosen,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
-    signal d_idie : std_logic_vector(164 downto 0); 
-    signal q_idie: std_logic_vector(164 downto 0) := (others => '0');
+    signal d_idie : std_logic_vector(167 downto 0); 
+    signal q_idie: std_logic_vector(167 downto 0) := (others => '0');
     -------------------------------- Forward Unit ----------------------------
     signal forward_a_signal, forward_b_signal : std_logic_vector(1 downto 0) := (others => '0');
     -------------------------------- Exception Unit --------------------------
@@ -259,7 +254,6 @@ architecture arch_processor of processor is
     --------------------------------- Execute Signals ----------------------------
     signal exec_data_out : std_logic_vector(15 downto 0);
     signal exec_jumpFlag, exec_carryFlagOutput, exec_zeroFlagOutput, exec_negativeFlagOutput : std_logic := '0';
-    
         ----------------------------- IEMEM pipeline signals ---------------------
     signal d_ex_mem : std_logic_vector(116 downto 0);
     signal q_ex_mem : std_logic_vector(116 downto 0) := (others => '0');
@@ -274,14 +268,16 @@ architecture arch_processor of processor is
     signal temp: std_logic := '0';
     
     begin
-
         d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;
         decode_pc <= q_ifid(47 downto 32);
         decode_next_pc <= q_ifid(31 downto 16);
         decode_instruction <= q_ifid(15 downto 0);
 
         d_idie <= (
-            out_decode_set_carry -- [164]
+            out_decode_push -- 167
+            & out_decode_pop -- 166
+            & out_decode_mem_to_reg -- 165
+            & out_decode_set_carry -- [164]
             & out_decode_which_jmp -- [163, 162]
             & fetch_instruction -- [161 -> 146] 
             & in_peripheral -- [130 -> 145]
@@ -338,8 +334,9 @@ architecture arch_processor of processor is
             & q_idie(9) --3
             & q_idie(8) -- 2
             & q_idie(6) -- 1
-            & temp -- 0
+            & q_idie(165) -- 0
         );
+
         d_mem_wb <= (
             q_ex_mem(1) -- 36
             & q_ex_mem (106 downto 104) -- 33 to 35
@@ -406,6 +403,9 @@ architecture arch_processor of processor is
             decode_int => out_decode_int,
             decode_rti => out_decode_rti,
             decode_ret_or_rti => out_decode_ret_or_rti,
+            decode_push => out_decode_push,
+            decode_pop => out_decode_pop,
+            decode_mem_to_reg => out_decode_mem_to_reg,
             decode_alu_op_code => out_decode_alu_op_code,
             decode_which_jmp => out_decode_which_jmp,
             decode_which_r_src => out_decode_which_r_src,
@@ -413,7 +413,7 @@ architecture arch_processor of processor is
             out_read_data_2 => out_decode_read_data_2 
         );
 
-        ID_IE: my_nDFF generic map (165) port map (
+        ID_IE: my_nDFF generic map (168) port map (
             Clk => my_clk,
             Rst => '0',
             writeEN => '1',
@@ -432,7 +432,7 @@ architecture arch_processor of processor is
             forward_b => forward_b_signal
         );
         
-        nathan_hazard_unit: hazardUnit port map (
+        thorgan_hazard_unit: hazardUnit port map (
             memRead => q_ex_mem(2),   -- from executeMem reg i guess
             Rdst => q_ex_mem(106 downto 104),-- from executeMem reg
             Rsrc1 => q_ex_mem(113 downto 111), 
@@ -442,12 +442,11 @@ architecture arch_processor of processor is
             hazard_detected => eden_hazard  
         );
 
-
         except_unit: Exception_Unit port map (
             Mem_read_en => q_ex_mem(2), 
             Mem_write_en => q_ex_mem(3),
-            push => temp, -- 1 for push inst.
-            pop => temp, -- 1 for pop inst.
+            push => out_decode_push, -- 1 for push inst.
+            pop => out_decode_pop, -- 1 for pop inst.
             Mem_read_en_exception => Mem_read_en_exception_signal, -- read enable from excep.
             Mem_write_en_exception => Mem_write_en_exception_signal, -- write enable from excep.
             mem_address => q_ex_mem(101 downto 86), -- memory address to be accessed
@@ -506,7 +505,7 @@ architecture arch_processor of processor is
         mem_stage: Memory_Stage port map (
             clk => my_clk,
             rst => temp,
-            Mem_reg => q_ex_mem(0), --e3mlha ya samora
+            Mem_reg => q_ex_mem(0), 
             RegWrite => q_ex_mem(1),
             Mem_read_en => q_ex_mem(2),
             Mem_write_en => q_ex_mem(3),
@@ -529,6 +528,7 @@ architecture arch_processor of processor is
             RET => q_ex_mem(109),
             RTI => q_ex_mem(110)
         );
+
         Imem_wb: my_nDFF generic map (37) port map (
             Clk => my_clk,
             Rst => '0',
@@ -536,11 +536,11 @@ architecture arch_processor of processor is
             d => d_mem_wb,
             q => q_mem_wb
         );
+
         wb_stage: Write_Back port map (
             memToReg => q_mem_wb(0),
             dataBack => q_mem_wb(16 downto 1),
             mem => q_mem_wb(32 downto 17),
             write_data => writeBackOut
-
         );
 end architecture;

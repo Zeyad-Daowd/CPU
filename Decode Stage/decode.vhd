@@ -33,6 +33,9 @@ entity decode is
         decode_int: out std_logic;
         decode_rti: out std_logic;
         decode_ret_or_rti: out std_logic;
+        decode_push: out std_logic; 
+        decode_pop: out std_logic; 
+        decode_mem_to_reg: out std_logic; 
         decode_alu_op_code: out std_logic_vector(2 downto 0);
         decode_which_jmp: out std_logic_vector(1 downto 0);
         decode_which_r_src: out std_logic_vector(1 downto 0);
@@ -104,6 +107,9 @@ architecture arch_decode of decode is
             int: out std_logic;
             rti: out std_logic;
             ret_or_rti: out std_logic;
+            push: out std_logic;
+            pop: out std_logic; 
+            mem_to_reg: out std_logic; 
             alu_op_code: out std_logic_vector(2 downto 0);
             which_jmp: out std_logic_vector(1 downto 0);
             which_r_src: out std_logic_vector(1 downto 0)
@@ -212,6 +218,10 @@ begin
             ret => decode_ret,
             int => decode_int,
             rti => sim_rti,
+            ret_or_rti => decode_ret_or_rti,
+            push => decode_push,
+            pop => decode_pop,
+            mem_to_reg => decode_mem_to_reg,
             alu_op_code => decode_alu_op_code,
             which_jmp => decode_which_jmp,
             which_r_src => decode_which_r_src
