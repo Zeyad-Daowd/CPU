@@ -94,9 +94,9 @@ BEGIN
     zeroFlagEnable <= zeroFlagEn or RTI;
     negativeFlagEnable <= negativeFlagEn or RTI;
     ----- setting flags inputs
-    carryFlagIN <= (RTI and carryFlagMem) or carryFlagALU or set_C;
-    zeroFlagIN <= (RTI and zeroFlagMem) or zeroFlagALU;
-    negativeFlagIN <= (RTI and negativeFlagMem) or negativeFlagALU;
+    carryFlagIN <= (RTI and carryFlagMem) or (not RTI and carryFlagALU) or set_C;
+    zeroFlagIN <= (RTI and zeroFlagMem) or (not RTI and zeroFlagALU);
+    negativeFlagIN <= (RTI and negativeFlagMem) or (not RTI and negativeFlagALU);
     ----- setting flags outputs
     carryFlagOutput <= carryFlagOUT;
     zeroFlagOutput <= zeroFlagOUT;

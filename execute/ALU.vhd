@@ -13,97 +13,33 @@ ENTITY ALU IS
 END ALU;
 
 ARCHITECTURE arch1 OF ALU IS
+signal temp: std_logic_vector(16 DOWNTO 0);
 BEGIN
+zeroFlag <= not (temp(0) or temp(1) or temp(2) or temp(3) or 
+                 temp(4) or temp(5) or temp(6) or temp(7) or
+                 temp(8) or temp(9) or temp(10) or temp(11) or
+                 temp(12) or temp(13) or temp(14) or temp(15));
+negativeFlag <= temp(15);
+carryFlag <= temp(16);
+aluRes <= temp(15 DOWNTO 0);
 PROCESS(RegA, RegB, selector)
 BEGIN
     case selector IS
     WHEN "000" => -- PASS
-        aluRes <= RegA;
-        carryFlag <= '0';
-        zeroFlag <= '0';
-        negativeFlag <= '0';
+        temp <= '0' & RegA;
     WHEN "001" => -- NOT
-        aluRes <= not RegA;
-        if RegA = "0000000000000000" then
-            zeroFlag <= '1';
-        ELSE
-            zeroFlag <= '0';
-        END IF;
-        carryFlag <= '0';
-        if(RegA(15) = '1') then
-            negativeFlag <= '0';
-        ELSE
-            negativeFlag <= '1';
-        END IF;
+        temp <= '0' & not RegA;
     WHEN "010" => -- INCR
-        aluRes <= std_logic_vector(unsigned(RegA) + to_unsigned(1, 16));
-        if RegA = "1111111111111111" then
-            carryFlag <= '1';
-            zeroFlag <= '0';
-            negativeFlag <= '0';
-        ELSE
-            carryFlag <= '0';
-            zeroFlag <= '0';
-            if(RegA < "0111111111111111") then
-                negativeFlag <= '0';
-            ELSE
-                negativeFlag <= '1';
-            END IF;
-        END IF;
-        
+        temp <= std_logic_vector(unsigned('0' & RegA) + to_unsigned(1, 17));
     WHEN "011" => -- ADD
-        aluRes <= std_logic_vector(unsigned(RegA) + unsigned(RegB));
-        if std_logic_vector(unsigned(RegA) + unsigned(RegB)) = "0000000000000000" then
-        zeroFlag <= '1';
-        ELSE
-        zeroFlag <= '0';
-        END IF;
-        if  (unsigned(RegA) + unsigned(RegB) > ("0111111111111111")) then
-            negativeFlag <= '1';
-        ELSE
-            negativeFlag <= '0';
-        END IF;
-        if (unsigned(RegA) + unsigned(RegB) > ("1111111111111111")) then
-            carryFlag <= '1';
-        ELSE
-            carryFlag <= '0';
-        END IF;
-
+        temp <= std_logic_vector(unsigned('0' & RegA) + unsigned('0' & RegB));
     WHEN "100" => -- SUB
-        aluRes <= std_logic_vector(unsigned(RegA) - unsigned(RegB));
-        if std_logic_vector(unsigned(RegA) - unsigned(RegB)) = "0000000000000000" then
-            zeroFlag <= '1';
-        ELSE
-            zeroFlag <= '0';
-        END IF;
-        if (unsigned(RegA) - unsigned(RegB) > ("0111111111111111")) then
-            negativeFlag <= '1';
-        ELSE
-            negativeFlag <= '0';
-        END IF;
-        if unsigned(RegB) > unsigned(RegA) then
-            carryFlag <= '1';
-        ELSE
-            carryFlag <= '0';
-        END IF;
+        temp <= std_logic_vector(unsigned(RegA(15) & RegA) + unsigned(not RegB(15) & not RegB) + to_unsigned(1, 17));
+        --temp <= std_logic_vector(unsigned('0' & RegA) + unsigned('0' & not RegB) + to_unsigned(1, 17));
     WHEN "101" => -- AND
-        carryFlag <= '0';
-        aluRes <= RegA and RegB;
-        if (RegA and RegB) = "0000000000000000" then
-            zeroFlag <= '1';
-        ELSE
-            zeroFlag <= '0';
-        END IF;
-        if (RegA and RegB) > "0111111111111111" then
-            negativeFlag <= '1';
-        ELSE
-            negativeFlag <= '0';
-        END IF;
+        temp <= ( '0' & RegA) and ( '0' &  RegB);
     when others =>
-        aluRes <= (others => '0');
-        carryFlag <= '0';
-        zeroFlag <= '0';
-        negativeFlag <= '0';
+        temp <= (others => '0');
     END CASE;
 END PROCESS;
 END arch1;
