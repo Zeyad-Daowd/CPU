@@ -451,7 +451,8 @@ architecture arch_processor of processor is
             Mem_write_en_exception => Mem_write_en_exception_signal, -- write enable from excep.
             mem_address => q_ex_mem(101 downto 86), -- memory address to be accessed
             sp => out_decode_sp_chosen, -- TODO decode -- stack pointer
-            pc => zeros_16, -- TODO: Fatma -- program counter of current inst.
+            pc_memory => zeros_16, -- program counter of current inst. (memory stage)
+            pc_decode => zeros_16, -- program counter of current inst. (decode stage)
             epc => epc_signal, -- TODO m4 awy: Fatma epc "=pc if exception found"
             IF_D_flush => IF_D_flush_signal,
             D_EX_flush => D_EX_flush_signal,

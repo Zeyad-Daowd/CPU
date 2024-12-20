@@ -13,7 +13,8 @@ ENTITY Exception_Unit IS
 
         mem_address : IN std_logic_vector(15 DOWNTO 0); -- memory address to be accessed
         sp : IN std_logic_vector(15 DOWNTO 0); -- stack pointer
-        pc : IN std_logic_vector(15 DOWNTO 0); -- program counter of current inst.
+        pc_memory : IN std_logic_vector(15 DOWNTO 0); -- program counter of current inst. (memory)
+        pc_decode : IN std_logic_vector(15 DOWNTO 0); -- program counter of current inst. (decode)
         epc : OUT std_logic_vector(15 DOWNTO 0); -- epc "=pc if exception found"
 
         -- FLUSH FETCH IF STACK EXCEPTION
@@ -58,7 +59,7 @@ BEGIN
         END IF;
     END PROCESS;
 
-    PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc)
+    PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc_memory,pc_decode)
     BEGIN
         Mem_read_en_exception <= Mem_read_en;
         Mem_write_en_exception <= Mem_write_en;
@@ -75,15 +76,15 @@ BEGIN
             D_EX_flush <= '1';
             EX_M_flush <= '1';
             pc_sel <= "01";
-            epc <= pc;
+            epc <= pc_memory;
         END IF;
         IF (stack_full = '1') THEN
-            epc <= pc;
+            epc <= pc_decode;
             IF_D_flush <= '1';
             pc_sel <= "11";
         END IF;
         IF (stack_empty = '1') THEN
-            epc <= pc;
+            epc <= pc_decode;
             IF_D_flush <= '1';
             pc_sel <= "10";
         END IF;
