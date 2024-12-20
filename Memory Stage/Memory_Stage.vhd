@@ -137,8 +137,8 @@ BEGIN
   address_mux: MUX_2_INPUT
     PORT MAP (
       sel => mem_address,
-      data_in0 => sp_selected,
-      data_in1 => Data_back,
+      data_in0 => Data_back,
+      data_in1 => sp_selected,
       data_out => mem_selected_address
     );
 
