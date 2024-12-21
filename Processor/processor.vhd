@@ -433,10 +433,10 @@ architecture arch_processor of processor is
         );
         
         thorgan_hazard_unit: hazardUnit port map (
-            memRead => q_ex_mem(2),   -- from executeMem reg i guess
-            Rdst => q_ex_mem(106 downto 104),-- from executeMem reg
-            Rsrc1 => q_ex_mem(113 downto 111), 
-            Rsrc2 => q_ex_mem(116 downto 114),  -- from decodeEX reg
+            memRead => d_ex_mem(2),   -- from execute
+            Rdst => d_ex_mem(106 downto 104),-- from execute
+            Rsrc1 => d_ex_mem(113 downto 111), 
+            Rsrc2 => d_ex_mem(116 downto 114),  -- from decode
             Rsrc1Used => q_idie(23),
             Rsrc2Used => q_idie(24), -- from decoder
             hazard_detected => eden_hazard  
