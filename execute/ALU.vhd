@@ -34,7 +34,7 @@ BEGIN
     WHEN "011" => -- ADD
         temp <= std_logic_vector(unsigned('0' & RegA) + unsigned('0' & RegB));
     WHEN "100" => -- SUB
-        temp <= std_logic_vector(unsigned(RegA(15) & RegA) + unsigned(not RegB(15) & not RegB) + to_unsigned(1, 17));
+        temp <= std_logic_vector(unsigned('0' & RegA) - unsigned('0' & RegB));
     WHEN "101" => -- AND
         temp <= ( '0' & RegA) and ( '0' &  RegB);
     when others =>
