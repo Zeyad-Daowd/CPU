@@ -16,7 +16,7 @@ entity Fetch_Block is
         pc_en:      in std_logic; --unused now
         rst:        in std_logic;
         -- possible PCs
-        call_and_jmp_pc: in std_logic_vector(15 downto 0);
+        call_pc, jmp_pc: in std_logic_vector(15 downto 0);
         ret_pc: in std_logic_vector(15 downto 0);
 
         -- writing to instruction memory
@@ -80,11 +80,13 @@ begin
     HLT <= '1' when (instruction_tmp(15 downto 11) = "00001" and rst = '0') else '0';
     index <= "0000000000000010" when instruction_tmp(7) = '1' else "0000000000000000";
 
-    process(call_sig, jmp_sig, ret_rti_sig, INT_CTRL_sig, HLT, hazard_sig, exception_sig, rst, pc_address_in_tmp,pc_address_out_tmp, next_pc_tmp, call_and_jmp_pc, ret_pc, int_pc, clk)
+    process(call_sig, jmp_sig, ret_rti_sig, INT_CTRL_sig, HLT, hazard_sig, exception_sig, rst, pc_address_in_tmp,pc_address_out_tmp, next_pc_tmp, call_pc,jmp_pc, ret_pc, int_pc, clk)
     begin
         --choosing a pc
-        if (call_sig = '1' or jmp_sig = '1') then
-            pc_address_in_tmp <= call_and_jmp_pc;
+        if (call_sig = '1') then
+            pc_address_in_tmp <= call_pc;
+        elsif (jmp_sig = '1') then
+            pc_address_in_tmp <= jmp_pc; 
         elsif (ret_rti_sig = '1') then
             pc_address_in_tmp <= ret_pc;
         elsif (INT_CTRL_sig = '1') then

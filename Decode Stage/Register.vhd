@@ -13,7 +13,7 @@ end entity reg;
 
 architecture arch_reg of reg is
     -- Declare the signal to hold the state of the register (internal signal)
-    signal reg_internal : std_logic_vector(15 downto 0) := (others => '1');  -- Initialize to zero
+    signal reg_internal : std_logic_vector(15 downto 0) := "0000111111111111";  -- Initialize to zero
 
     component my_DFF is 
         port (

@@ -34,7 +34,7 @@ architecture arch_processor of processor is
             pc_en:      in std_logic; --unused now
             rst:        in std_logic;
             -- possible PCs
-            call_and_jmp_pc: in std_logic_vector(15 downto 0);
+            call_pc, jmp_pc: in std_logic_vector(15 downto 0);
             ret_pc: in std_logic_vector(15 downto 0);
     
             -- writing to instruction memory
@@ -59,7 +59,7 @@ architecture arch_processor of processor is
             in_read_addr_2: in std_logic_vector(2 downto 0); 
             in_write_addr: in std_logic_vector(2 downto 0);  
             in_write_data: in std_logic_vector(15 downto 0); 
-            sp_plus_minus, sp_chosen: out std_logic_vector(15 downto 0);
+            sp_first, sp_second, sp_required: out std_logic_vector(15 downto 0);
             decode_push_pop: out std_logic;
             decode_int_or_rti: out std_logic;
             decode_sp_wen: out std_logic;
@@ -139,12 +139,14 @@ architecture arch_processor of processor is
             Mem_write_en : IN std_logic; -- write enable from inst.
             push : IN std_logic; -- 1 for push inst.
             pop : IN std_logic; -- 1 for pop inst.
+            rti : IN std_logic;
             Mem_read_en_exception : OUT std_logic; -- read enable from excep.
             Mem_write_en_exception : OUT std_logic; -- write enable from excep.
             mem_address : IN std_logic_vector(15 DOWNTO 0); -- memory address to be accessed
             sp : IN std_logic_vector(15 DOWNTO 0); -- stack pointer
-            pc : IN std_logic_vector(15 DOWNTO 0); -- program counter of current inst.
             epc : OUT std_logic_vector(15 DOWNTO 0); -- epc "=pc if exception found"
+            pc_memory : IN std_logic_vector(15 DOWNTO 0); -- program counter of current inst. (memory)
+            pc_decode : IN std_logic_vector(15 DOWNTO 0); 
             -- FLUSH FETCH IF STACK EXCEPTION
             -- FLUSH F/D/E IF MEMORY EXCEPTION 
             IF_D_flush : OUT std_logic;
@@ -240,7 +242,7 @@ architecture arch_processor of processor is
 
     signal out_decode_which_r_src, out_decode_which_jmp : std_logic_vector(1 downto 0);
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
-    signal out_decode_sp_plus_minus, out_decode_sp_chosen,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
+    signal out_decode_sp_first, out_decode_sp_second, out_decode_sp_required,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
     signal d_idie : std_logic_vector(168 downto 0); 
     signal q_idie: std_logic_vector(168 downto 0) := (others => '0');
@@ -268,6 +270,7 @@ architecture arch_processor of processor is
     signal reset : std_logic := '0'; -- TODO: handle this
     signal temp: std_logic := '0';
     signal stall_signal: std_logic:='0';
+
     begin
         stall_signal <= (eden_hazard or out_decode_int);
         d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;
@@ -291,8 +294,8 @@ architecture arch_processor of processor is
             & decode_instruction(10 downto 8) -- [89 -> 91]
             & decode_next_pc -- [73 -> 88]
             & decode_pc -- [57 -> 72]
-            & out_decode_sp_plus_minus -- [41 -> 56]
-            & out_decode_sp_chosen -- [25 -> 40]
+            & out_decode_sp_first -- [41 -> 56]
+            & out_decode_sp_second -- [25 -> 40]
             & out_decode_which_r_src -- 23, 24
             & out_decode_alu_op_code -- 20, 21, 22
             & out_decode_ret_or_rti -- 19
@@ -350,15 +353,16 @@ architecture arch_processor of processor is
 
         fetch_stage: Fetch_Block port map (
             clk => my_clk,
-            ret_rti_sig => out_decode_ret_or_rti,
+            ret_rti_sig => pcOutFromMemory,
             call_sig => out_decode_call,
-            jmp_sig => out_decode_is_jmp, -- TODO: as far as I see, jump is from ex
+            jmp_sig => exec_jumpFlag, -- TODO: as far as I see, jump is from ex
             hazard_sig => stall_signal, --For stalling after int
             exception_sig => exception_sig,
             pc_en => '1', -- unused now
             rst => reset,
-            call_and_jmp_pc => (others => '0'), -- TODO: handle this
-            ret_pc => (others => '0'), -- TODO: handle this
+            call_pc => d_idie(113 downto 98),
+            jmp_pc => q_idie(113 downto 98), -- TODO: handle this
+            ret_pc => dataOutFromMemory, -- TODO: handle this
             im_write_enable => '0', -- TODO: handle this
             im_write_address => (others => '0'), -- TODO: handle this
             im_write_data => (others => '0'), -- TODO: handle this
@@ -383,8 +387,9 @@ architecture arch_processor of processor is
             in_read_addr_2 => decode_instruction(4 downto 2),
             in_write_addr => q_mem_wb(35 downto 33), -- from wb
             in_write_data => writeBackOut, --from wb
-            sp_plus_minus => out_decode_sp_plus_minus,
-            sp_chosen => out_decode_sp_chosen,
+            sp_first => out_decode_sp_first,
+            sp_second => out_decode_sp_second,
+            sp_required => out_decode_sp_required,  
             decode_push_pop => out_decode_push_pop,
             decode_int_or_rti => out_decode_int_or_rti,
             decode_sp_wen => out_decode_sp_wen,
@@ -414,7 +419,7 @@ architecture arch_processor of processor is
             decode_which_jmp => out_decode_which_jmp,
             decode_which_r_src => out_decode_which_r_src,
             out_read_data_1 => out_decode_read_data_1, 
-            out_read_data_2 => out_decode_read_data_2 
+            out_read_data_2 => out_decode_read_data_2
         );
 
         ID_IE: my_nDFF generic map (169) port map (
@@ -440,7 +445,7 @@ architecture arch_processor of processor is
             memRead => q_idie(8),   -- from execute
             Rdst => q_idie(91 downto 89),-- from execute
             Rsrc1 => decode_instruction(7 downto 5), -- from decode
-            Rsrc2 => decode_instruction(5 downto 2),  -- from decode
+            Rsrc2 => decode_instruction(4 downto 2),  -- from decode
             Rsrc1Used => out_decode_which_r_src(0), -- from decoder
             Rsrc2Used => out_decode_which_r_src(1), -- from decoder
             hazard_detected => eden_hazard  
@@ -451,10 +456,11 @@ architecture arch_processor of processor is
             Mem_write_en => q_ex_mem(3),
             push => out_decode_push, -- 1 for push inst.
             pop => out_decode_pop, -- 1 for pop inst.
+            rti => out_decode_rti,
             Mem_read_en_exception => Mem_read_en_exception_signal, -- read enable from excep.
             Mem_write_en_exception => Mem_write_en_exception_signal, -- write enable from excep.
             mem_address => q_ex_mem(101 downto 86), -- memory address to be accessed
-            sp => out_decode_sp_chosen, -- TODO decode -- stack pointer
+            sp => out_decode_sp_required, -- TODO decode -- stack pointer
             pc_memory => zeros_16, -- program counter of current inst. (memory stage)
             pc_decode => zeros_16, -- program counter of current inst. (decode stage)
             epc => epc_signal, -- TODO m4 awy: Fatma epc "=pc if exception found"
@@ -502,7 +508,7 @@ architecture arch_processor of processor is
         IE_mem: my_nDFF generic map (117) port map (
             Clk => my_clk,
             Rst => '0',
-            writeEN => out_decode_write_enable_ex_mem_pipe,
+            writeEN => q_idie(168),
             d => d_ex_mem,
             q => q_ex_mem
         );
@@ -518,8 +524,8 @@ architecture arch_processor of processor is
             Mem_write_en_exception => Mem_write_en_exception_signal,
             PC => q_ex_mem(21 downto 6),
             FLAGS => q_ex_mem(37 downto 22),
-            SP => q_ex_mem(53 downto 38),
-            SP_SEC => q_ex_mem(69 downto 54),
+            SP_SEC => q_ex_mem(53 downto 38),
+            SP => q_ex_mem(69 downto 54),
             R_Rsrc => q_ex_mem(85 downto 70),
             Data_back => q_ex_mem(101 downto 86),
             mem_address => q_ex_mem(102),

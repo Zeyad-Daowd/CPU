@@ -8,6 +8,7 @@ ENTITY Exception_Unit IS
         Mem_write_en : IN std_logic; -- write enable from inst.
         push : IN std_logic; -- 1 for push inst.
         pop : IN std_logic; -- 1 for pop inst.
+        rti : IN std_logic;
         Mem_read_en_exception : OUT std_logic; -- read enable from excep.
         Mem_write_en_exception : OUT std_logic; -- write enable from excep.
 
@@ -56,7 +57,13 @@ BEGIN
         -- Stack empty exception: Occurs if pop is attempted while stack pointer is at the highest address (0x0FFF)
         IF (pop = '1' AND sp = x"0FFF") THEN
             stack_empty <= '1';
-        END IF;
+        elsif(rti = '1' AND sp = x"0FFF")THEN
+            stack_empty <= '1';
+        elsif(rti = '1' AND sp = x"0FFE")THEN
+            stack_empty <= '1';
+        else 
+            stack_empty <= '0';
+        end if;
     END PROCESS;
 
     PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc_memory,pc_decode)

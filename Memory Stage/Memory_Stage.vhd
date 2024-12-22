@@ -188,13 +188,18 @@ BEGIN
     ELSIF rising_edge(clk) THEN
       if RET = '1' THEN
         PC_Out <= '1';
-      END IF;
-      if RTI = '1' THEN
+        Flags_Out  <= '0';
+      elsif RTI = '1' THEN
         if flags_pc_sel = '1' THEN
           PC_Out <= '1';
+          Flags_Out  <= '0';
         ELSIF flags_pc_sel = '0' THEN
           Flags_Out <= '1';
+          PC_Out <= '0';
         END IF;
+      else 
+        PC_Out <='0';
+        Flags_Out  <= '0';
       END IF;
       Mem_Data_Out <= mem_data_out_tmp;
 

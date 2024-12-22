@@ -11,7 +11,7 @@ entity decode is
         in_read_addr_2: in std_logic_vector(2 downto 0); 
         in_write_addr: in std_logic_vector(2 downto 0);  
         in_write_data: in std_logic_vector(15 downto 0); 
-        sp_plus_minus, sp_chosen: out std_logic_vector(15 downto 0);
+        sp_first, sp_second, sp_required: out std_logic_vector(15 downto 0);
         decode_push_pop: out std_logic;
         decode_int_or_rti: out std_logic;
         decode_sp_wen: out std_logic;
@@ -36,7 +36,7 @@ entity decode is
         decode_push: out std_logic; 
         decode_pop: out std_logic; 
         decode_mem_to_reg: out std_logic; 
-        write_enable_ex_mem_pipe: out std_logic; --
+        decode_write_enable_ex_mem_pipe: out std_logic; --
         decode_alu_op_code: out std_logic_vector(2 downto 0);
         decode_which_jmp: out std_logic_vector(1 downto 0);
         decode_which_r_src: out std_logic_vector(1 downto 0);
@@ -118,12 +118,11 @@ architecture arch_decode of decode is
     end component control_unit;
 
     -- Signals    
-    signal my_clk: std_logic := '0';
     signal rst: std_logic := '0';
     signal write_pipe_en : std_logic := '1';
     
     -- control unit signals --
-    signal sim_rti, sim_int_or_rti, sim_push_pop, sim_sp_wen: std_logic := '0';
+    signal sim_int_or_rti, sim_push_pop, sim_sp_wen: std_logic := '0';
     signal op_code_counter: integer := 0;
 
     -- sp signals --
@@ -131,31 +130,90 @@ architecture arch_decode of decode is
     signal add_first_res, add_sec_res : std_logic_vector(15 downto 0) := (others => '0');
     signal one : std_logic_vector(15 downto 0) := (0 => '1', others => '0');
     signal neg_one : std_logic_vector(15 downto 0) := (others => '1');
-    signal sp_data_in, sp_data_out : std_logic_vector(15 downto 0) := (others => '0');
+    signal sp_data_in, sp_data_out : std_logic_vector(15 downto 0) := "0000111111111111";
+    signal sp_mux_sel_fatma : std_logic := '0';
+    signal sp_read : std_logic_vector(15 downto 0) := "0000111111111111";
 
     -- stall and flush signals --
     signal counter_flush : std_logic_vector(1 downto 0) := (others => '0');
+    signal local_decode_int, local_decode_call, local_decode_ret,
+        local_decode_rti, local_decode_Mem_addr, local_decode_zero_neg_flag_en,
+        local_decode_carry_flag_en, local_decode_set_carry, local_decode_reg_write,
+        local_decode_is_jmp, local_decode_mem_read, local_decode_mem_write,
+        local_decode_imm_used, local_decode_imm_loc, local_decode_out_wen,
+        local_decode_from_in, local_decode_mem_wr_data, local_decode_ret_or_rti,
+        local_decode_push, local_decode_pop, local_decode_mem_to_reg: std_logic := '0';
+    signal local_decode_alu_op_code : std_logic_vector(2 downto 0) := (others => '0');
+    signal local_decode_which_jmp, local_decode_which_r_src : std_logic_vector(1 downto 0) := (others => '0');
+    signal decode_write_enable_ex_mem_pipe_sig: std_logic := '1';
+    signal flush_condition: std_logic := '1';  
+    signal sp_sim_write_for_exception : std_logic := '0';
+
 
 begin
-    decode_int_or_rti <= sim_int_or_rti;
-    decode_rti <= sim_rti;
-    decode_push_pop <= sim_push_pop;
-    decode_sp_wen <= sim_sp_wen;
+    
+    flush_condition <= '1' when counter_flush = "00" else '0';  
+    decode_int_or_rti <= sim_int_or_rti and flush_condition;
+    decode_push_pop <= sim_push_pop and flush_condition;
+    sp_sim_write_for_exception <= sim_sp_wen and flush_condition;
+    decode_sp_wen <= sim_sp_wen and flush_condition;
+    decode_int <= local_decode_int and flush_condition;
+    decode_call <= local_decode_call and flush_condition;
+    decode_ret <= local_decode_ret and flush_condition;
+    decode_rti <= local_decode_rti and flush_condition;
+    decode_write_enable_ex_mem_pipe <= decode_write_enable_ex_mem_pipe_sig;
+    decode_Mem_addr <= local_decode_Mem_addr and flush_condition;
+    decode_zero_neg_flag_en <= local_decode_zero_neg_flag_en and flush_condition;
+    decode_carry_flag_en <= local_decode_carry_flag_en and flush_condition;
+    decode_set_carry <= local_decode_set_carry and flush_condition;
+    decode_reg_write <= local_decode_reg_write and flush_condition;                                  
+    decode_is_jmp <= local_decode_is_jmp and flush_condition;
+    decode_mem_read <= local_decode_mem_read and flush_condition;
+    decode_mem_write <= local_decode_mem_write and flush_condition;
+    decode_imm_used <= local_decode_imm_used and flush_condition;
+    decode_imm_loc <= local_decode_imm_loc and flush_condition;
+    decode_out_wen <= local_decode_out_wen and flush_condition;
+    decode_from_in <= local_decode_from_in and flush_condition;
+    decode_mem_wr_data <= local_decode_mem_wr_data and flush_condition;
+    decode_call <= local_decode_call and flush_condition;
+    decode_ret <= local_decode_ret and flush_condition;
+    decode_int <= local_decode_int and flush_condition;
+    decode_rti <= local_decode_rti and flush_condition;
+    decode_ret_or_rti <= local_decode_ret_or_rti and flush_condition;
+    decode_push <= local_decode_push and flush_condition;
+    decode_pop <= local_decode_pop and flush_condition;
+    decode_mem_to_reg <= local_decode_mem_to_reg and flush_condition;
+    decode_alu_op_code <= local_decode_alu_op_code when counter_flush = "00" else (others => '0');
+    decode_which_jmp <= local_decode_which_jmp when counter_flush = "00" else (others => '0');
+    decode_which_r_src <= local_decode_which_r_src when counter_flush = "00" else (others => '0');
 
-    if counter_flush = "00" then
-        write_enable_ex_mem_pipe <= '1';
-        if int = '1' then
-            counter_flush = "01";
+    sp_mux_sel_fatma <= local_decode_push or local_decode_call or local_decode_int;
+    sp_required <= sp_read;
+
+    process (clk)
+    begin
+        if rising_edge(clk) then
+            sp_read <= sp_data_out;
+            if counter_flush = "00" then
+                decode_write_enable_ex_mem_pipe_sig <= '1';
+                if local_decode_int = '1' or local_decode_call = '1' then
+                    counter_flush <= "01";
+                elsif local_decode_ret = '1' or local_decode_rti = '1' then
+                    counter_flush <= "11";
+                end if;
+            elsif counter_flush = "01" or counter_flush = "10" then
+                decode_write_enable_ex_mem_pipe_sig <= '0';
+                counter_flush <= (others => '0'); -- Reset to "00"
+            end if;
         end if;
-    elsif counter_flush = "01" then
-        write_enable_ex_mem_pipe <= '0';
-        counter_flush <= (others => '0');
-    end if;
+    end process;
 
+
+    
     sp: reg
         port map (
-            clk => my_clk,
-            reg_write_enable => sim_sp_wen,
+            clk => clk,
+            reg_write_enable => sp_sim_write_for_exception,
             reg_write_data => sp_data_in,
             reg_data_out => sp_data_out
         );
@@ -170,7 +228,7 @@ begin
 
     add_first: Add_signed
         port map (
-            data_in => sp_data_out,
+            data_in => sp_read,
             added_bit => plus_minus_res,
             data_out => add_first_res
         );
@@ -186,18 +244,25 @@ begin
         port map (
             choice_1 => add_first_res,
             choice_2 => add_sec_res,
-            sel => sim_int_or_rti,
+            sel => sim_int_or_rti,  
             selected => sp_data_in
         );
-    
-    mux_sp_sp_plus_2: mux2to1
+
+    mux_sp_first: mux2to1
         port map (
-            choice_1 => sp_data_out,
-            choice_2 => add_sec_res,
-            sel => sim_rti,
-            selected => sp_chosen
+            choice_1 => add_first_res,
+            choice_2 => sp_read,
+            sel => sp_mux_sel_fatma,  
+            selected => sp_first
         );
 
+    mux_sp_second: mux2to1
+        port map (
+            choice_1 => add_sec_res,
+            choice_2 => add_first_res,
+            sel => sp_mux_sel_fatma,  
+            selected => sp_second
+        );
     reg_file : Register_File port map (
         clk => clk,
         reg_write => wb_reg_write,
@@ -215,30 +280,30 @@ begin
             push_pop => sim_push_pop,
             int_or_rti => sim_int_or_rti,
             sp_wen => sim_sp_wen,
-            Mem_addr => decode_Mem_addr,
-            zero_neg_flag_en => decode_zero_neg_flag_en,
-            carry_flag_en => decode_carry_flag_en,
-            set_carry => decode_set_carry,
-            reg_write => decode_reg_write,
-            is_jmp => decode_is_jmp,
-            mem_read => decode_mem_read,
-            mem_write => decode_mem_write,
-            imm_used => decode_imm_used,
-            imm_loc => decode_imm_loc,
-            out_wen => decode_out_wen,
-            from_in => decode_from_in,
-            mem_wr_data => decode_mem_wr_data,
-            call => decode_call,
-            ret => decode_ret,
-            int => decode_int,
-            rti => sim_rti,
-            ret_or_rti => decode_ret_or_rti,
-            push => decode_push,
-            pop => decode_pop,
-            mem_to_reg => decode_mem_to_reg,
-            alu_op_code => decode_alu_op_code,
-            which_jmp => decode_which_jmp,
-            which_r_src => decode_which_r_src
+            Mem_addr => local_decode_Mem_addr,
+            zero_neg_flag_en => local_decode_zero_neg_flag_en,
+            carry_flag_en => local_decode_carry_flag_en,
+            set_carry => local_decode_set_carry,
+            reg_write => local_decode_reg_write,                                  
+            is_jmp => local_decode_is_jmp,
+            mem_read => local_decode_mem_read,
+            mem_write => local_decode_mem_write,
+            imm_used => local_decode_imm_used,
+            imm_loc => local_decode_imm_loc,
+            out_wen => local_decode_out_wen,
+            from_in => local_decode_from_in,
+            mem_wr_data => local_decode_mem_wr_data,
+            call => local_decode_call,
+            ret => local_decode_ret,
+            int => local_decode_int,
+            rti => local_decode_rti,
+            ret_or_rti => local_decode_ret_or_rti,
+            push => local_decode_push,
+            pop => local_decode_pop,
+            mem_to_reg => local_decode_mem_to_reg,
+            alu_op_code => local_decode_alu_op_code,
+            which_jmp => local_decode_which_jmp,
+            which_r_src => local_decode_which_r_src
         );
 
 end architecture;
