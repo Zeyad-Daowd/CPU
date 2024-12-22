@@ -106,7 +106,7 @@ architecture arch_processor of processor is
             execForwardData: IN std_logic_vector (15 DOWNTO 0);
             fromIn: IN std_logic;
             inData: IN std_logic_vector (15 DOWNTO 0);
-            dataBack       : OUT std_logic_vector (15 DOWNTO 0);
+            dataBack, Rsrc1Forwarded       : OUT std_logic_vector (15 DOWNTO 0);
             isJump: in std_logic;
             clk, rst: in std_logic;
             whichJump: in std_logic_vector(1 DOWNTO 0); -- 00 = always, 01 = zero, 10 = negative, 11 = carry
@@ -255,7 +255,7 @@ architecture arch_processor of processor is
     signal epc_signal: std_logic_vector(15 downto 0) := (others => '0');
     signal IF_D_flush_signal, D_EX_flush_signal, EX_M_flush_signal : std_logic := '0';
     --------------------------------- Execute Signals ----------------------------
-    signal exec_data_out : std_logic_vector(15 downto 0);
+    signal exec_data_out, exec_Rsrc1Forwarded : std_logic_vector(15 downto 0);
     signal exec_jumpFlag, exec_carryFlagOutput, exec_zeroFlagOutput, exec_negativeFlagOutput : std_logic := '0';
         ----------------------------- IEMEM pipeline signals ---------------------
     signal d_ex_mem : std_logic_vector(116 downto 0);
@@ -330,7 +330,7 @@ architecture arch_processor of processor is
             & q_idie(14) -- 103
             & q_idie(3) -- 102
             & exec_data_out --86 to 101
-            & q_idie(113 downto 98) -- 70 to 85
+            & exec_Rsrc1Forwarded -- 70 to 85
             & q_idie(56 downto 41) -- 54 to 69
             & q_idie(40 downto 25) -- 38 to 53
             & zeros & exec_carryFlagOutput & exec_zeroFlagOutput & exec_negativeFlagOutput -- 22 to 37
@@ -502,7 +502,8 @@ architecture arch_processor of processor is
             carryFlagOutput => exec_carryFlagOutput, 
             zeroFlagOutput => exec_zeroFlagOutput,
             negativeFlagOutput => exec_negativeFlagOutput,
-            dataBack => exec_data_out
+            dataBack => exec_data_out,
+            Rsrc1Forwarded => exec_Rsrc1Forwarded
         );
 
         IE_mem: my_nDFF generic map (117) port map (

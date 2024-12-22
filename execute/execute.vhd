@@ -14,7 +14,7 @@ ENTITY execute IS
         execForwardData: IN std_logic_vector (15 DOWNTO 0);
         fromIn: IN std_logic;
         inData: IN std_logic_vector (15 DOWNTO 0);
-        dataBack       : OUT std_logic_vector (15 DOWNTO 0);
+        dataBack, Rsrc1Forwarded       : OUT std_logic_vector (15 DOWNTO 0);
         isJump: in std_logic;
         clk, rst: in std_logic;
         whichJump: in std_logic_vector(1 DOWNTO 0); -- 00 = always, 01 = zero, 10 = negative, 11 = carry
@@ -59,7 +59,13 @@ BEGIN
     PROCESS (RegA, RegB, ALUop, imm_used, imm_loc, imm_value, memForward1, memForward2, execForward1, execForward2, memForwardData, execForwardData, fromIn, inData, isJump, whichJump, carryFlagEn, zeroFlagEn, negativeFlagEn, RTI, set_C, carryFlagMem, zeroFlagMem, negativeFlagMem, aluRes, negativeFlagOUT, zeroFlagOUT, carryFlagOUT, clk)
     BEGIN
     ----- setting ALU INPUTS
-
+    if memForward1 = '1' then
+        Rsrc1Forwarded <= memForwardData;
+    elsif execForward1 = '1' then
+        Rsrc1Forwarded <= execForwardData;
+    else
+        Rsrc1Forwarded <= RegA;
+    end if;
     if ((not imm_loc) AND imm_used) = '1' then
         aluin1 <= imm_value;
     else 
