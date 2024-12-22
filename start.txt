@@ -33,6 +33,9 @@ mem load -i {//Mac/Home/Desktop/ARCH project/CPU/data_mem.mem} -format binary /p
 mem load -i {//Mac/Home/Desktop/ARCH project/CPU/result.mem} -format binary /processor/fetch_stage/im0/memory
 add wave -position insertpoint sim:/processor/mem_stage/*
 add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 0000000000000000 0
+
 
 add wave -position insertpoint sim:/processor/*
 add wave -position insertpoint sim:/processor/execute_stage/*

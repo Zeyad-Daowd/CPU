@@ -184,7 +184,7 @@ architecture arch_processor of processor is
         -- needed to be passed to Mem-WB Reg
         Mem_reg_Out : OUT std_logic;
         RegWrite_Out : OUT std_logic;
-        Data_back_Out : OUT std_logic_vector(15 DOWNTO 0);
+        Data_back_Out, address_for_exception : OUT std_logic_vector(15 DOWNTO 0);
         -- FLAGS_WR_Out : OUT std_logic_vector(2 DOWNTO 0);  -- ??
 
         PC_Out : OUT std_logic; 
@@ -252,7 +252,7 @@ architecture arch_processor of processor is
     -------------------------------- Exception Unit --------------------------
     signal Mem_read_en_exception_signal, Mem_write_en_exception_signal : std_logic := '1';
     signal exception_sig: std_logic_vector(1 downto 0) := (others => '0');
-    signal zeros_16: std_logic_vector(15 downto 0) := (others => '0');
+    signal zeros_16, mem_address_signal_for_exception: std_logic_vector(15 downto 0) := (others => '0');
     signal epc_signal: std_logic_vector(15 downto 0) := (others => '0');
     signal IF_D_flush_signal, D_EX_flush_signal, EX_M_flush_signal : std_logic := '0';
     --------------------------------- Execute Signals ----------------------------
@@ -461,7 +461,7 @@ architecture arch_processor of processor is
             rti => out_decode_rti,
             Mem_read_en_exception => Mem_read_en_exception_signal, -- read enable from excep.
             Mem_write_en_exception => Mem_write_en_exception_signal, -- write enable from excep.
-            mem_address => q_ex_mem(101 downto 86), -- memory address to be accessed
+            mem_address => mem_address_signal_for_exception, --q_ex_mem(101 downto 86), -- memory address to be accessed
             sp => out_decode_sp_required, -- TODO decode -- stack pointer
             pc_memory => zeros_16, -- program counter of current inst. (memory stage)
             pc_decode => zeros_16, -- program counter of current inst. (decode stage)
@@ -540,7 +540,8 @@ architecture arch_processor of processor is
             Call => q_ex_mem(107),
             INT => q_ex_mem(108),
             RET => q_ex_mem(109),
-            RTI => q_ex_mem(110)
+            RTI => q_ex_mem(110),
+            address_for_exception => mem_address_signal_for_exception
         );
 
         Imem_wb: my_nDFF generic map (37) port map (

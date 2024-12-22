@@ -29,7 +29,7 @@ ENTITY Memory_Stage IS
     -- needed to be passed to Mem-WB Reg
     Mem_reg_Out : OUT std_logic;
     RegWrite_Out : OUT std_logic;
-    Data_back_Out : OUT std_logic_vector(15 DOWNTO 0);
+    Data_back_Out, address_for_exception : OUT std_logic_vector(15 DOWNTO 0);
     -- FLAGS_WR_Out : OUT std_logic_vector(2 DOWNTO 0);  -- ??
 
     PC_Out : OUT std_logic; -- when popping pc
@@ -83,7 +83,9 @@ ARCHITECTURE mem_arch OF Memory_Stage IS
   SIGNAL write_enable_signal : std_logic;
   SIGNAL read_enable_signal : std_logic;
 BEGIN
-
+  ----- zeyads
+  address_for_exception <= mem_selected_address;
+  -----zeyads
   -- Update control signals based on INT, RTI, CALL, and RET conditions
   control_logic: PROCESS(INT, RTI, CALL, RET, clk,rst)
   BEGIN
@@ -178,7 +180,7 @@ BEGIN
   BEGIN
     IF rst = '1' THEN
       -- Reset all outputs and memory
-      Mem_Data_Out <= (OTHERS => '0');
+      -- Mem_Data_Out <= (OTHERS => '0');
       Mem_reg_Out <= '0';
       RegWrite_Out <= '0';
       Data_back_Out <= (OTHERS => '0');
@@ -201,7 +203,7 @@ BEGIN
         PC_Out <='0';
         Flags_Out  <= '0';
       END IF;
-      Mem_Data_Out <= mem_data_out_tmp;
+      -- Mem_Data_Out <= mem_data_out_tmp;
 
       -- Pass-through signals
       Data_back_Out <= Data_back;
@@ -210,6 +212,7 @@ BEGIN
       Mem_reg_Out <= Mem_reg;
     END IF;
   END PROCESS;
+  Mem_Data_Out <= mem_data_out_tmp when (rst = '0') else (OTHERS => '0');
 
 END ARCHITECTURE mem_arch;
 

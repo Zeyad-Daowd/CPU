@@ -190,21 +190,23 @@ begin
 
     sp_mux_sel_fatma <= local_decode_push or local_decode_call or local_decode_int;
     sp_required <= sp_read;
-
+    decode_write_enable_ex_mem_pipe_sig <= '1' when (counter_flush = "00" or counter_flush = "11") else '0';
     process (clk)
     begin
         if rising_edge(clk) then
             sp_read <= sp_data_out;
             if counter_flush = "00" then
-                decode_write_enable_ex_mem_pipe_sig <= '1';
+                -- decode_write_enable_ex_mem_pipe_sig <= '1';
                 if local_decode_int = '1' or local_decode_call = '1' or latest_bit = '1' then
                     counter_flush <= "01";
                 elsif local_decode_ret = '1' or local_decode_rti = '1' then
                     counter_flush <= "11";
                 end if;
             elsif counter_flush = "01" or counter_flush = "10" then
-                decode_write_enable_ex_mem_pipe_sig <= '0';
-                counter_flush <= (others => '0'); -- Reset to "00"
+                -- decode_write_enable_ex_mem_pipe_sig <= '0';
+                counter_flush <= std_logic_vector(to_unsigned(to_integer(unsigned(counter_flush)) - 1, counter_flush'length));
+            else
+                counter_flush <= std_logic_vector(to_unsigned(to_integer(unsigned(counter_flush)) - 1, counter_flush'length));
             end if;
         end if;
     end process;

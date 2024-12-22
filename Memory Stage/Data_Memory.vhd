@@ -33,12 +33,18 @@ begin
             if write_enable = '1' then
                 memory(to_integer(unsigned(write_address))) <= write_data;
             end if;
-            if read_enable = '1' then
-                data_reg <= memory(to_integer(unsigned(read_address)));
-            end if;
         end if;
     end process;
 
     -- Output the instruction
+    process(read_enable, read_address)
+    begin
+        if read_enable = '1' then
+            data_reg <= memory(to_integer(unsigned(read_address)));
+        else
+            data_reg <= (others => '0');
+        end if;
+
+    end process;
     mem_data_out <= data_reg;
 end Behavioral;

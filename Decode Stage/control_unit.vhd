@@ -65,6 +65,7 @@ begin
     
     reg_write <= (op_code(4) and not op_code(3) and not op_code(2) and op_code(1)) or
                  (not op_code(4) and op_code(3)) or
+                 (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and op_code(0)) or
                  (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and op_code(0)) or
                  (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0)) or
                  (not op_code(4) and not op_code(3) and op_code(2) and op_code(1) and not op_code(0));
