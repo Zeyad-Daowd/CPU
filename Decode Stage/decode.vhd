@@ -36,6 +36,7 @@ entity decode is
         decode_push: out std_logic; 
         decode_pop: out std_logic; 
         decode_mem_to_reg: out std_logic; 
+        write_enable_ex_mem_pipe: out std_logic; --
         decode_alu_op_code: out std_logic_vector(2 downto 0);
         decode_which_jmp: out std_logic_vector(1 downto 0);
         decode_which_r_src: out std_logic_vector(1 downto 0);
@@ -132,11 +133,24 @@ architecture arch_decode of decode is
     signal neg_one : std_logic_vector(15 downto 0) := (others => '1');
     signal sp_data_in, sp_data_out : std_logic_vector(15 downto 0) := (others => '0');
 
+    -- stall and flush signals --
+    signal counter_flush : std_logic_vector(1 downto 0) := (others => '0');
+
 begin
     decode_int_or_rti <= sim_int_or_rti;
     decode_rti <= sim_rti;
     decode_push_pop <= sim_push_pop;
     decode_sp_wen <= sim_sp_wen;
+
+    if counter_flush = "00" then
+        write_enable_ex_mem_pipe <= '1';
+        if int = '1' then
+            counter_flush = "01";
+        end if;
+    elsif counter_flush = "01" then
+        write_enable_ex_mem_pipe <= '0';
+        counter_flush <= (others => '0');
+    end if;
 
     sp: reg
         port map (

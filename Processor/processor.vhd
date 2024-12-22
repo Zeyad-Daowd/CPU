@@ -84,6 +84,7 @@ architecture arch_processor of processor is
             decode_push: out std_logic; 
             decode_pop: out std_logic; 
             decode_mem_to_reg: out std_logic; 
+            decode_write_enable_ex_mem_pipe: out std_logic; -- 
             decode_alu_op_code: out std_logic_vector(2 downto 0);
             decode_which_jmp: out std_logic_vector(1 downto 0);
             decode_which_r_src: out std_logic_vector(1 downto 0);
@@ -235,14 +236,14 @@ architecture arch_processor of processor is
                 out_decode_mem_write, out_decode_imm_used, out_decode_imm_loc, out_decode_out_wen, out_decode_from_in, out_decode_mem_wr_data,
                 out_decode_call, out_decode_ret, out_decode_int,out_decode_rti,
                 out_decode_ret_or_rti, out_decode_set_carry,
-                out_decode_push, out_decode_pop, out_decode_mem_to_reg : std_logic := '0';
+                out_decode_push, out_decode_pop, out_decode_mem_to_reg, out_decode_write_enable_ex_mem_pipe : std_logic := '0';
 
     signal out_decode_which_r_src, out_decode_which_jmp : std_logic_vector(1 downto 0);
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
     signal out_decode_sp_plus_minus, out_decode_sp_chosen,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
-    signal d_idie : std_logic_vector(167 downto 0); 
-    signal q_idie: std_logic_vector(167 downto 0) := (others => '0');
+    signal d_idie : std_logic_vector(168 downto 0); 
+    signal q_idie: std_logic_vector(168 downto 0) := (others => '0');
     -------------------------------- Forward Unit ----------------------------
     signal forward_a_signal, forward_b_signal : std_logic_vector(1 downto 0) := (others => '0');
     -------------------------------- Exception Unit --------------------------
@@ -266,15 +267,17 @@ architecture arch_processor of processor is
     signal writeFlagsFromMemory: std_logic;
     signal reset : std_logic := '0'; -- TODO: handle this
     signal temp: std_logic := '0';
-    
+    signal stall_signal: std_logic:='0';
     begin
+        stall_signal <= (eden_hazard or out_decode_int);
         d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;
         decode_pc <= q_ifid(47 downto 32);
         decode_next_pc <= q_ifid(31 downto 16);
         decode_instruction <= q_ifid(15 downto 0);
 
         d_idie <= (
-            out_decode_push -- 167
+            out_decode_write_enable_ex_mem_pipe -- 168
+            & out_decode_push -- 167
             & out_decode_pop -- 166
             & out_decode_mem_to_reg -- 165
             & out_decode_set_carry -- [164]
@@ -350,7 +353,7 @@ architecture arch_processor of processor is
             ret_rti_sig => out_decode_ret_or_rti,
             call_sig => out_decode_call,
             jmp_sig => out_decode_is_jmp, -- TODO: as far as I see, jump is from ex
-            hazard_sig => eden_hazard,
+            hazard_sig => stall_signal, --For stalling after int
             exception_sig => exception_sig,
             pc_en => '1', -- unused now
             rst => reset,
@@ -406,6 +409,7 @@ architecture arch_processor of processor is
             decode_push => out_decode_push,
             decode_pop => out_decode_pop,
             decode_mem_to_reg => out_decode_mem_to_reg,
+            decode_write_enable_ex_mem_pipe => out_decode_write_enable_ex_mem_pipe,
             decode_alu_op_code => out_decode_alu_op_code,
             decode_which_jmp => out_decode_which_jmp,
             decode_which_r_src => out_decode_which_r_src,
@@ -413,7 +417,7 @@ architecture arch_processor of processor is
             out_read_data_2 => out_decode_read_data_2 
         );
 
-        ID_IE: my_nDFF generic map (168) port map (
+        ID_IE: my_nDFF generic map (169) port map (
             Clk => my_clk,
             Rst => '0',
             writeEN => '1',
@@ -498,7 +502,7 @@ architecture arch_processor of processor is
         IE_mem: my_nDFF generic map (117) port map (
             Clk => my_clk,
             Rst => '0',
-            writeEN => '1',
+            writeEN => out_decode_write_enable_ex_mem_pipe,
             d => d_ex_mem,
             q => q_ex_mem
         );
