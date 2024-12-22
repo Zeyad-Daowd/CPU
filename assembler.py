@@ -105,7 +105,7 @@ class Assembler:
         print("line: ", line)
         return ""
 filename = "input.txt"
-outFile = "result.txt"
+outFile = "result.mem"
 if os.path.exists(outFile):
     os.remove(outFile)
 with open(filename, "r") as f:

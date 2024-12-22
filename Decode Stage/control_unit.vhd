@@ -111,7 +111,7 @@ begin
     ret_or_rti <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0)) or
                     (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0));
     
-    mem_to_reg <= (op_code(4) and not op_code(3) and not op_code(2)) and (op_code(1) or op_code(0));
+    mem_to_reg <= (op_code(4) and not op_code(3) and not op_code(2)) and (op_code(0));  --- zeyad editted
 
     push <= (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and not op_code(0));
 

@@ -11,6 +11,7 @@ entity decode is
         in_read_addr_2: in std_logic_vector(2 downto 0); 
         in_write_addr: in std_logic_vector(2 downto 0);  
         in_write_data: in std_logic_vector(15 downto 0); 
+        latest_bit: in std_logic;
         sp_first, sp_second, sp_required: out std_logic_vector(15 downto 0);
         decode_push_pop: out std_logic;
         decode_int_or_rti: out std_logic;
@@ -196,7 +197,7 @@ begin
             sp_read <= sp_data_out;
             if counter_flush = "00" then
                 decode_write_enable_ex_mem_pipe_sig <= '1';
-                if local_decode_int = '1' or local_decode_call = '1' then
+                if local_decode_int = '1' or local_decode_call = '1' or latest_bit = '1' then
                     counter_flush <= "01";
                 elsif local_decode_ret = '1' or local_decode_rti = '1' then
                     counter_flush <= "11";

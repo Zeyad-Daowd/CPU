@@ -29,14 +29,17 @@ vsim work.processor
 # Loading work.mux_2_input(behav)
 # Loading work.data_memory(behavioral)
 # Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH project/CPU/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH project/CPU/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
 add wave -position insertpoint sim:/processor/except_unit/*
 
 add wave -position insertpoint sim:/processor/*
 add wave -position insertpoint sim:/processor/execute_stage/*
 add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/Imem_wb/*
+add wave -position insertpoint sim:/processor/wb_stage/*
 force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
-mem load -i {/home/zizo/CMP Year three/Semester 1/Architecture/Project/CPU/haga.mem} -format binary /processor/fetch_stage/im0/memory
-run
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
 #    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
@@ -48,6 +51,7 @@ run
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
 #    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
 add wave -position end sim:/processor/decode_stage/reg_file/*
+run
 run
 run
 run

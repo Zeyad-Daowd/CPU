@@ -59,6 +59,7 @@ architecture arch_processor of processor is
             in_read_addr_2: in std_logic_vector(2 downto 0); 
             in_write_addr: in std_logic_vector(2 downto 0);  
             in_write_data: in std_logic_vector(15 downto 0); 
+            latest_bit: in std_logic;
             sp_first, sp_second, sp_required: out std_logic_vector(15 downto 0);
             decode_push_pop: out std_logic;
             decode_int_or_rti: out std_logic;
@@ -385,6 +386,7 @@ architecture arch_processor of processor is
             pipe_IF_out => decode_instruction(15 downto 11),
             in_read_addr_1 => decode_instruction(7 downto 5),
             in_read_addr_2 => decode_instruction(4 downto 2),
+            latest_bit => decode_instruction(0),
             in_write_addr => q_mem_wb(35 downto 33), -- from wb
             in_write_data => writeBackOut, --from wb
             sp_first => out_decode_sp_first,

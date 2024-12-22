@@ -45,7 +45,7 @@ BEGIN
         stack_empty <= '0';
 
         -- Invalid memory address exception: Check if memory address is out of bounds
-        IF (unsigned(mem_address) > x"0FFF") THEN
+        IF (unsigned(mem_address) > x"0FFF" and (Mem_read_en = '1' or Mem_write_en = '1')) THEN
             invalid_address <= '1';
         END IF;
 
