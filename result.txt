@@ -39,6 +39,8 @@ add wave -position insertpoint sim:/processor/execute_stage/*
 add wave -position insertpoint sim:/processor/fetch_stage/*
 add wave -position insertpoint sim:/processor/Imem_wb/*
 add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
 force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
 #    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit

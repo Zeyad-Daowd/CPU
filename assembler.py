@@ -66,7 +66,7 @@ class Assembler:
             return Assembler.toBinary(30, 5)+ "0" * 3 + char + "0" * 7
         if instruction in Assembler.src:
             src = line.split(" ")[1]
-            return Assembler.toBinary(Assembler.src[instruction], 5) + Assembler.Registers[src] + "0"*8
+            return Assembler.toBinary(Assembler.src[instruction], 5) + "0" * 3 + Assembler.Registers[src] + "0"*5
         if instruction == "iadd":
             line = line.replace(",", " ").replace("  ", " ")
             dst, src, imm = line.split(" ")[1:]
