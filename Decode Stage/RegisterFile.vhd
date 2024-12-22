@@ -18,7 +18,7 @@ END ENTITY Register_File;
 ARCHITECTURE Register_File_Arch OF Register_File IS
     TYPE reg_file is Array(0 TO 7) of std_logic_vector(15 DOWNTO 0);
     signal my_reg_file: reg_file := (
-        0 => "0101010101010101",
+        0 => "0000000000000111",
         1 => "0000000000000000",
         2 => "1111111111111111",
         3 => "1011101110111011",

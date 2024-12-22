@@ -434,9 +434,9 @@ architecture arch_processor of processor is
             regWrite_ex_mem => q_ex_mem(1), 
             regWrite_mem_wb => q_mem_wb(36), 
             rd_ex_mem => q_ex_mem(106 downto 104),  
-            rd_mem_wb => q_ex_mem(35 downto 33),  
-            rs_id_ex => q_ex_mem(113 downto 111),  
-            rt_id_ex => q_ex_mem(116 downto 114),  
+            rd_mem_wb => q_mem_wb(35 downto 33),  
+            rs_id_ex => q_idie(94 downto 92),  
+            rt_id_ex => q_idie(97 downto 95),  
             forward_a => forward_a_signal, 
             forward_b => forward_b_signal
         );
@@ -484,7 +484,7 @@ architecture arch_processor of processor is
             memForward2 => forward_b_signal(0), -- TODO
             execForward1 => forward_a_signal(1), -- TODO
             execForward2 => forward_b_signal(1), -- TODO
-            memForwardData => q_mem_wb(32 downto 17), -- TODO
+            memForwardData => writeBackOut, -- TODO
             execForwardData => q_ex_mem(101 downto 86), -- TODO
             fromIn => q_idie(13),
             inData => q_idie(145 downto 130),
@@ -494,7 +494,7 @@ architecture arch_processor of processor is
             zeroFlagEn => q_idie(4),
             negativeFlagEn => q_idie(4),
             RTI => writeFlagsFromMemory,  -- from memory stage
-            set_C => d_idie(164), 
+            set_C => q_idie(164), 
             carryFlagMem => dataOutFromMemory(2),
             zeroFlagMem => dataOutFromMemory(1),
             negativeFlagMem => dataOutFromMemory(0),
