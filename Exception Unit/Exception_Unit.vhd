@@ -34,7 +34,6 @@ ARCHITECTURE excep_arch OF Exception_Unit IS
     SIGNAL invalid_address : std_logic := '0'; -- Indicates invalid memory address exception
     SIGNAL stack_full       : std_logic := '0'; -- Indicates stack full exception
     SIGNAL stack_empty      : std_logic := '0'; -- Indicates stack empty exception
-    signal ours : std_logic_vector(1 downto 0) := "00"; --01 "INVALID ADDRESS" 10 "EMPTY STACK" 11 "FULL STACK"
 BEGIN
 
     -- Exception detection logic
@@ -48,64 +47,57 @@ BEGIN
         -- Invalid memory address exception: Check if memory address is out of bounds
         IF (unsigned(mem_address) > x"0FFF" and (Mem_read_en = '1' or Mem_write_en = '1')) THEN
             invalid_address <= '1';
-            ours <= "01";
         END IF;
 
         -- Stack full exception: Occurs if push is attempted while stack pointer is at the lowest address (0x0000)
         IF (push = '1' AND sp = x"0000") THEN
             stack_full <= '1';
-            ours <= "11";
         END IF;
 
         -- Stack empty exception: Occurs if pop is attempted while stack pointer is at the highest address (0x0FFF)
         IF (pop = '1' AND sp = x"0FFF") THEN
             stack_empty <= '1';
-            ours <= "10";
         elsif(rti = '1' AND sp = x"0FFF")THEN
             stack_empty <= '1';
-            ours <= "10";
         elsif(rti = '1' AND sp = x"0FFE")THEN
             stack_empty <= '1';
-            ours <= "10";
         else 
             stack_empty <= '0';
         end if;
     END PROCESS;
 
-    PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc_memory, pc_decode, ours)
+    PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc_memory,pc_decode)
     BEGIN
-    CASE ours IS
-    WHEN "01" =>
-        Mem_read_en_exception <= '0';
-        Mem_write_en_exception <= '0';
-        IF_D_flush <= '1';
-        D_EX_flush <= '1';
-        EX_M_flush <= '1';
-        pc_sel <= "01";
-        epc <= pc_memory;
-
-    WHEN "11" =>
-        epc <= pc_decode;
-        IF_D_flush <= '1';
-        pc_sel <= "11";
-
-    WHEN "10" =>
-        epc <= pc_decode;
-        IF_D_flush <= '1';
-        pc_sel <= "10";
-
-    WHEN OTHERS =>
-        -- Default values for no specific condition
-        Mem_read_en_exception <= Mem_read_en;
-        Mem_write_en_exception <= Mem_write_en;
+        
         epc <= (OTHERS => '0');
         IF_D_flush <= '0';
         D_EX_flush <= '0';
         EX_M_flush <= '0';
         pc_sel <= "00";
-END CASE;
+        
+        IF (invalid_address = '1') THEN
+            Mem_read_en_exception <= '0';
+            Mem_write_en_exception <= '0';
+            IF_D_flush <= '1';
+            D_EX_flush <= '1';
+            EX_M_flush <= '1';
+            pc_sel <= "01";
+            epc <= pc_memory;
+        ELSE 
+            Mem_read_en_exception <= '1';
+            Mem_write_en_exception <= '1';
 
+        END IF;
+        IF (stack_full = '1') THEN
+            epc <= pc_decode;
+            IF_D_flush <= '1';
+            pc_sel <= "11";
+        END IF;
+        IF (stack_empty = '1') THEN
+            epc <= pc_decode;
+            IF_D_flush <= '1';
+            pc_sel <= "10";
+        END IF;
     END PROCESS;
-
 
 END ARCHITECTURE excep_arch;
