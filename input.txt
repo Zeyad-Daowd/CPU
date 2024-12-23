@@ -1,21 +1,10 @@
 Mov R1, R2
 Not R2, R2
 And R1, R2, R1
-JZ R1
-LDM R1, 10
-SUB R4, R3, R1       
-AND R5, R3, R2       
-NOT R1, R2           
-INC R3, R3           
-PUSH R3              
-POP R7     
-LDM R1, 10           
-IADD R3, R1, 15      
-OUT R3               
-IN R2                
-JZ R1
-MOV R3, R1           
-HLT
-ldd r7,255(r3)
-int 0 
-int 1
+int 0
+nop
+NOP
+Add R1, R2, R3
+rti
+STD R1, 12(R2)
+LDD R4, 12(R2)
