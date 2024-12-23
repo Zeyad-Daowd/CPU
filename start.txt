@@ -29,8 +29,8 @@ vsim work.processor
 # Loading work.mux_2_input(behav)
 # Loading work.data_memory(behavioral)
 # Loading work.write_back(write_back_arch)
-mem load -i {//Mac/Home/Desktop/ARCH project/CPU/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
-mem load -i {//Mac/Home/Desktop/ARCH project/CPU/result.mem} -format binary /processor/fetch_stage/im0/memory
+mem load -i {/home/zizo/CMP Year three/Semester 1/Architecture/Project/CPU/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {/home/zizo/CMP Year three/Semester 1/Architecture/Project/CPU/result.mem} -format binary /processor/fetch_stage/im0/memory
 add wave -position insertpoint sim:/processor/mem_stage/*
 add wave -position insertpoint sim:/processor/except_unit/*
 add wave -position insertpoint sim:/processor/mem_stage/dm0/*

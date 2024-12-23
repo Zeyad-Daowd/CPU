@@ -154,7 +154,7 @@ architecture arch_decode of decode is
 
 begin
     
-    flush_condition <= '1' when (counter_flush = "00" and not jump_from_exec) else '0';  
+    flush_condition <= '1' when (counter_flush = "00" and jump_from_exec = '0') else '0';  
     decode_int_or_rti <= sim_int_or_rti and flush_condition;
     decode_push_pop <= sim_push_pop and flush_condition;
     sp_sim_write_for_exception <= sim_sp_wen and flush_condition;
@@ -197,7 +197,9 @@ begin
     begin
         if rising_edge(clk) then
             sp_read <= sp_data_out;
-            if counter_flush = "00" then
+            if jump_from_exec = '1' then
+                counter_flush <= "00";
+            elsif counter_flush = "00" then
                 -- decode_write_enable_ex_mem_pipe_sig <= '1';
                 if local_decode_int = '1' or local_decode_call = '1' or latest_bit = '1' then
                     counter_flush <= "01";

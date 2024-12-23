@@ -363,7 +363,7 @@ architecture arch_processor of processor is
             pc_en => '1', -- unused now
             rst => reset,
             call_pc => d_idie(113 downto 98),
-            jmp_pc => q_idie(113 downto 98), -- TODO: handle this
+            jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
             ret_pc => dataOutFromMemory, -- TODO: handle this
             im_write_enable => '0', -- TODO: handle this
             im_write_address => (others => '0'), -- TODO: handle this
