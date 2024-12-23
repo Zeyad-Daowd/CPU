@@ -12,7 +12,7 @@ entity decode is
         in_write_addr: in std_logic_vector(2 downto 0);  
         in_write_data: in std_logic_vector(15 downto 0); 
         latest_bit: in std_logic;
-        jump_from_exec: in std_logic;
+        jump_from_exec, hazard_detected: in std_logic;
         sp_first, sp_second, sp_required: out std_logic_vector(15 downto 0);
         decode_push_pop: out std_logic;
         decode_int_or_rti: out std_logic;
@@ -154,7 +154,7 @@ architecture arch_decode of decode is
 
 begin
     
-    flush_condition <= '1' when (counter_flush = "00" and jump_from_exec = '0') else '0';  
+    flush_condition <= '1' when (counter_flush = "00" and jump_from_exec = '0' and hazard_detected = '0') else '0';  
     decode_int_or_rti <= sim_int_or_rti and flush_condition;
     decode_push_pop <= sim_push_pop and flush_condition;
     sp_sim_write_for_exception <= sim_sp_wen and flush_condition;
@@ -197,7 +197,7 @@ begin
     begin
         if rising_edge(clk) then
             sp_read <= sp_data_out;
-            if jump_from_exec = '1' then
+            if jump_from_exec = '1' or hazard_detected = '1'then
                 counter_flush <= "00";
             elsif counter_flush = "00" then
                 -- decode_write_enable_ex_mem_pipe_sig <= '1';
