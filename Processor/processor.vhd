@@ -356,13 +356,13 @@ architecture arch_processor of processor is
         fetch_stage: Fetch_Block port map (
             clk => my_clk,
             ret_rti_sig => pcOutFromMemory,
-            call_sig => out_decode_call,
+            call_sig => q_idie(15),
             jmp_sig => exec_jumpFlag, -- TODO: as far as I see, jump is from ex
             hazard_sig => stall_signal, --For stalling after int
             exception_sig => exception_sig,
             pc_en => '1', -- unused now
             rst => reset,
-            call_pc => d_idie(113 downto 98),
+            call_pc => exec_Rsrc1Forwarded,
             jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
             ret_pc => dataOutFromMemory, -- TODO: handle this
             im_write_enable => '0', -- TODO: handle this

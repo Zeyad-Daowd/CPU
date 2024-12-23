@@ -213,7 +213,7 @@ begin
                 if local_decode_int = '1' or local_decode_call = '1' or latest_bit = '1' then
                     counter_flush <= "01";
                 elsif local_decode_ret = '1' or local_decode_rti = '1' then
-                    counter_flush <= "11";
+                    counter_flush <= "10";
                 end if;
             elsif counter_flush = "01" or counter_flush = "10" then
                 -- decode_write_enable_ex_mem_pipe_sig <= '0';
