@@ -122,7 +122,7 @@ begin
         case op_code is
             when "00011" => alu_op_code <= "001";
             when "00100" => alu_op_code <= "010";
-            when "01001" | "01100" | "10011" => alu_op_code <= "011";
+            when "01001" | "01100" | "10011" | "10100" => alu_op_code <= "011";
             when "01010" => alu_op_code <= "100";
             when "01011" => alu_op_code <= "101";
             when others => alu_op_code <= "000";

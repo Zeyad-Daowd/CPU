@@ -30,7 +30,7 @@ begin
     begin
     -- write then read
         if rising_edge(clk) then
-            if write_enable = '1' then
+            if write_enable = '1'  and (to_integer(unsigned(write_address)) < 4096) then
                 memory(to_integer(unsigned(write_address))) <= write_data;
             end if;
         end if;
@@ -39,7 +39,7 @@ begin
     -- Output the instruction
     process(read_enable, read_address)
     begin
-        if read_enable = '1' then
+        if (read_enable = '1') and (to_integer(unsigned(read_address)) < 4096) then
             data_reg <= memory(to_integer(unsigned(read_address)));
         else
             data_reg <= (others => '0');

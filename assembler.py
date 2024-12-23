@@ -82,8 +82,8 @@ class Assembler:
         if instruction == "ldd":
             line = line.replace(" (", "(")
             offset = re.search(r"[0-9]+\(", line).group()
-            src = re.search(r"r[0-7]\,", line).group()
-            dst = re.search(r"r[0-7]\)", line).group()
+            dst = re.search(r"r[0-7]\,", line).group()
+            src = re.search(r"r[0-7]\)", line).group()
             offset = int(offset[:-1])
             src = src[:-1]
             dst = dst[:-1]
@@ -93,8 +93,8 @@ class Assembler:
         if instruction == "std":
             line = line.replace(" (", "(")
             offset = re.search(r"[0-9]+\(", line).group()
-            src2 = re.search(r"r[0-7]\,", line).group()
-            src1 = re.search(r"r[0-7]\)", line).group()
+            src1 = re.search(r"r[0-7]\,", line).group()
+            src2 = re.search(r"r[0-7]\)", line).group()
             offset = int(offset[:-1])
             src1 = src1[:-1]
             src2 = src2[:-1]

@@ -150,7 +150,7 @@ architecture arch_decode of decode is
     signal decode_write_enable_ex_mem_pipe_sig: std_logic := '1';
     signal flush_condition: std_logic := '1';  
     signal sp_sim_write_for_exception : std_logic := '0';
-
+    signal signal_stop_writing : std_logic_vector(1 downto 0) := (others => '0');
 
 begin
     
@@ -191,12 +191,21 @@ begin
 
     sp_mux_sel_fatma <= local_decode_push or local_decode_call or local_decode_int;
     sp_required <= sp_read;
-    decode_write_enable_ex_mem_pipe_sig <= '1' when (counter_flush = "00" or counter_flush = "11") else '0';
+    decode_write_enable_ex_mem_pipe_sig <= '0' when (signal_stop_writing = "10") else '1';
     
     process (clk)
     begin
         if rising_edge(clk) then
             sp_read <= sp_data_out;
+            if (jump_from_exec = '0' and hazard_detected = '0') then
+                if (signal_stop_writing = "00") then
+                    if(local_decode_rti = '1' or local_decode_int = '1') then
+                        signal_stop_writing <= "10";
+                    end if;
+                else
+                    signal_stop_writing <= std_logic_vector(to_unsigned(to_integer(unsigned(signal_stop_writing)) - 1, signal_stop_writing'length));
+                end if;
+            end if;
             if jump_from_exec = '1' or hazard_detected = '1'then
                 counter_flush <= "00";
             elsif counter_flush = "00" then

@@ -176,7 +176,7 @@ BEGIN
     );
 
   -- Process for handling memory read and write operations
-  memory_operations: PROCESS(clk, rst)
+  memory_operations: PROCESS(clk, rst, RET, RTI, flags_pc_sel, Data_back, RegWrite, Mem_reg)
   BEGIN
     IF rst = '1' THEN
       -- Reset all outputs and memory
@@ -187,7 +187,7 @@ BEGIN
       -- FLAGS_WR_Out <= (OTHERS => '0');
       PC_Out <= '0';
       Flags_Out  <= '0';
-    ELSIF rising_edge(clk) THEN
+    ELSIF clk = '1' THEN
       if RET = '1' THEN
         PC_Out <= '1';
         Flags_Out  <= '0';
