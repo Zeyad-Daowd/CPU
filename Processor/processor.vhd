@@ -60,6 +60,7 @@ architecture arch_processor of processor is
             in_write_addr: in std_logic_vector(2 downto 0);  
             in_write_data: in std_logic_vector(15 downto 0); 
             latest_bit: in std_logic;
+            jump_from_exec: in std_logic;
             sp_first, sp_second, sp_required: out std_logic_vector(15 downto 0);
             decode_push_pop: out std_logic;
             decode_int_or_rti: out std_logic;
@@ -107,7 +108,7 @@ architecture arch_processor of processor is
             execForwardData: IN std_logic_vector (15 DOWNTO 0);
             fromIn: IN std_logic;
             inData: IN std_logic_vector (15 DOWNTO 0);
-            dataBack, Rsrc1Forwarded       : OUT std_logic_vector (15 DOWNTO 0);
+            dataBack, Rsrc1Forwarded  : OUT std_logic_vector (15 DOWNTO 0);
             isJump: in std_logic;
             clk, rst: in std_logic;
             whichJump: in std_logic_vector(1 DOWNTO 0); -- 00 = always, 01 = zero, 10 = negative, 11 = carry
@@ -387,6 +388,7 @@ architecture arch_processor of processor is
             in_read_addr_1 => decode_instruction(7 downto 5),
             in_read_addr_2 => decode_instruction(4 downto 2),
             latest_bit => decode_instruction(0),
+            jump_from_exec => exec_jumpFlag,
             in_write_addr => q_mem_wb(35 downto 33), -- from wb
             in_write_data => writeBackOut, --from wb
             sp_first => out_decode_sp_first,
