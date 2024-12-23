@@ -68,8 +68,7 @@ BEGIN
 
     PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc_memory,pc_decode)
     BEGIN
-        Mem_read_en_exception <= Mem_read_en;
-        Mem_write_en_exception <= Mem_write_en;
+        
         epc <= (OTHERS => '0');
         IF_D_flush <= '0';
         D_EX_flush <= '0';
@@ -84,6 +83,10 @@ BEGIN
             EX_M_flush <= '1';
             pc_sel <= "01";
             epc <= pc_memory;
+        ELSE 
+            Mem_read_en_exception <= '1';
+            Mem_write_en_exception <= '1';
+
         END IF;
         IF (stack_full = '1') THEN
             epc <= pc_decode;
