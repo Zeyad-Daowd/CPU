@@ -27,11 +27,11 @@ class Assembler:
     src = {
         "out": 5,
         "push": 16,
-        "jz": 22,
-        "jn": 23,
-        "jc": 24,
-        "jmp": 25,
-        "call": 26
+        "jz": 24,
+        "jn": 25,
+        "jc": 26,
+        "jmp": 27,
+        "call": 28
     }
     @staticmethod
     def toBinary(value, bits=16):
