@@ -177,10 +177,6 @@ begin
     decode_out_wen <= local_decode_out_wen and flush_condition;
     decode_from_in <= local_decode_from_in and flush_condition;
     decode_mem_wr_data <= local_decode_mem_wr_data and flush_condition;
-    decode_call <= local_decode_call and flush_condition;
-    decode_ret <= local_decode_ret and flush_condition;
-    decode_int <= local_decode_int and flush_condition;
-    decode_rti <= local_decode_rti and flush_condition;
     decode_ret_or_rti <= local_decode_ret_or_rti and flush_condition;
     decode_push <= local_decode_push and flush_condition;
     decode_pop <= local_decode_pop and flush_condition;
