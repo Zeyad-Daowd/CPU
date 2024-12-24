@@ -106,7 +106,7 @@ class Assembler:
         print("line: ", line)
         return ""
 filename = "input.txt"
-outFile = "Orgresult.mem"
+outFile = "result.mem"
 if os.path.exists(outFile):
     os.remove(outFile)
 dictionary = OrderedDict()

@@ -52,6 +52,7 @@ architecture arch_processor of processor is
 
     component decode is
         port (
+            prev_decode_out: in std_logic_vector(168 downto 0);
             clk : in std_logic; 
             wb_reg_write: in std_logic; 
             pipe_IF_out : in  std_logic_vector(4 downto 0); 
@@ -246,7 +247,7 @@ architecture arch_processor of processor is
     signal out_decode_alu_op_code : std_logic_vector(2 downto 0);
     signal out_decode_sp_first, out_decode_sp_second, out_decode_sp_required,out_decode_read_data_1, out_decode_read_data_2: std_logic_vector(15 downto 0);
         ----------------------------- IDIE pipeline -----------------------------
-    signal d_idie : std_logic_vector(168 downto 0); 
+    signal d_idie, prev_decode_out : std_logic_vector(168 downto 0) := (others => '0'); 
     signal q_idie: std_logic_vector(168 downto 0) := (others => '0');
     -------------------------------- Forward Unit ----------------------------
     signal forward_a_signal, forward_b_signal : std_logic_vector(1 downto 0) := (others => '0');
@@ -273,15 +274,39 @@ architecture arch_processor of processor is
     signal temp: std_logic := '0';
     signal stall_signal: std_logic:='0';
     signal single_zero: std_logic := '0';
+    signal flags : std_logic_vector(15 downto 0) := (others => '0');
     begin
-        out_peripheral <= exec_Rsrc1Forwarded when (q_idie(12) = '1' and eden_hazard = '0');
-        stall_signal <= (eden_hazard or q_idie(17));
-        d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;        ----instruction 0 to 15, next pc 16 to 31 
-        decode_pc <= q_ifid(47 downto 32);
-        decode_next_pc <= q_ifid(31 downto 16);
-        decode_instruction <= q_ifid(15 downto 0);
+        out_peripheral <= exec_Rsrc1Forwarded when (out_decode_out_wen = '1');
+        stall_signal <= (out_decode_int);
+        decode_pc <= fetch_pc;
+        decode_next_pc <= fetch_next_pc;
+        decode_instruction <= fetch_instruction;
+        flags <= zeros & exec_carryFlagOutput & exec_zeroFlagOutput & exec_negativeFlagOutput;
+       
+        
 
-        d_idie <= (
+
+        fetch_stage: Fetch_Block port map (
+            clk => my_clk,
+            ret_rti_sig => pcOutFromMemory,
+            call_sig => out_decode_call,
+            jmp_sig => exec_jumpFlag, -- TODO: as far as I see, jump is from ex
+            hazard_sig => stall_signal, --For stalling after int
+            exception_sig => exception_sig,
+            pc_en => '1', -- unused now
+            rst => reset,
+            call_pc => exec_Rsrc1Forwarded,
+            jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
+            ret_pc => dataOutFromMemory, -- TODO: handle this
+            im_write_enable => '0', -- TODO: handle this
+            im_write_address => (others => '0'), -- TODO: handle this
+            im_write_data => (others => '0'), -- TODO: handle this
+            current_pc => fetch_pc,
+            next_pc => fetch_next_pc,
+            instruction => fetch_instruction 
+        );
+
+        prev_decode_out <= (
             out_decode_write_enable_ex_mem_pipe -- 168
             & out_decode_push -- 167
             & out_decode_pop -- 166
@@ -322,76 +347,18 @@ architecture arch_processor of processor is
             & out_decode_int_or_rti -- 1
             & out_decode_push_pop -- 0
         );
-        d_ex_mem <= (
-            q_idie (97 downto 95) --- 114 to 116 (2nd addr)
-            & q_idie (94 downto 92) -- 111 to 113 (first reg addr)
-            & q_idie(18) -- 110
-            & q_idie(16) -- 109
-            & q_idie(17) -- 108
-            & q_idie(15) -- 107
-            & q_idie(91 downto 89) -- 104 to 106
-            & q_idie(14) -- 103
-            & q_idie(3) -- 102
-            & exec_data_out --86 to 101
-            & exec_Rsrc1Forwarded -- 70 to 85
-            & q_idie(56 downto 41) -- 54 to 69
-            & q_idie(40 downto 25) -- 38 to 53
-            & zeros & exec_carryFlagOutput & exec_zeroFlagOutput & exec_negativeFlagOutput -- 22 to 37
-            & q_idie(88 downto 73) -- 6 to 21
-            & temp      --5
-            & temp      --4
-            & q_idie(9) --3
-            & q_idie(8) -- 2
-            & q_idie(6) -- 1
-            & q_idie(165) -- 0
-        );
-
-        d_mem_wb <= (
-            q_ex_mem(1) -- 36
-            & q_ex_mem (106 downto 104) -- 33 to 35
-            & dataOutFromMemory -- 17 to 32
-            & q_ex_mem(101 downto 86) -- 1 to 16
-            & q_ex_mem(0) -- 0
-        );
-
-        fetch_stage: Fetch_Block port map (
-            clk => my_clk,
-            ret_rti_sig => pcOutFromMemory,
-            call_sig => q_idie(15),
-            jmp_sig => exec_jumpFlag, -- TODO: as far as I see, jump is from ex
-            hazard_sig => stall_signal, --For stalling after int
-            exception_sig => exception_sig,
-            pc_en => '1', -- unused now
-            rst => reset,
-            call_pc => exec_Rsrc1Forwarded,
-            jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
-            ret_pc => dataOutFromMemory, -- TODO: handle this
-            im_write_enable => '0', -- TODO: handle this
-            im_write_address => (others => '0'), -- TODO: handle this
-            im_write_data => (others => '0'), -- TODO: handle this
-            current_pc => fetch_pc,
-            next_pc => fetch_next_pc,
-            instruction => fetch_instruction 
-        );
-
-        If_ID: my_nDFF generic map (48) port map (
-            Clk => my_clk,
-            Rst => '0',
-            writeEN => '1',
-            d => d_ifid,
-            q => q_ifid
-        );
 
         decode_stage: decode port map ( 
+            prev_decode_out => prev_decode_out,
             clk => my_clk,
-            wb_reg_write => q_mem_wb(36), -- TODO: come from wb
+            wb_reg_write => out_decode_reg_write, 
             pipe_IF_out => decode_instruction(15 downto 11),
             in_read_addr_1 => decode_instruction(7 downto 5),
             in_read_addr_2 => decode_instruction(4 downto 2),
             latest_bit => decode_instruction(0),
             jump_from_exec => exec_jumpFlag,
-            hazard_detected => eden_hazard,
-            in_write_addr => q_mem_wb(35 downto 33), -- from wb
+            hazard_detected => single_zero,
+            in_write_addr => decode_instruction(10 downto 8), -- from wb
             in_write_data => writeBackOut, --from wb
             sp_first => out_decode_sp_first,
             sp_second => out_decode_sp_second,
@@ -428,38 +395,14 @@ architecture arch_processor of processor is
             out_read_data_2 => out_decode_read_data_2
         );
 
-        ID_IE: my_nDFF generic map (169) port map (
-            Clk => my_clk,
-            Rst => '0',
-            writeEN => '1',
-            d => d_idie,
-            q => q_idie
-        );
 
-        forward_unit: forwarding_unit port map (
-            regWrite_ex_mem => q_ex_mem(1), 
-            regWrite_mem_wb => q_mem_wb(36), 
-            rd_ex_mem => q_ex_mem(106 downto 104),  
-            rd_mem_wb => q_mem_wb(35 downto 33),  
-            rs_id_ex => q_idie(94 downto 92),  
-            rt_id_ex => q_idie(97 downto 95),  
-            forward_a => forward_a_signal, 
-            forward_b => forward_b_signal
-        );
         
-        thorgan_hazard_unit: hazardUnit port map (
-            memRead => q_idie(8),   -- from execute
-            Rdst => q_idie(91 downto 89),-- from execute
-            Rsrc1 => decode_instruction(7 downto 5), -- from decode
-            Rsrc2 => decode_instruction(4 downto 2),  -- from decode
-            Rsrc1Used => out_decode_which_r_src(0), -- from decoder
-            Rsrc2Used => out_decode_which_r_src(1), -- from decoder
-            hazard_detected => eden_hazard  
-        );
+        
+        
 
         except_unit: Exception_Unit port map (
-            Mem_read_en => q_ex_mem(2), 
-            Mem_write_en => q_ex_mem(3),
+            Mem_read_en => out_decode_mem_read, 
+            Mem_write_en => out_decode_mem_write,
             push => out_decode_push, -- 1 for push inst.
             pop => out_decode_pop, -- 1 for pop inst.
             rti => out_decode_rti,
@@ -480,27 +423,27 @@ architecture arch_processor of processor is
         execute_stage: execute port map (
             clk => my_clk,
             rst => temp,
-            RegA => q_idie(113 downto 98),
-            RegB => q_idie(129 downto 114),
-            ALUop => q_idie(22 downto 20),
-            imm_used => q_idie(10),
-            imm_loc => q_idie(11),
-            imm_value => q_idie(161 downto 146),
-            memForward1 => single_zero, -- TODO
-            memForward2 => single_zero, -- TODO
-            execForward1 => single_zero, -- TODO
-            execForward2 => single_zero, -- TODO
-            memForwardData => writeBackOut, -- TODO
-            execForwardData => q_ex_mem(101 downto 86), -- TODO
-            fromIn => q_idie(13),
-            inData => q_idie(145 downto 130),
-            isJump => q_idie(7),
-            whichJump => q_idie(163 downto 162),
-            carryFlagEn => q_idie(5),
-            zeroFlagEn => q_idie(4),
-            negativeFlagEn => q_idie(4),
+            RegA => out_decode_read_data_1,
+            RegB => out_decode_read_data_2,
+            ALUop => out_decode_alu_op_code,
+            imm_used => out_decode_imm_used,
+            imm_loc => out_decode_imm_loc,
+            imm_value => fetch_instruction,     -- this won't work needs stall he7
+            memForward1 => single_zero, -- TODO useless here
+            memForward2 => single_zero, -- TODO useless here
+            execForward1 => single_zero, -- TODO useless here
+            execForward2 => single_zero, -- TODO useless here
+            memForwardData => writeBackOut, -- TODO useless here
+            execForwardData => zeros_16, -- TODO useless here
+            fromIn => out_decode_from_in,
+            inData => in_peripheral,
+            isJump => out_decode_is_jmp,
+            whichJump => out_decode_which_jmp,
+            carryFlagEn => out_decode_carry_flag_en,
+            zeroFlagEn => out_decode_zero_neg_flag_en,
+            negativeFlagEn => out_decode_zero_neg_flag_en,
             RTI => writeFlagsFromMemory,  -- from memory stage
-            set_C => q_idie(164), 
+            set_C => out_decode_set_carry,
             carryFlagMem => dataOutFromMemory(2),
             zeroFlagMem => dataOutFromMemory(1),
             negativeFlagMem => dataOutFromMemory(0),
@@ -512,54 +455,39 @@ architecture arch_processor of processor is
             Rsrc1Forwarded => exec_Rsrc1Forwarded
         );
 
-        IE_mem: my_nDFF generic map (117) port map (
-            Clk => my_clk,
-            Rst => '0',
-            writeEN => q_idie(168),
-            d => d_ex_mem,
-            q => q_ex_mem
-        );
 
         mem_stage: Memory_Stage port map (
             clk => my_clk,
             rst => temp,
-            Mem_reg => q_ex_mem(0), 
-            RegWrite => q_ex_mem(1),
-            Mem_read_en => q_ex_mem(2),
-            Mem_write_en => q_ex_mem(3),
+            Mem_reg => out_decode_mem_to_reg, 
+            RegWrite => out_decode_reg_write,
+            Mem_read_en => out_decode_mem_read,
+            Mem_write_en => out_decode_mem_read,
             Mem_read_en_exception => Mem_read_en_exception_signal,
             Mem_write_en_exception => Mem_write_en_exception_signal,
-            PC => q_ex_mem(21 downto 6),
-            FLAGS => q_ex_mem(37 downto 22),
-            SP_SEC => q_ex_mem(53 downto 38),
-            SP => q_ex_mem(69 downto 54),
-            R_Rsrc => q_ex_mem(85 downto 70),
-            Data_back => q_ex_mem(101 downto 86),
-            mem_address => q_ex_mem(102),
-            Mem_write_data => q_ex_mem(103),
-            Rdst => q_ex_mem(106 downto 104),
+            PC => decode_next_pc,
+            FLAGS => flags,
+            SP_SEC => out_decode_sp_second,
+            SP => out_decode_sp_first,
+            R_Rsrc => out_decode_read_data_1,
+            Data_back => exec_data_out,
+            mem_address => out_decode_Mem_addr,
+            Mem_write_data => out_decode_mem_wr_data,
+            Rdst => decode_instruction(10 downto 8),
             Mem_Data_Out => dataOutFromMemory, -- data out from memory
             PC_Out => pcOutFromMemory,
             Flags_Out => writeFlagsFromMemory,
-            Call => q_ex_mem(107),
-            INT => q_ex_mem(108),
-            RET => q_ex_mem(109),
-            RTI => q_ex_mem(110),
+            Call => out_decode_call,
+            INT => out_decode_int,
+            RET => out_decode_ret,
+            RTI => out_decode_rti,
             address_for_exception => mem_address_signal_for_exception
         );
 
-        Imem_wb: my_nDFF generic map (37) port map (
-            Clk => my_clk,
-            Rst => '0',
-            writeEN => '1',
-            d => d_mem_wb,
-            q => q_mem_wb
-        );
-
         wb_stage: Write_Back port map (
-            memToReg => q_mem_wb(0),
-            dataBack => q_mem_wb(16 downto 1),
-            mem => q_mem_wb(32 downto 17),
+            memToReg => out_decode_mem_to_reg,
+            dataBack => exec_data_out,
+            mem => dataOutFromMemory,
             write_data => writeBackOut
         );
 end architecture;

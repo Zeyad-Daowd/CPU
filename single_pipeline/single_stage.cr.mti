@@ -1,0 +1,317 @@
+{//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Memory_Stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Memory_Stage.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Memory_Stage
+-- Compiling architecture mem_arch of Memory_Stage
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/mux4.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/mux4.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux4
+-- Compiling architecture arch1 of mux4
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_Register.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_Register.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity hana_reg
+-- Compiling architecture arch_hana_reg of hana_reg
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Block.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Block.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Fetch_Block
+-- Compiling architecture Fetch_Block_arch of Fetch_Block
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/exception_unit_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/exception_unit_tb.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Exception_Unit_tb
+-- Compiling architecture tb_arch of Exception_Unit_tb
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Add_signed.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Add_signed.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Add_signed
+-- Compiling architecture arch_Add_signed of Add_signed
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register_tb.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_reg
+-- Compiling architecture sim of tb_reg
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile_tb.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Register_File_TB
+-- Compiling architecture behavior of Register_File_TB
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/SP_sim.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/SP_sim.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity TB_SP_sim
+-- Compiling architecture testbench of TB_SP_sim
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/pipeline_reg.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/pipeline_reg.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity my_nDFF
+-- Compiling architecture b_my_nDFF of my_nDFF
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/oldALU.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/oldALU.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity ALUOLD
+-- Compiling architecture arch1 of ALUOLD
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/hazard_unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/hazard_unit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity hazardUnit
+-- Compiling architecture mybehavior of hazardUnit
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity forwarding_unit
+-- Compiling architecture forwarding_behavioral of forwarding_unit
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_DFF.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_DFF.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity hana_DFF
+-- Compiling architecture arch_hana_DFF of hana_DFF
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit_tb.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity control_unit_tb
+-- Compiling architecture testbench of control_unit_tb
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/my_DFF.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/my_DFF.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity my_DFF
+-- Compiling architecture arch_my_DFF of my_DFF
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Adder.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Adder.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Adder
+-- Compiling architecture Behavioral of Adder
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/execute.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/execute.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity execute
+-- Compiling architecture arch1 of execute
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Data_Memory.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Data_Memory.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Data_Memory
+-- Compiling architecture Behavioral of Data_Memory
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity control_unit
+-- Compiling architecture arch_control_unit of control_unit
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/mux2to1.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/mux2to1.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity mux2to1
+-- Compiling architecture arch_mux2to1 of mux2to1
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/MUX2.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/MUX2.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MUX_2_INPUT
+-- Compiling architecture behav of MUX_2_INPUT
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit_tb.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity forwarding_tb
+-- Compiling architecture forwarding_tb_arch of forwarding_tb
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/7ambola_dff.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/7ambola_dff.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity hambola_dff
+-- Compiling architecture arch_hambola_dff of hambola_dff
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Write Back Stage/Write_Back.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Write Back Stage/Write_Back.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Write_Back
+-- Compiling architecture Write_Back_arch of Write_Back
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Stage.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Stage.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Fetch_Stage
+-- Compiling architecture Fetch_Stage_arch of Fetch_Stage
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partB.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partB.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity partB
+-- Compiling architecture arch1 of partB
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partC.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partC.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity partC
+-- Compiling architecture arch1 of partC
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/ALU.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/ALU.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ALU
+-- Compiling architecture arch1 of ALU
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/Exception_Unit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/Exception_Unit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Exception_Unit
+-- Compiling architecture excep_arch of Exception_Unit
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity reg
+-- Compiling architecture arch_reg of reg
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Register_File
+-- Compiling architecture Register_File_Arch of Register_File
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partD.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partD.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity partD
+-- Compiling architecture arch1 of partD
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/zeyad_DFF.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/zeyad_DFF.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity zeyad_DFF
+-- Compiling architecture mybehavior of zeyad_DFF
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/tb_Add_Signed.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/tb_Add_Signed.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_Add_signed
+-- Compiling architecture arch_tb_Add_signed of tb_Add_signed
+
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Instruction_Memory
+-- Compiling architecture Behavioral of Instruction_Memory
+
+} {} {}}
