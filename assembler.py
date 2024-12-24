@@ -1,4 +1,5 @@
 import re, os
+from collections import OrderedDict
 class Assembler:
     Registers = dict()
     for i in range(8):
@@ -105,11 +106,27 @@ class Assembler:
         print("line: ", line)
         return ""
 filename = "input.txt"
-outFile = "result.mem"
+outFile = "Orgresult.mem"
 if os.path.exists(outFile):
     os.remove(outFile)
+dictionary = OrderedDict()
+initial = 0
 with open(filename, "r") as f:
     for line in f:
+        if (line.lower().split()[0] == ".org"):
+            hexa = line.lower().split()[1]
+            initial = int(hexa, 16)
+            continue
         assembled = Assembler.assemble(line)
-        with open(outFile, "a") as f:
-            f.write(assembled + "\n")
+        for x in assembled.split("\n"):
+            dictionary[initial] = x
+            initial += 1
+        # with open(outFile, "a") as f:
+        #     f.write(assembled + "\n")
+maxKey = max(dictionary.keys())
+with open(outFile, "w") as f:
+    for i in range(maxKey+1):
+        if i in dictionary:
+            f.write(dictionary[i] + "\n")
+        else:
+            f.write("0"*16 + "\n")
