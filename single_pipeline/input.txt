@@ -1,10 +1,11 @@
-Mov R1, R2
-Not R2, R2
-And R1, R2, R1
-int 0
-nop
-nop
-Add R1, R2, R3
-rti
-STD R1, 12(R2)
-LDD R4, 12(R2)
+LDM R1, 16
+LDM R2, 4
+call R1
+in R3
+int 1
+in R4
+Not R1, R1
+RTI
+.Org 10
+OUT R2
+RET

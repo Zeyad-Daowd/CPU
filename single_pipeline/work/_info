@@ -1,0 +1,1552 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/modelSim/modelsim_ase/win32aloem
+Eadd_signed
+Z0 w1735004463
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 d//Mac/Home/Desktop/ARCH project/CPU/single_pipeline
+Z5 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Add_signed.vhd
+Z6 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Add_signed.vhd
+l0
+L5
+VGmoDgB>W>:a5nR@RJiaAC3
+!s100 ;Uk?Ok:kKcGYM8nK^VD4>2
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1735053606
+!i10b 1
+Z9 !s108 1735053606.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Add_signed.vhd|
+Z11 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Add_signed.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Aarch_add_signed
+R1
+R2
+R3
+DEx4 work 10 add_signed 0 22 GmoDgB>W>:a5nR@RJiaAC3
+l14
+L13
+V4jn]QD@_jOdKQGU9H@[;`3
+!s100 0N5cA:zbmc:gkoEdEVbdo1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eadder
+R0
+R1
+R2
+R3
+R4
+Z14 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Adder.vhd
+Z15 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Adder.vhd
+l0
+L5
+VV]OC^FNGbk2NZ^Kj^lMPT2
+!s100 gI9hQXDDaKaG0VB;1`d]81
+R7
+32
+Z16 !s110 1735053609
+!i10b 1
+Z17 !s108 1735053609.000000
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Adder.vhd|
+Z19 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Adder.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R1
+R2
+R3
+DEx4 work 5 adder 0 22 V]OC^FNGbk2NZ^Kj^lMPT2
+l14
+L13
+VoK<B^h[6cDe?E6ae>fE7`3
+!s100 _FillH[5`ZdQlL0U;Xo[@1
+R7
+32
+R16
+!i10b 1
+R17
+R18
+R19
+!i113 1
+R12
+R13
+Ealu
+R0
+R1
+R2
+R3
+R4
+Z20 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/ALU.vhd
+Z21 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/ALU.vhd
+l0
+L4
+VzDUkdT`875]UKOQXWR@hl1
+!s100 Q3@bVCJa5X@?ImGCKjGel0
+R7
+32
+Z22 !s110 1735053608
+!i10b 1
+Z23 !s108 1735053608.000000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/ALU.vhd|
+Z25 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/ALU.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R1
+R2
+R3
+DEx4 work 3 alu 0 22 zDUkdT`875]UKOQXWR@hl1
+l17
+L15
+VWEd2=a@W^]9JzPZW^8FSQ0
+!s100 _=N_`aXn^V3F<DkC_^1;e1
+R7
+32
+R22
+!i10b 1
+R23
+R24
+R25
+!i113 1
+R12
+R13
+Ealuold
+R0
+R2
+R3
+R4
+Z26 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/oldALU.vhd
+Z27 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/oldALU.vhd
+l0
+L4
+Vd<W[jAg=D5G4T8W3K?nnj1
+!s100 jLgNk9S;0ke0?ZBgMHWK81
+R7
+32
+R22
+!i10b 1
+R23
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/oldALU.vhd|
+Z29 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/oldALU.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R2
+R3
+DEx4 work 6 aluold 0 22 d<W[jAg=D5G4T8W3K?nnj1
+l62
+L15
+V88JGECB7;^7RMzeP`U3j50
+!s100 mml81NIBC@nBzQK37m`Fb3
+R7
+32
+R22
+!i10b 1
+R23
+R28
+R29
+!i113 1
+R12
+R13
+Econtrol_unit
+R0
+R1
+R2
+R3
+R4
+Z30 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit.vhd
+Z31 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit.vhd
+l0
+L5
+VSXPRGKBa9^e`kzg9QIG_Y2
+!s100 FgeS`GzPjk4lmPP7LecCd2
+R7
+32
+R8
+!i10b 1
+R9
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit.vhd|
+Z33 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit.vhd|
+!i113 1
+R12
+R13
+Aarch_control_unit
+R1
+R2
+R3
+DEx4 work 12 control_unit 0 22 SXPRGKBa9^e`kzg9QIG_Y2
+l40
+L39
+VKgIzcK^G`h?GUaF0@5RO50
+!s100 ho?F]G8RhPZP?OW>^bPMl1
+R7
+32
+R8
+!i10b 1
+R9
+R32
+R33
+!i113 1
+R12
+R13
+Econtrol_unit_tb
+R0
+R1
+R2
+R3
+R4
+Z34 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit_tb.vhd
+Z35 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit_tb.vhd
+l0
+L5
+V29PadgEVh2FllWCkL3`h22
+!s100 ^8fVfmf_YzIQDPf0O[NHe2
+R7
+32
+R8
+!i10b 1
+R9
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit_tb.vhd|
+Z37 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/control_unit_tb.vhd|
+!i113 1
+R12
+R13
+Atestbench
+R1
+R2
+R3
+DEx4 work 15 control_unit_tb 0 22 29PadgEVh2FllWCkL3`h22
+l78
+L8
+V]D8To_7:2jOc0iiFO0NQU3
+!s100 :BbOMmLdEUg?LXLM[lW1J2
+R7
+32
+R8
+!i10b 1
+R9
+R36
+R37
+!i113 1
+R12
+R13
+Edata_memory
+R0
+R1
+R2
+R3
+R4
+Z38 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Data_Memory.vhd
+Z39 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Data_Memory.vhd
+l0
+L5
+V76PoX4NbGQEjE3[7NL9T;1
+!s100 C[]bBeJfo0a1IIWUgBH9j0
+R7
+32
+Z40 !s110 1735053610
+!i10b 1
+Z41 !s108 1735053610.000000
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Data_Memory.vhd|
+Z43 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Data_Memory.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R1
+R2
+R3
+DEx4 work 11 data_memory 0 22 76PoX4NbGQEjE3[7NL9T;1
+l27
+L19
+V91?=W<<ezV<6?cXB?DZBK1
+!s100 8HL[6Th17d711`joHYK?R1
+R7
+32
+R40
+!i10b 1
+R41
+R42
+R43
+!i113 1
+R12
+R13
+Edecode
+Z44 w1735041665
+R1
+R2
+R3
+R4
+Z45 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/decode.vhd
+Z46 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/decode.vhd
+l0
+L5
+V`oIS6ImbazLjhR:E>fJQJ0
+!s100 fW_E52L`H;a9D?>fEJBUc1
+R7
+32
+R8
+!i10b 1
+R9
+Z47 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/decode.vhd|
+Z48 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/decode.vhd|
+!i113 1
+R12
+R13
+Aarch_decode
+R1
+R2
+R3
+DEx4 work 6 decode 0 22 `oIS6ImbazLjhR:E>fJQJ0
+l162
+L53
+V26oDThi^;;S7EJK:hiV2n3
+!s100 M>83TUXfTm5KEbE?ZbULU3
+R7
+32
+R8
+!i10b 1
+R9
+R47
+R48
+!i113 1
+R12
+R13
+Eexception_unit
+R0
+R1
+R2
+R3
+R4
+Z49 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/Exception_Unit.vhd
+Z50 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/Exception_Unit.vhd
+l0
+L5
+V6[eb@0G6kOTGP]GHhLzHg3
+!s100 KA`U]nh8HV;_^MT5z:Em91
+R7
+32
+R22
+!i10b 1
+R23
+Z51 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/Exception_Unit.vhd|
+Z52 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/Exception_Unit.vhd|
+!i113 1
+R12
+R13
+Aexcep_arch
+R1
+R2
+R3
+DEx4 work 14 exception_unit 0 22 6[eb@0G6kOTGP]GHhLzHg3
+l37
+L32
+VQhmOLfoYX:mGn:b@0h<^11
+!s100 fL4czj7PM2OV3]LdJ:>6g2
+R7
+32
+R22
+!i10b 1
+R23
+R51
+R52
+!i113 1
+R12
+R13
+Eexception_unit_tb
+R0
+R1
+R2
+R3
+R4
+Z53 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/exception_unit_tb.vhd
+Z54 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/exception_unit_tb.vhd
+l0
+L5
+VSGQ;aIcRSED13Q7F<zi`c1
+!s100 393lgC>::`<^?B?9G1[iW2
+R7
+32
+R22
+!i10b 1
+Z55 !s108 1735053607.000000
+Z56 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/exception_unit_tb.vhd|
+Z57 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Exception Unit/exception_unit_tb.vhd|
+!i113 1
+R12
+R13
+Atb_arch
+R1
+R2
+R3
+DEx4 work 17 exception_unit_tb 0 22 SGQ;aIcRSED13Q7F<zi`c1
+l51
+L8
+V=U_WWSdHJP32C?me2C34K2
+!s100 lI8N<eaG<<:YGjc:D1ccE2
+R7
+32
+R22
+!i10b 1
+R55
+R56
+R57
+!i113 1
+R12
+R13
+Eexecute
+R0
+R1
+R2
+R3
+R4
+Z58 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/execute.vhd
+Z59 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/execute.vhd
+l0
+L4
+VdHz_If8<M_hAkBZR7YAzc1
+!s100 9VoJhOD0@[hRah^DlCeL40
+R7
+32
+R22
+!i10b 1
+R23
+Z60 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/execute.vhd|
+Z61 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/execute.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R1
+R2
+R3
+DEx4 work 7 execute 0 22 dHz_If8<M_hAkBZR7YAzc1
+l58
+L31
+V<D=cj]e4=>?GK1]fU66km1
+!s100 cTKPRiZ5@K3Om76khD;jS1
+R7
+32
+R22
+!i10b 1
+R23
+R60
+R61
+!i113 1
+R12
+R13
+Efetch_block
+R0
+R1
+R2
+R3
+R4
+Z62 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Block.vhd
+Z63 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Block.vhd
+l0
+L5
+Vn2BaAgl:D:KfO[<QScna<2
+!s100 ^c8]:]37RaPfRZ2zDzzLJ0
+R7
+32
+R16
+!i10b 1
+R17
+Z64 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Block.vhd|
+Z65 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Block.vhd|
+!i113 1
+R12
+R13
+Afetch_block_arch
+R1
+R2
+R3
+DEx4 work 11 fetch_block 0 22 n2BaAgl:D:KfO[<QScna<2
+l77
+L35
+V:2]bi8D8<UG9WgZ;@;WAH0
+!s100 4`K1eJgkEHEXm<gO:nTgI2
+R7
+32
+R16
+!i10b 1
+R17
+R64
+R65
+!i113 1
+R12
+R13
+Efetch_stage
+R0
+R1
+R2
+R3
+R4
+Z66 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Stage.vhd
+Z67 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Stage.vhd
+l0
+L4
+VkPI135N97<oKl72cVFlkN1
+!s100 <OHP3]7H`fRY3:S7MQ6Q<1
+R7
+32
+R16
+!i10b 1
+R17
+Z68 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Stage.vhd|
+Z69 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Fetch_Stage.vhd|
+!i113 1
+R12
+R13
+Afetch_stage_arch
+R1
+R2
+R3
+DEx4 work 11 fetch_stage 0 22 kPI135N97<oKl72cVFlkN1
+l59
+L23
+VgJIYBj<YFh:TTgid<zK0?1
+!s100 4f=E0e73L;a68Lkj`o6MQ3
+R7
+32
+R16
+!i10b 1
+R17
+R68
+R69
+!i113 1
+R12
+R13
+Eforwarding_tb
+R0
+R1
+R2
+R3
+R4
+Z70 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit_tb.vhd
+Z71 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit_tb.vhd
+l0
+L4
+VP;L@bk84F@ABdBKc5Ie]83
+!s100 SJOLNXIl0o8:lI[2SL]J>1
+R7
+32
+R40
+!i10b 1
+R41
+Z72 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit_tb.vhd|
+Z73 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit_tb.vhd|
+!i113 1
+R12
+R13
+Aforwarding_tb_arch
+R1
+R2
+R3
+DEx4 work 13 forwarding_tb 0 22 P;L@bk84F@ABdBKc5Ie]83
+l30
+L6
+VjA5kM4YUSoi79PQfjH6Q>1
+!s100 I:R>N3<9h]5InON_V5ML90
+R7
+32
+R40
+!i10b 1
+R41
+R72
+R73
+!i113 1
+R12
+R13
+Eforwarding_unit
+R0
+R1
+R2
+R3
+R4
+Z74 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit.vhd
+Z75 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit.vhd
+l0
+L5
+V4bDOdF9mBAegJHSHF0e6b2
+!s100 SAI<Z]hIKKW1Xmm4KNPPA3
+R7
+32
+R40
+!i10b 1
+R41
+Z76 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit.vhd|
+Z77 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Forwarding Unit/forwarding_unit.vhd|
+!i113 1
+R12
+R13
+Aforwarding_behavioral
+R1
+R2
+R3
+DEx4 work 15 forwarding_unit 0 22 4bDOdF9mBAegJHSHF0e6b2
+l22
+L21
+V1Lga@Y>=2WG[Fd1EoB`W93
+!s100 HO0XmmRMfgf:znBi?ELHP3
+R7
+32
+R40
+!i10b 1
+R41
+R76
+R77
+!i113 1
+R12
+R13
+Ehambola_dff
+Z78 w1735036872
+R1
+R2
+R3
+R4
+Z79 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/7ambola_dff.vhd
+Z80 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/7ambola_dff.vhd
+l0
+L5
+VB@S2JRB^iI]W;2ZDcM1nd2
+!s100 SCLcO=98B:m]Sc6CVRPZd0
+R7
+32
+R8
+!i10b 1
+R9
+Z81 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/7ambola_dff.vhd|
+Z82 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/7ambola_dff.vhd|
+!i113 1
+R12
+R13
+Aarch_hambola_dff
+R1
+R2
+R3
+DEx4 work 11 hambola_dff 0 22 B@S2JRB^iI]W;2ZDcM1nd2
+l16
+L14
+VfEa@OAiPLO3EYZamc7V@X3
+!s100 hB5HVMIlf@goST5^cAdIA3
+R7
+32
+R8
+!i10b 1
+R9
+R81
+R82
+!i113 1
+R12
+R13
+Ehana_dff
+Z83 w1735036646
+R1
+R2
+R3
+R4
+Z84 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_DFF.vhd
+Z85 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_DFF.vhd
+l0
+L5
+VD>oL<GiQ[;?0EJAZUmQ`_1
+!s100 A9Z`bXE]d>H2>37XKMV8b1
+R7
+32
+R16
+!i10b 1
+R17
+Z86 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_DFF.vhd|
+Z87 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_DFF.vhd|
+!i113 1
+R12
+R13
+Aarch_hana_dff
+R1
+R2
+R3
+DEx4 work 8 hana_dff 0 22 D>oL<GiQ[;?0EJAZUmQ`_1
+l16
+L14
+Vd?V;71bS>o8ZPcRHkRR2B1
+!s100 ]R5BC8;D0mlXSaIEN>FnS0
+R7
+32
+R16
+!i10b 1
+R17
+R86
+R87
+!i113 1
+R12
+R13
+Ehana_reg
+R0
+R1
+R2
+R3
+R4
+Z88 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_Register.vhd
+Z89 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_Register.vhd
+l0
+L5
+V?6zMQNb3Pba2;ILHCT<3h3
+!s100 Yg7BES`C:<;O2IU[599DG3
+R7
+32
+R16
+!i10b 1
+R17
+Z90 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_Register.vhd|
+Z91 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/hana_Register.vhd|
+!i113 1
+R12
+R13
+Aarch_hana_reg
+R1
+R2
+R3
+DEx4 work 8 hana_reg 0 22 ?6zMQNb3Pba2;ILHCT<3h3
+l27
+L14
+VdE=LlgiRIGcLNc[DaObHY0
+!s100 N]00BZFfm<4G3C<o56mfj2
+R7
+32
+R16
+!i10b 1
+R17
+R90
+R91
+!i113 1
+R12
+R13
+Ehazardunit
+R0
+R2
+R3
+R4
+Z92 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/hazard_unit.vhd
+Z93 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/hazard_unit.vhd
+l0
+L4
+VL2odb>ZS=9IZ^f?S03oYK1
+!s100 CSOD^Rk<ZRd2_VKChZ=@00
+R7
+32
+R22
+!i10b 1
+R23
+Z94 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/hazard_unit.vhd|
+Z95 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/hazard_unit.vhd|
+!i113 1
+R12
+R13
+Amybehavior
+R2
+R3
+DEx4 work 10 hazardunit 0 22 L2odb>ZS=9IZ^f?S03oYK1
+l15
+L14
+VgdS2e6?B161HnJkKT5JYB3
+!s100 A=1dM15j1@Ugg]TD_N8BA0
+R7
+32
+R22
+!i10b 1
+R23
+R94
+R95
+!i113 1
+R12
+R13
+Einstruction_memory
+R0
+R1
+R2
+R3
+R4
+Z96 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd
+Z97 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd
+l0
+L5
+V0n8gU=;m]?mRV91GkF5<]1
+!s100 GN6aR@>;kaz<gIj7kR0:T3
+R7
+32
+R16
+!i10b 1
+R17
+Z98 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd|
+Z99 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R1
+R2
+R3
+DEx4 work 18 instruction_memory 0 22 0n8gU=;m]?mRV91GkF5<]1
+l34
+L18
+V1ZIGCMVELRzTBZmd>l=eK0
+!s100 cdW_mQJoP[^`iCa:NDlfY1
+R7
+32
+R16
+!i10b 1
+R17
+R98
+R99
+!i113 1
+R12
+R13
+Ememory_stage
+R0
+R1
+R2
+R3
+R4
+Z100 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Memory_Stage.vhd
+Z101 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Memory_Stage.vhd
+l0
+L5
+Vg11M>Q`XNJC1:Ob1K990h0
+!s100 FYg`c4FCfV8j;45]XU8:[1
+R7
+32
+R40
+!i10b 1
+R41
+Z102 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Memory_Stage.vhd|
+Z103 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/Memory_Stage.vhd|
+!i113 1
+R12
+R13
+Amem_arch
+R1
+R2
+R3
+DEx4 work 12 memory_stage 0 22 g11M>Q`XNJC1:Ob1K990h0
+l85
+L48
+VRWQjg>OJk49YhSad_CE1P2
+!s100 ;CzWUkz4VoZcmRd:93S9l1
+R7
+32
+R40
+!i10b 1
+R41
+R102
+R103
+!i113 1
+R12
+R13
+Emux2to1
+R0
+R3
+R2
+R1
+R4
+Z104 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/mux2to1.vhd
+Z105 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/mux2to1.vhd
+l0
+L5
+VllR@[H?6H]?^8j8XB8S?01
+!s100 d[B7ekZ;:n2KUI3mXSY1h1
+R7
+32
+R8
+!i10b 1
+R9
+Z106 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/mux2to1.vhd|
+Z107 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/mux2to1.vhd|
+!i113 1
+R12
+R13
+Aarch_mux2to1
+R3
+R2
+R1
+DEx4 work 7 mux2to1 0 22 llR@[H?6H]?^8j8XB8S?01
+l15
+L14
+VQI]]jUD8j_PE<lQ<[:;Wa3
+!s100 FgB9dQIcYLBGofkX_d__k3
+R7
+32
+R8
+!i10b 1
+R9
+R106
+R107
+!i113 1
+R12
+R13
+Emux4
+R0
+R2
+R3
+R4
+Z108 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/mux4.vhd
+Z109 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/mux4.vhd
+l0
+L4
+V6KaRL4S2>gg4A[T@XloS70
+!s100 C:EGcWfY[:32kf7lP10h?0
+R7
+32
+R22
+!i10b 1
+R23
+Z110 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/mux4.vhd|
+Z111 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/mux4.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R2
+R3
+DEx4 work 4 mux4 0 22 6KaRL4S2>gg4A[T@XloS70
+l16
+L15
+V4h_Jz4[gbEZWWdn:;c[_D0
+!s100 i=80]N@_4NbJW_okoV0dU1
+R7
+32
+R22
+!i10b 1
+R23
+R110
+R111
+!i113 1
+R12
+R13
+Emux_2_input
+R0
+R1
+R2
+R3
+R4
+Z112 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/MUX2.vhd
+Z113 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/MUX2.vhd
+l0
+L5
+V9zVMDdjPY[TgGV4;g4HBP1
+!s100 Mzjc;H^PPQ`4A_[AZa]Zc1
+R7
+32
+R40
+!i10b 1
+R41
+Z114 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/MUX2.vhd|
+Z115 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Memory Stage/MUX2.vhd|
+!i113 1
+R12
+R13
+Abehav
+R1
+R2
+R3
+DEx4 work 11 mux_2_input 0 22 9zVMDdjPY[TgGV4;g4HBP1
+l15
+L14
+VGN2g97ob:TXe:6J6_dK?J0
+!s100 ROf9:EO_e7j6WI@bZ>5;Y1
+R7
+32
+R40
+!i10b 1
+R41
+R114
+R115
+!i113 1
+R12
+R13
+Emy_dff
+Z116 w1735036878
+R1
+R2
+R3
+R4
+Z117 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/my_DFF.vhd
+Z118 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/my_DFF.vhd
+l0
+L5
+V6hbMYSN@XRMgzm19C;oIK2
+!s100 CiKT]BInbXZ8lbFiVISVU1
+R7
+32
+R8
+!i10b 1
+R9
+Z119 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/my_DFF.vhd|
+Z120 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/my_DFF.vhd|
+!i113 1
+R12
+R13
+Aarch_my_dff
+R1
+R2
+R3
+DEx4 work 6 my_dff 0 22 6hbMYSN@XRMgzm19C;oIK2
+l16
+L14
+VCP_Uh5^:HXFUg][Z82^DR3
+!s100 ^=_mL0<zl]TMe6^C9IEOT3
+R7
+32
+R8
+!i10b 1
+R9
+R119
+R120
+!i113 1
+R12
+R13
+Emy_ndff
+R0
+R2
+R3
+R4
+Z121 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/pipeline_reg.vhd
+Z122 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/pipeline_reg.vhd
+l0
+L3
+V<?ff;SZCgf=2`JZQ5>>Wh0
+!s100 HS6>zAHUVJFXHhBbb;N>z2
+R7
+32
+Z123 !s110 1735053607
+!i10b 1
+R55
+Z124 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/pipeline_reg.vhd|
+Z125 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/pipeline_reg.vhd|
+!i113 1
+R12
+R13
+Ab_my_ndff
+R2
+R3
+DEx4 work 7 my_ndff 0 22 <?ff;SZCgf=2`JZQ5>>Wh0
+l14
+L12
+VWS0IiRYUz2=JMlX?SYTYn1
+!s100 IDPmW_TAY8ZCk_g`a1jT01
+R7
+32
+R123
+!i10b 1
+R55
+R124
+R125
+!i113 1
+R12
+R13
+Epartb
+R0
+R2
+R3
+R4
+Z126 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partB.vhd
+Z127 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partB.vhd
+l0
+L4
+V5z4^_278O9mljjHHoz2[a2
+!s100 6o?Agf7>S]AgaZEM[<GEM2
+R7
+32
+R22
+!i10b 1
+R23
+Z128 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partB.vhd|
+Z129 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partB.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R2
+R3
+DEx4 work 5 partb 0 22 5z4^_278O9mljjHHoz2[a2
+l16
+L15
+VR`FN?I5DWmGCiXR:7<EfA3
+!s100 3AVEiNX[EOMZ6k^naUkRd3
+R7
+32
+R22
+!i10b 1
+R23
+R128
+R129
+!i113 1
+R12
+R13
+Epartc
+R0
+R2
+R3
+R4
+Z130 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partC.vhd
+Z131 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partC.vhd
+l0
+L5
+VH>2=U1PfAT_eN^BR30daT1
+!s100 0loT:@ll`^8T;@^Nf;HA:0
+R7
+32
+R16
+!i10b 1
+R17
+Z132 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partC.vhd|
+Z133 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partC.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R2
+R3
+DEx4 work 5 partc 0 22 H>2=U1PfAT_eN^BR30daT1
+l18
+L17
+V_WU8AS59YTegb4Sl8[U8e1
+!s100 7=[He7D9AnkZkn35S874G1
+R7
+32
+R16
+!i10b 1
+R17
+R132
+R133
+!i113 1
+R12
+R13
+Epartd
+R0
+R2
+R3
+R4
+Z134 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partD.vhd
+Z135 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partD.vhd
+l0
+L4
+VK45AY>PU:VET1>[Y_XX_F0
+!s100 0CEj333:`G=`]gI6;g0Bb3
+R7
+32
+R16
+!i10b 1
+R17
+Z136 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partD.vhd|
+Z137 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/partD.vhd|
+!i113 1
+R12
+R13
+Aarch1
+R2
+R3
+DEx4 work 5 partd 0 22 K45AY>PU:VET1>[Y_XX_F0
+l17
+L16
+V^]OJemTD1z`;OHKMH^g;m3
+!s100 C7@I]7l@:ZaLgbBX79H1B2
+R7
+32
+R16
+!i10b 1
+R17
+R136
+R137
+!i113 1
+R12
+R13
+Eprocessor
+Z138 w1735053593
+R1
+R2
+R3
+R4
+Z139 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd
+Z140 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd
+l0
+L5
+VWJ@JdS<m?FC<=>Aoa]>R[1
+!s100 oKXZA8m2U2CoB]7AH[D481
+R7
+32
+R40
+!i10b 1
+R41
+Z141 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd|
+Z142 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd|
+!i113 1
+R12
+R13
+Aarch_processor
+R1
+R2
+R3
+DEx4 work 9 processor 0 22 WJ@JdS<m?FC<=>Aoa]>R[1
+l284
+L13
+VW36B@o1lZF=FDNF2M@Eng0
+!s100 ObZ95E0KYFZJg?jMin@`93
+R7
+32
+R40
+!i10b 1
+R41
+R141
+R142
+!i113 1
+R12
+R13
+Ereg
+R0
+R1
+R2
+R3
+R4
+Z143 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register.vhd
+Z144 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register.vhd
+l0
+L5
+V5:?D05=5G:CV29JNT^HXC2
+!s100 1IC3Kb2Go>1oC8lXX:>Wz2
+R7
+32
+R123
+!i10b 1
+R55
+Z145 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register.vhd|
+Z146 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register.vhd|
+!i113 1
+R12
+R13
+Aarch_reg
+R1
+R2
+R3
+DEx4 work 3 reg 0 22 5:?D05=5G:CV29JNT^HXC2
+l36
+L14
+V8gglN08BOmkZG:QJ4QgC<2
+!s100 2nZS^oA0MfFB3_aTjml=X1
+R7
+32
+R123
+!i10b 1
+R55
+R145
+R146
+!i113 1
+R12
+R13
+Eregister_file
+Z147 w1735036480
+R1
+R2
+R3
+R4
+Z148 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile.vhd
+Z149 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile.vhd
+l0
+L5
+VGnaE;WOK:9WG_D:chYoIV3
+!s100 UY82dIE;KhogXB<6Y0g2O2
+R7
+32
+R123
+!i10b 1
+R55
+Z150 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile.vhd|
+Z151 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile.vhd|
+!i113 1
+R12
+R13
+Aregister_file_arch
+R1
+R2
+R3
+DEx4 work 13 register_file 0 22 GnaE;WOK:9WG_D:chYoIV3
+l30
+L18
+VzaT5=fT`i>nRH0neX=I>c3
+!s100 d0[e2`<6Ig=979iX9<_b>3
+R7
+32
+R123
+!i10b 1
+R55
+R150
+R151
+!i113 1
+R12
+R13
+Eregister_file_tb
+R0
+R1
+R2
+R3
+R4
+Z152 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile_tb.vhd
+Z153 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile_tb.vhd
+l0
+L5
+VBif=@i]nCD:<KiAGb8eIN2
+!s100 FKfY3A<J_Ba;oVMc2V0@h1
+R7
+32
+R123
+!i10b 1
+R55
+Z154 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile_tb.vhd|
+Z155 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/RegisterFile_tb.vhd|
+!i113 1
+R12
+R13
+Abehavior
+R1
+R2
+R3
+DEx4 work 16 register_file_tb 0 22 Bif=@i]nCD:<KiAGb8eIN2
+l34
+L8
+V0Z]Scn^6Dg3J^:6]CVo>g3
+!s100 Y8N<^2[PD4n7T?NZ<JkVA1
+R7
+32
+R123
+!i10b 1
+R55
+R154
+R155
+!i113 1
+R12
+R13
+Etb_add_signed
+R0
+R1
+R2
+R3
+R4
+Z156 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/tb_Add_Signed.vhd
+Z157 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/tb_Add_Signed.vhd
+l0
+L5
+VPbTcUOI7UBibzhJgncTHk0
+!s100 FnK`H`N>FaJ<S=e4SZL9C0
+R7
+32
+R123
+!i10b 1
+R55
+Z158 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/tb_Add_Signed.vhd|
+Z159 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/tb_Add_Signed.vhd|
+!i113 1
+R12
+R13
+Aarch_tb_add_signed
+R1
+R2
+R3
+DEx4 work 13 tb_add_signed 0 22 PbTcUOI7UBibzhJgncTHk0
+l21
+L8
+VK4Ab8LiBJG9_eMo>bodZ^1
+!s100 G8Zd@_Z]eBXBmzAV2LPnU1
+R7
+32
+R123
+!i10b 1
+R55
+R158
+R159
+!i113 1
+R12
+R13
+Etb_reg
+R0
+R1
+R2
+R3
+R4
+Z160 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register_tb.vhd
+Z161 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register_tb.vhd
+l0
+L5
+VjzHB?ILTLm1anEVi`TFFG1
+!s100 nifV5ZCC0O[f__K57>aVz1
+R7
+32
+R123
+!i10b 1
+R55
+Z162 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register_tb.vhd|
+Z163 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/Register_tb.vhd|
+!i113 1
+R12
+R13
+Asim
+R1
+R2
+R3
+DEx4 work 6 tb_reg 0 22 jzHB?ILTLm1anEVi`TFFG1
+l23
+L8
+VfYaMi6hnXHeOQdR31[OEO3
+!s100 Z>?FdFU584T3mlPUUZf0h0
+R7
+32
+R123
+!i10b 1
+R55
+R162
+R163
+!i113 1
+R12
+R13
+Etb_sp_sim
+R0
+R1
+R2
+R3
+R4
+Z164 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/SP_sim.vhd
+Z165 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/SP_sim.vhd
+l0
+L5
+V`i@mmUX<Z;8WJ1I2bzDSJ3
+!s100 VHhHBl?1_Q@D=QDFPG4gz1
+R7
+32
+R123
+!i10b 1
+R55
+Z166 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/SP_sim.vhd|
+Z167 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Decode Stage/SP_sim.vhd|
+!i113 1
+R12
+R13
+Atestbench
+R1
+R2
+R3
+DEx4 work 9 tb_sp_sim 0 22 `i@mmUX<Z;8WJ1I2bzDSJ3
+l47
+L8
+V^_oA6:QKYCeDi@8aVTaCV2
+!s100 3z]X7fZLW2WOKbE=P7@EX0
+R7
+32
+R123
+!i10b 1
+R55
+R166
+R167
+!i113 1
+R12
+R13
+Ewrite_back
+R0
+R1
+R2
+R3
+R4
+Z168 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Write Back Stage/Write_Back.vhd
+Z169 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Write Back Stage/Write_Back.vhd
+l0
+L4
+V63_CA_6;1aoMJYflAOh8^0
+!s100 6gQ4bF`g[1MSNUTb2zZQM3
+R7
+32
+R40
+!i10b 1
+R41
+Z170 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Write Back Stage/Write_Back.vhd|
+Z171 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Write Back Stage/Write_Back.vhd|
+!i113 1
+R12
+R13
+Awrite_back_arch
+R1
+R2
+R3
+Z172 DEx4 work 10 write_back 0 22 63_CA_6;1aoMJYflAOh8^0
+l21
+L20
+Z173 VW7SImlH7[PRgOjc9JG9QI1
+Z174 !s100 RR4]6XSzKLHAV?f^Xg6NA2
+R7
+32
+R40
+!i10b 1
+R41
+R170
+R171
+!i113 1
+R12
+R13
+Ezeyad_dff
+R0
+R2
+R3
+R4
+Z175 8//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/zeyad_DFF.vhd
+Z176 F//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/zeyad_DFF.vhd
+l0
+L4
+VUCMkHeD^54QR>P:ggi<E72
+!s100 DC1Po8Vo7ba9ZiFMX`0N81
+R7
+32
+R16
+!i10b 1
+R17
+Z177 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/zeyad_DFF.vhd|
+Z178 !s107 //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/execute/zeyad_DFF.vhd|
+!i113 1
+R12
+R13
+Amybehavior
+R2
+R3
+DEx4 work 9 zeyad_dff 0 22 UCMkHeD^54QR>P:ggi<E72
+l16
+L14
+V2<Id7UVOjCA8?C@14kNY63
+!s100 nc3SzVg[Z9DJIOJ<Q2oYU1
+R7
+32
+R16
+!i10b 1
+R17
+R177
+R178
+!i113 1
+R12
+R13

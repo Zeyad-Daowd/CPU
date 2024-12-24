@@ -53,6 +53,10 @@ architecture arch_processor of processor is
     component decode is
         port (
             prev_decode_out: in std_logic_vector(168 downto 0);
+            fetch_pc_in : in std_logic_vector(15 downto 0);
+            out_decode_fetch_pc: out std_logic_vector(15 downto 0);
+
+            notStall : out std_logic; 
             clk : in std_logic; 
             wb_reg_write: in std_logic; 
             pipe_IF_out : in  std_logic_vector(4 downto 0); 
@@ -230,7 +234,7 @@ architecture arch_processor of processor is
     signal temp_idie: std_logic_vector(113 downto 0) := (others => '0');
 
         -----------------------------------------------------------------------
-    signal fetch_pc, fetch_next_pc, fetch_instruction : std_logic_vector(15 downto 0);
+    signal fetch_pc, fetch_next_pc, fetch_instruction, working_instruction : std_logic_vector(15 downto 0);
         ----------------------------- IFID pipeline -----------------------------
     signal d_ifid : std_logic_vector(47 downto 0);
     signal q_ifid: std_logic_vector(47 downto 0) := (others => '0');
@@ -275,38 +279,26 @@ architecture arch_processor of processor is
     signal stall_signal: std_logic:='0';
     signal single_zero: std_logic := '0';
     signal flags : std_logic_vector(15 downto 0) := (others => '0');
+    signal notStall: std_logic := '1';
+    signal fetch_pc_into_decode, fetch_pc_from_decode_next: std_logic_vector(15 downto 0) := (others => '0');
     begin
         out_peripheral <= exec_Rsrc1Forwarded when (out_decode_out_wen = '1');
-        stall_signal <= (out_decode_int);
+        stall_signal <= (out_decode_int or pcOutFromMemory or writeFlagsFromMemory);
         decode_pc <= fetch_pc;
         decode_next_pc <= fetch_next_pc;
         decode_instruction <= fetch_instruction;
         flags <= zeros & exec_carryFlagOutput & exec_zeroFlagOutput & exec_negativeFlagOutput;
-       
         
-
-
-        fetch_stage: Fetch_Block port map (
-            clk => my_clk,
-            ret_rti_sig => pcOutFromMemory,
-            call_sig => out_decode_call,
-            jmp_sig => exec_jumpFlag, -- TODO: as far as I see, jump is from ex
-            hazard_sig => stall_signal, --For stalling after int
-            exception_sig => exception_sig,
-            pc_en => '1', -- unused now
-            rst => reset,
-            call_pc => exec_Rsrc1Forwarded,
-            jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
-            ret_pc => dataOutFromMemory, -- TODO: handle this
-            im_write_enable => '0', -- TODO: handle this
-            im_write_address => (others => '0'), -- TODO: handle this
-            im_write_data => (others => '0'), -- TODO: handle this
-            current_pc => fetch_pc,
-            next_pc => fetch_next_pc,
-            instruction => fetch_instruction 
-        );
-
-        prev_decode_out <= (
+        process(notStall, decode_instruction)
+        begin
+        if (notStall = '1') then
+            working_instruction <= decode_instruction;
+        end if;
+        end process;
+        process(my_clk)
+        begin
+            if rising_edge(my_clk) then
+                prev_decode_out <= (
             out_decode_write_enable_ex_mem_pipe -- 168
             & out_decode_push -- 167
             & out_decode_pop -- 166
@@ -347,18 +339,45 @@ architecture arch_processor of processor is
             & out_decode_int_or_rti -- 1
             & out_decode_push_pop -- 0
         );
+            end if;
+        end process;
+
+        fetch_stage: Fetch_Block port map (
+            clk => my_clk,
+            ret_rti_sig => pcOutFromMemory,
+            call_sig => out_decode_call,
+            jmp_sig => exec_jumpFlag, -- TODO: as far as I see, jump is from ex
+            hazard_sig => stall_signal, --For stalling after int
+            exception_sig => exception_sig,
+            pc_en => '1', -- unused now
+            rst => reset,
+            call_pc => exec_Rsrc1Forwarded,
+            jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
+            ret_pc => dataOutFromMemory, -- TODO: handle this
+            im_write_enable => '0', -- TODO: handle this
+            im_write_address => (others => '0'), -- TODO: handle this
+            im_write_data => (others => '0'), -- TODO: handle this
+            current_pc => fetch_pc,
+            next_pc => fetch_next_pc,
+            instruction => fetch_instruction 
+        );
+
+       
 
         decode_stage: decode port map ( 
+            out_decode_fetch_pc => fetch_pc_from_decode_next,
+            fetch_pc_in => fetch_next_pc,
+            notStall => notStall,
             prev_decode_out => prev_decode_out,
             clk => my_clk,
             wb_reg_write => out_decode_reg_write, 
-            pipe_IF_out => decode_instruction(15 downto 11),
-            in_read_addr_1 => decode_instruction(7 downto 5),
-            in_read_addr_2 => decode_instruction(4 downto 2),
-            latest_bit => decode_instruction(0),
+            pipe_IF_out => working_instruction(15 downto 11),
+            in_read_addr_1 => working_instruction(7 downto 5),
+            in_read_addr_2 => working_instruction(4 downto 2),
+            latest_bit => working_instruction(0),
             jump_from_exec => exec_jumpFlag,
             hazard_detected => single_zero,
-            in_write_addr => decode_instruction(10 downto 8), -- from wb
+            in_write_addr => working_instruction(10 downto 8), -- from wb
             in_write_data => writeBackOut, --from wb
             sp_first => out_decode_sp_first,
             sp_second => out_decode_sp_second,
@@ -462,10 +481,10 @@ architecture arch_processor of processor is
             Mem_reg => out_decode_mem_to_reg, 
             RegWrite => out_decode_reg_write,
             Mem_read_en => out_decode_mem_read,
-            Mem_write_en => out_decode_mem_read,
+            Mem_write_en => out_decode_mem_write,
             Mem_read_en_exception => Mem_read_en_exception_signal,
             Mem_write_en_exception => Mem_write_en_exception_signal,
-            PC => decode_next_pc,
+            PC => fetch_pc_from_decode_next,
             FLAGS => flags,
             SP_SEC => out_decode_sp_second,
             SP => out_decode_sp_first,
