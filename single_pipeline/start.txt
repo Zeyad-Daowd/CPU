@@ -1,0 +1,69 @@
+vsim work.processor
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/Imem_wb/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
