@@ -18,13 +18,9 @@ BEGIN
     Q <= Q_temp; 
     PROCESS (clk, rst)
     BEGIN
-        if rising_edge(clk) then
-            IF rst = '1' THEN
-                Q_temp <= '0';  
-            End if;
+        if rst = '1'then
+            Q_temp <= '0';  
         elsif falling_edge(clk) THEN
-            --if rst = '1' then
-            --    Q_temp <= '0';
             if enable = '1' THEN
                 Q_temp <= D;  
             END IF;
