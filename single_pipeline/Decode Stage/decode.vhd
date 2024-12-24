@@ -4,6 +4,9 @@ use ieee.numeric_std.all;
 
 entity decode is
     port (
+        prev_decode_out: in std_logic_vector(168 downto 0);
+        fetch_pc_in : in std_logic_vector(15 downto 0);
+        out_decode_fetch_pc: out std_logic_vector(15 downto 0);
         clk : in std_logic; 
         wb_reg_write: in std_logic;
         pipe_IF_out : in  std_logic_vector(4 downto 0); 
@@ -43,7 +46,8 @@ entity decode is
         decode_which_jmp: out std_logic_vector(1 downto 0);
         decode_which_r_src: out std_logic_vector(1 downto 0);
         out_read_data_1: out std_logic_vector(15 downto 0); 
-        out_read_data_2: out std_logic_vector(15 downto 0)
+        out_read_data_2: out std_logic_vector(15 downto 0);
+        notStall: out std_logic
     );
 end entity decode;
 architecture arch_decode of decode is
@@ -151,48 +155,50 @@ architecture arch_decode of decode is
     signal flush_condition: std_logic := '1';  
     signal sp_sim_write_for_exception : std_logic := '0';
     signal signal_stop_writing : std_logic_vector(1 downto 0) := (others => '0');
+    -----------
+    signal  local_out_read_data_1: std_logic_vector(15 downto 0):= (others => '0'); 
+    signal  local_out_read_data_2: std_logic_vector(15 downto 0):= (others => '0');
 
 begin
-    
+    notStall <= flush_condition;
+    out_decode_fetch_pc <= prev_decode_out(88 downto 73) when flush_condition = '0' else fetch_pc_in;
     flush_condition <= '1' when (counter_flush = "00" and jump_from_exec = '0' and hazard_detected = '0') else '0';  
-    decode_int_or_rti <= sim_int_or_rti and flush_condition;
-    decode_push_pop <= sim_push_pop and flush_condition;
-    sp_sim_write_for_exception <= sim_sp_wen and flush_condition;
-    decode_sp_wen <= sim_sp_wen and flush_condition;
-    decode_int <= local_decode_int and flush_condition;
-    decode_call <= local_decode_call and flush_condition;
-    decode_ret <= local_decode_ret and flush_condition;
-    decode_rti <= local_decode_rti and flush_condition;
+    decode_int_or_rti <= (sim_int_or_rti and flush_condition) or (not flush_condition and prev_decode_out(1));
+    decode_push_pop <= (sim_push_pop and flush_condition) or (not flush_condition and prev_decode_out(0));
+    sp_sim_write_for_exception <= (sim_sp_wen and flush_condition) or (not flush_condition and prev_decode_out(2));
+    decode_sp_wen <= (sim_sp_wen and flush_condition) or (not flush_condition and prev_decode_out(2));
     decode_write_enable_ex_mem_pipe <= decode_write_enable_ex_mem_pipe_sig;
-    decode_Mem_addr <= local_decode_Mem_addr and flush_condition;
-    decode_zero_neg_flag_en <= local_decode_zero_neg_flag_en and flush_condition;
-    decode_carry_flag_en <= local_decode_carry_flag_en and flush_condition;
-    decode_set_carry <= local_decode_set_carry and flush_condition;
-    decode_reg_write <= local_decode_reg_write and flush_condition;                                  
-    decode_is_jmp <= local_decode_is_jmp and flush_condition;
-    decode_mem_read <= local_decode_mem_read and flush_condition;
-    decode_mem_write <= local_decode_mem_write and flush_condition;
-    decode_imm_used <= local_decode_imm_used and flush_condition;
-    decode_imm_loc <= local_decode_imm_loc and flush_condition;
-    decode_out_wen <= local_decode_out_wen and flush_condition;
-    decode_from_in <= local_decode_from_in and flush_condition;
-    decode_mem_wr_data <= local_decode_mem_wr_data and flush_condition;
-    decode_call <= local_decode_call and flush_condition;
-    decode_ret <= local_decode_ret and flush_condition;
-    decode_int <= local_decode_int and flush_condition;
-    decode_rti <= local_decode_rti and flush_condition;
-    decode_ret_or_rti <= local_decode_ret_or_rti and flush_condition;
-    decode_push <= local_decode_push and flush_condition;
-    decode_pop <= local_decode_pop and flush_condition;
-    decode_mem_to_reg <= local_decode_mem_to_reg and flush_condition;
-    decode_alu_op_code <= local_decode_alu_op_code when counter_flush = "00" else (others => '0');
-    decode_which_jmp <= local_decode_which_jmp when counter_flush = "00" else (others => '0');
-    decode_which_r_src <= local_decode_which_r_src when counter_flush = "00" else (others => '0');
-
+    decode_Mem_addr <= (local_decode_Mem_addr and flush_condition) or (not flush_condition and prev_decode_out(3));
+    decode_zero_neg_flag_en <= (local_decode_zero_neg_flag_en and flush_condition) or (not flush_condition and prev_decode_out(4));
+    decode_carry_flag_en <= (local_decode_carry_flag_en and flush_condition) or (not flush_condition and prev_decode_out(5));
+    decode_set_carry <= (local_decode_set_carry and flush_condition) or (not flush_condition and prev_decode_out(164));
+    decode_reg_write <= (local_decode_reg_write and flush_condition) or (not flush_condition and prev_decode_out(6));                                  
+    decode_is_jmp <= (local_decode_is_jmp and flush_condition) or (not flush_condition and prev_decode_out(7));
+    decode_mem_read <= (local_decode_mem_read and flush_condition) or (not flush_condition and prev_decode_out(8));
+    decode_mem_write <= (local_decode_mem_write and flush_condition) or (not flush_condition and prev_decode_out(9));
+    decode_imm_used <= (local_decode_imm_used and flush_condition) or (not flush_condition and prev_decode_out(10));
+    decode_imm_loc <= (local_decode_imm_loc and flush_condition) or (not flush_condition and prev_decode_out(11));
+    decode_out_wen <= (local_decode_out_wen and flush_condition) or (not flush_condition and prev_decode_out(12));
+    decode_from_in <= (local_decode_from_in and flush_condition) or (not flush_condition and prev_decode_out(13));
+    decode_mem_wr_data <= (local_decode_mem_wr_data and flush_condition) or (not flush_condition and prev_decode_out(14));
+    decode_call <= (local_decode_call and flush_condition) or (not flush_condition and prev_decode_out(15));
+    decode_ret <= (local_decode_ret and flush_condition) or (not flush_condition and prev_decode_out(16));
+    decode_int <= (local_decode_int and flush_condition) or (not flush_condition and prev_decode_out(17));
+    decode_rti <= (local_decode_rti and flush_condition) or (not flush_condition and prev_decode_out(18));
+    decode_ret_or_rti <= (local_decode_ret_or_rti and flush_condition) or (not flush_condition and prev_decode_out(19));
+    decode_push <= (local_decode_push and flush_condition) or (not flush_condition and prev_decode_out(167));
+    decode_pop <= (local_decode_pop and flush_condition) or (not flush_condition and prev_decode_out(166));
+    decode_mem_to_reg <= (local_decode_mem_to_reg and flush_condition) or (not flush_condition and prev_decode_out(165));
+    decode_alu_op_code <= local_decode_alu_op_code when counter_flush = "00" else prev_decode_out(22 downto 20);
+    decode_which_jmp <= local_decode_which_jmp when counter_flush = "00" else prev_decode_out(163 downto 162);
+    decode_which_r_src <= local_decode_which_r_src when counter_flush = "00" else prev_decode_out(24 downto 23);
+    --- set destination, sources from prev?
     sp_mux_sel_fatma <= local_decode_push or local_decode_call or local_decode_int;
     sp_required <= sp_read;
     decode_write_enable_ex_mem_pipe_sig <= '0' when (signal_stop_writing = "10") else '1';
-    
+    out_read_data_1 <= local_out_read_data_1 when (flush_condition = '1') else prev_decode_out(113 downto 98);
+    out_read_data_2 <= local_out_read_data_2 when (flush_condition = '1') else prev_decode_out(129 downto 114);
+
     process (clk)
     begin
         if rising_edge(clk) then
@@ -210,10 +216,10 @@ begin
                 counter_flush <= "00";
             elsif counter_flush = "00" then
                 -- decode_write_enable_ex_mem_pipe_sig <= '1';
-                if local_decode_int = '1' or local_decode_call = '1' or latest_bit = '1' then
+                if local_decode_int = '1' or latest_bit = '1' then --was :or local_decode_call = '1' then
                     counter_flush <= "01";
-                elsif local_decode_ret = '1' or local_decode_rti = '1' then
-                    counter_flush <= "10";
+                elsif local_decode_rti = '1' then -- was + ret
+                    counter_flush <= "01";--was: "10";
                 end if;
             elsif counter_flush = "01" or counter_flush = "10" then
                 -- decode_write_enable_ex_mem_pipe_sig <= '0';
@@ -286,8 +292,8 @@ begin
         read_addr_2 => in_read_addr_2,
         write_addr => in_write_addr,
         write_data => in_write_data,
-        read_data_1 => out_read_data_1,
-        read_data_2 => out_read_data_2
+        read_data_1 => local_out_read_data_1,
+        read_data_2 => local_out_read_data_2
     );
     
     control: control_unit 

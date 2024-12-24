@@ -18,7 +18,7 @@ begin
 
     process (clk)
     begin
-        if falling_edge(clk) then
+        if rising_edge(clk) then
             if enable = '1' then
                 Q_int <= D;  
             end if;

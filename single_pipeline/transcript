@@ -1,0 +1,4392 @@
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd failed with 3 errors.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 1 failed with 3 errors.
+# Compile of processor.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 04:21:35 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 04:25:23 on Dec 24,2024, Elapsed time: 0:03:48
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 04:25:27 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 05:09:19 on Dec 24,2024, Elapsed time: 0:43:52
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 05:09:25 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 05:11:27 on Dec 24,2024, Elapsed time: 0:02:02
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 05:11:29 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 06:52:53 on Dec 24,2024, Elapsed time: 1:41:24
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd failed with 37 errors.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 1 failed with 37 errors.
+# Compile of decode.vhd failed with 36 errors.
+# Compile of decode.vhd failed with 13 errors.
+# Compile of decode.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 06:56:05 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+# Break key hit
+quit -sim
+# End time: 06:59:35 on Dec 24,2024, Elapsed time: 0:03:30
+# Errors: 0, Warnings: 7
+# Compile of processor.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 06:59:49 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 07:04:25 on Dec 24,2024, Elapsed time: 0:04:36
+# Errors: 0, Warnings: 9
+# Compile of decode.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 07:04:30 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 10:09:03 on Dec 24,2024, Elapsed time: 3:04:33
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd failed with 1 errors.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 1 failed with 1 error.
+# Compile of processor.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:09:35 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# ** Fatal: (vsim-3808) Incompatible modes for port "notStall".
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage File: //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd Line: 364
+# FATAL ERROR while loading design
+# Error loading design
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+# End time: 10:09:36 on Dec 24,2024, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# Error while executing: mem load
+# Usage: mem load {-infile <infile> | -filldata <data_word> [-infile <infile>]} [-endaddress <end>] [-fillradix <radix_type>] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [<path>] [-skip <Nwords>] [-startaddress <st>] [-truncate]
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+# Error while executing: mem load
+# Usage: mem load {-infile <infile> | -filldata <data_word> [-infile <infile>]} [-endaddress <end>] [-fillradix <radix_type>] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [<path>] [-skip <Nwords>] [-startaddress <st>] [-truncate]
+add wave -position insertpoint sim:/processor/mem_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/except_unit/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+# Unrecognized dataset prefix: sim
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+
+
+add wave -position insertpoint sim:/processor/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/execute_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/fetch_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/wb_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/decode_stage/*
+# Unrecognized dataset prefix: sim
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+# Unrecognized dataset prefix: sim
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:10:16 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# ** Fatal: (vsim-3808) Incompatible modes for port "notStall".
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage File: //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd Line: 364
+# FATAL ERROR while loading design
+# Error loading design
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+# End time: 10:10:16 on Dec 24,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Error while executing: mem load
+# Usage: mem load {-infile <infile> | -filldata <data_word> [-infile <infile>]} [-endaddress <end>] [-fillradix <radix_type>] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [<path>] [-skip <Nwords>] [-startaddress <st>] [-truncate]
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+# Error while executing: mem load
+# Usage: mem load {-infile <infile> | -filldata <data_word> [-infile <infile>]} [-endaddress <end>] [-fillradix <radix_type>] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [<path>] [-skip <Nwords>] [-startaddress <st>] [-truncate]
+add wave -position insertpoint sim:/processor/mem_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/except_unit/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+# Unrecognized dataset prefix: sim
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+
+
+add wave -position insertpoint sim:/processor/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/execute_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/fetch_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/wb_stage/*
+# Unrecognized dataset prefix: sim
+add wave -position insertpoint sim:/processor/decode_stage/*
+# Unrecognized dataset prefix: sim
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# Error while executing: force
+# Usage: force <object_name> {<value> [[@]<time_info>][, <value> [[@]<time_info>]...} [-freeze | -drive | -deposit] [-cancel [@]<time_info>] [-repeat [@]<time_info>]
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+# Unrecognized dataset prefix: sim
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+run
+# No Design Loaded!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+clear
+# invalid command name "clear"
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:10:36 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# ** Fatal: (vsim-3808) Incompatible modes for port "notStall".
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage File: //Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd Line: 364
+# FATAL ERROR while loading design
+# Error loading design
+
+# End time: 10:10:37 on Dec 24,2024, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# Compile of processor.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:11:50 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+# Compile of decode.vhd was successful.
+quit -sim
+# End time: 10:18:52 on Dec 24,2024, Elapsed time: 0:07:02
+# Errors: 0, Warnings: 9
+# Compile of processor.vhd was successful.
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:19:06 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 10:25:11 on Dec 24,2024, Elapsed time: 0:06:05
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:26:00 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 10:30:43 on Dec 24,2024, Elapsed time: 0:04:43
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:30:52 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+# End time: 10:33:10 on Dec 24,2024, Elapsed time: 0:02:18
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:33:12 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 10:34:39 on Dec 24,2024, Elapsed time: 0:01:27
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 10:34:40 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:13:12 on Dec 24,2024, Elapsed time: 1:38:32
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:13:18 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:16:31 on Dec 24,2024, Elapsed time: 0:03:13
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:16:52 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:20:58 on Dec 24,2024, Elapsed time: 0:04:06
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:21:08 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+# End time: 12:27:44 on Dec 24,2024, Elapsed time: 0:06:36
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:27:47 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:34:52 on Dec 24,2024, Elapsed time: 0:07:05
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:35:01 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:37:37 on Dec 24,2024, Elapsed time: 0:02:36
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:37:47 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:41:31 on Dec 24,2024, Elapsed time: 0:03:44
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:42:01 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 12:49:21 on Dec 24,2024, Elapsed time: 0:07:20
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 12:49:25 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 13:26:07 on Dec 24,2024, Elapsed time: 0:36:42
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 13:26:09 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+quit -sim
+# End time: 13:28:38 on Dec 24,2024, Elapsed time: 0:02:29
+# Errors: 0, Warnings: 9
+vsim work.processor 
+# vsim work.processor 
+# Start time: 13:29:10 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 13:35:58 on Dec 24,2024, Elapsed time: 0:06:48
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 13:36:11 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+# End time: 13:43:29 on Dec 24,2024, Elapsed time: 0:07:18
+# Errors: 0, Warnings: 9
+vsim work.processor
+# vsim work.processor 
+# Start time: 13:43:32 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 13:51:05 on Dec 24,2024, Elapsed time: 0:07:33
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 13:51:18 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# WARNING: No extended dataflow license exists
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+add wave -position insertpoint sim:/processor/out_peripheral
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd failed with 5 errors.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 1 failed with 5 errors.
+# End time: 14:17:25 on Dec 24,2024, Elapsed time: 0:26:07
+# Errors: 0, Warnings: 9
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd failed with 5 errors.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 1 failed with 5 errors.
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd failed with 2 errors.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 1 failed with 2 errors.
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 17:08:10 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+add wave -position insertpoint sim:/processor/out_peripheral
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 17:20:02 on Dec 24,2024, Elapsed time: 0:11:52
+# Errors: 0, Warnings: 8
+# Compile of 7ambola_dff.vhd was successful.
+# Compile of Add_signed.vhd was successful.
+# Compile of control_unit.vhd was successful.
+# Compile of control_unit_tb.vhd was successful.
+# Compile of decode.vhd was successful.
+# Compile of mux2to1.vhd was successful.
+# Compile of my_DFF.vhd was successful.
+# Compile of pipeline_reg.vhd was successful.
+# Compile of Register.vhd was successful.
+# Compile of Register_tb.vhd was successful.
+# Compile of RegisterFile.vhd was successful.
+# Compile of RegisterFile_tb.vhd was successful.
+# Compile of SP_sim.vhd was successful.
+# Compile of tb_Add_Signed.vhd was successful.
+# Compile of exception_unit_tb.vhd was successful.
+# Compile of Exception_Unit.vhd was successful.
+# Compile of ALU.vhd was successful.
+# Compile of execute.vhd was successful.
+# Compile of hazard_unit.vhd was successful.
+# Compile of mux4.vhd was successful.
+# Compile of oldALU.vhd was successful.
+# Compile of partB.vhd was successful.
+# Compile of partC.vhd was successful.
+# Compile of partD.vhd was successful.
+# Compile of zeyad_DFF.vhd was successful.
+# Compile of Adder.vhd was successful.
+# Compile of Fetch_Block.vhd was successful.
+# Compile of Fetch_Stage.vhd was successful.
+# Compile of hana_DFF.vhd was successful.
+# Compile of hana_Register.vhd was successful.
+# Compile of Instruction_memory.vhd was successful.
+# Compile of forwarding_unit.vhd was successful.
+# Compile of forwarding_unit_tb.vhd was successful.
+# Compile of Data_Memory.vhd was successful.
+# Compile of Memory_Stage.vhd was successful.
+# Compile of MUX2.vhd was successful.
+# Compile of processor.vhd was successful.
+# Compile of Write_Back.vhd was successful.
+# 38 compiles, 0 failed with no errors.
+vsim work.processor
+# vsim work.processor 
+# Start time: 17:20:17 on Dec 24,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.hambola_dff(arch_hambola_dff)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+# vsim work.processor 
+# Start time: 19:03:22 on Dec 22,2024
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.processor(arch_processor)
+# Loading work.fetch_block(fetch_block_arch)
+# Loading work.hana_reg(arch_hana_reg)
+# Loading work.hana_dff(arch_hana_dff)
+# Loading work.instruction_memory(behavioral)
+# Loading work.adder(behavioral)
+# Loading work.my_ndff(b_my_ndff)
+# Loading work.decode(arch_decode)
+# Loading work.reg(arch_reg)
+# Loading work.my_dff(arch_my_dff)
+# Loading work.mux2to1(arch_mux2to1)
+# Loading work.add_signed(arch_add_signed)
+# Loading work.register_file(register_file_arch)
+# Loading work.control_unit(arch_control_unit)
+# Loading work.forwarding_unit(forwarding_behavioral)
+# Loading work.hazardunit(mybehavior)
+# Loading work.exception_unit(excep_arch)
+# Loading work.execute(arch1)
+# Loading work.alu(arch1)
+# Loading work.zeyad_dff(mybehavior)
+# Loading work.memory_stage(mem_arch)
+# Loading work.mux_2_input(behav)
+# Loading work.data_memory(behavioral)
+# Loading work.write_back(write_back_arch)
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/data_mem.mem} -format binary /processor/mem_stage/dm0/memory
+mem load -i {//Mac/Home/Desktop/ARCH Project/CPU/SINGLE_PIPELINE/result.mem} -format binary /processor/fetch_stage/im0/memory
+add wave -position insertpoint sim:/processor/mem_stage/*
+add wave -position insertpoint sim:/processor/except_unit/*
+add wave -position insertpoint sim:/processor/mem_stage/dm0/*
+force -freeze sim:/processor/in_peripheral 1000000000000000 0
+
+
+add wave -position insertpoint sim:/processor/*
+add wave -position insertpoint sim:/processor/execute_stage/*
+add wave -position insertpoint sim:/processor/fetch_stage/*
+add wave -position insertpoint sim:/processor/wb_stage/*
+add wave -position insertpoint sim:/processor/decode_stage/*
+add wave -position insertpoint sim:/processor/out_peripheral
+force -freeze sim:/processor/my_clk 0 0, 1 {5000 ps} -r {10 ns}
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+add wave -position end sim:/processor/decode_stage/reg_file/*
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/decode_stage/reg_file
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /processor/fetch_stage/im0
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 1  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 2  Instance: /processor/except_unit
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 3  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 55 ns  Iteration: 2  Instance: /processor/except_unit
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# WARNING: No extended dataflow license exists
