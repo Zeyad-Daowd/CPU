@@ -5,16 +5,17 @@ use ieee.numeric_std.all;
 entity processor is 
     port (
 		my_clk: in std_logic; 
-        in_peripheral: in std_logic_vector(15 downto 0);
-        out_peripheral: out std_logic_vector(15 downto 0);
-        r_1_out: out std_logic_vector(15 downto 0);
-        r_2_out: out std_logic_vector(15 downto 0);
-        r_3_out: out std_logic_vector(15 downto 0);
+        in_peripheral: in std_logic_vector(8 downto 0);
+        out_peripheral: out std_logic_vector(6 downto 0);
+        r_1_out: out std_logic_vector(6 downto 0);
+        r_2_out: out std_logic_vector(6 downto 0);
+        r_3_out: out std_logic_vector(6 downto 0);
         reset: in std_logic
     );
 end entity processor;
 
 architecture arch_processor of processor is
+    signal out_perph, in_perph, r_1_out_sig, r_2_out_sig, r_3_out_sig: std_logic_vector(15 downto 0) := (others => '0');
     component my_nDFF IS
         generic ( n : integer := 8);
         port(
@@ -224,6 +225,12 @@ architecture arch_processor of processor is
         hazard_detected : OUT std_logic     
     );
     END component;
+    component HexTo7Segment is
+    Port (
+        hex_in : in STD_LOGIC_VECTOR (3 downto 0); -- 4-bit hexadecimal input
+        seg_out : out STD_LOGIC_VECTOR (6 downto 0) -- 7-segment output
+    );
+    end component HexTo7Segment;
     -- TODO: to be removed signals 
     -- simulating hazards and exceptions 
     signal eden_hazard: std_logic := '0';
@@ -287,17 +294,17 @@ architecture arch_processor of processor is
 
     signal out_decode_r_1, out_decode_r_2, out_decode_r_3 : std_logic_vector(15 downto 0) := (others => '0');
     begin
-        out_peripheral <= exec_Rsrc1Forwarded when (q_idie(12) = '1' and eden_hazard = '0');
+        out_perph <= exec_Rsrc1Forwarded when (q_idie(12) = '1' and eden_hazard = '0');
         stall_signal <= (eden_hazard or q_idie(17));
         d_ifid <= traversing_from_fetch & fetch_pc & fetch_next_pc & fetch_instruction;        ----instruction 0 to 15, next pc 16 to 31 
         decode_pc <= q_ifid(47 downto 32);
         decode_next_pc <= q_ifid(31 downto 16);
         decode_instruction <= q_ifid(15 downto 0);
         reset_sig <= reset;
-
-        r_1_out <= out_decode_r_1;
-        r_2_out <= out_decode_r_2;
-        r_3_out <= out_decode_r_3;
+        r_1_out_sig <= out_decode_r_1;
+        r_2_out_sig <= out_decode_r_2;
+        r_3_out_sig <= out_decode_r_3;
+        in_perph <=  "0000000" & in_peripheral;
         d_idie <= (
             out_decode_write_enable_ex_mem_pipe -- 168
             & out_decode_push -- 167
@@ -306,7 +313,7 @@ architecture arch_processor of processor is
             & out_decode_set_carry -- [164]
             & out_decode_which_jmp -- [163, 162]
             & fetch_instruction -- [161 -> 146] 
-            & in_peripheral -- [130 -> 145]
+            & in_perph -- [130 -> 145]
             & out_decode_read_data_2 -- [114 -> 129]
             & out_decode_read_data_1 -- [98 -> 113]
             & decode_instruction(4 downto 2) -- [95 -> 97]
@@ -588,5 +595,25 @@ architecture arch_processor of processor is
             dataBack => q_mem_wb(16 downto 1),
             mem => q_mem_wb(32 downto 17),
             write_data => writeBackOut
+        );
+
+        seven_segment: HexTo7Segment port map (
+            hex_in => out_perph(3 downto 0),
+            seg_out => out_peripheral
+        );
+
+        seven_segment_2 : HexTo7Segment port map (
+            hex_in => r_1_out_sig(3 downto 0),
+            seg_out => r_1_out
+        );
+
+        seven_segment_3 : HexTo7Segment port map (
+            hex_in => r_2_out_sig(3 downto 0),
+            seg_out => r_2_out
+        );
+
+        seven_segment_4 : HexTo7Segment port map (
+            hex_in => r_3_out_sig(3 downto 0),
+            seg_out => r_3_out
         );
 end architecture;

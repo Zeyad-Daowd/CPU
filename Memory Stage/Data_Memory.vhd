@@ -18,7 +18,7 @@ end Data_Memory;
 
 architecture Behavioral of Data_Memory is
     -- memory array
-    type memory_array is array (0 to 4095) of std_logic_vector(15 downto 0);
+    type memory_array is array (0 to 1) of std_logic_vector(15 downto 0);
     signal memory: memory_array := (
         others => (others => '0') 
     );
