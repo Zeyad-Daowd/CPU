@@ -1,0 +1,63 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity SP_sim_tb is
+end entity SP_sim_tb;
+
+architecture behavior of SP_sim_tb is
+    component SP_sim is 
+    end component;
+
+    -- Internal signals to control the DUT (Device Under Test)
+    signal clk : std_logic := '0';
+    signal sp_write_enable : std_logic := '0';
+    signal sp_data_in, sp_data_out : std_logic_vector(15 downto 0) := (others => '0');
+    signal push_pop : std_logic := '0';
+    signal In_Or_RTI : std_logic := '0';
+
+    constant clk_period : time := 10 ns;
+begin
+    -- Instantiate the DUT
+    uut: SP_sim
+        port map ();
+
+    -- Connect internal signals to DUT signals
+    uut_clk: label uut.arch_SP_sim.sp.clk <= clk;
+    uut_sp_write_enable: label uut.arch_SP_sim.sp.reg_write_enable <= sp_write_enable;
+    uut_sp_data_in: label uut.arch_SP_sim.sp.reg_write_data <= sp_data_in;
+    uut_sp_data_out: label uut.arch_SP_sim.sp.reg_data_out => sp_data_out;
+    uut_push_pop: label uut.arch_SP_sim.mux_plus_minus.sel <= push_pop;
+    uut_In_Or_RTI: label uut.arch_SP_sim.mux_plus_minus_2.sel <= In_Or_RTI;
+
+    -- Clock generation
+    clk_process : process
+    begin
+        while true loop
+            clk <= '0';
+            wait for clk_period / 2;
+            clk <= '1';
+            wait for clk_period / 2;
+        end loop;
+    end process;
+
+    -- Stimulus process
+    stimulus_process : process
+    begin
+        -- Test all combinations of control signals
+        for i in 0 to 7 loop
+            sp_write_enable <= std_logic(to_unsigned(i, 3)(2));
+            push_pop <= std_logic(to_unsigned(i, 3)(1));
+            In_Or_RTI <= std_logic(to_unsigned(i, 3)(0));
+
+            -- Test a range of values for sp_data_in
+            for j in 0 to 15 loop
+                sp_data_in <= std_logic_vector(to_unsigned(j, 16));
+                wait for clk_period;
+            end loop;
+        end loop;
+
+        -- End simulation
+        wait;
+    end process;
+end architecture;

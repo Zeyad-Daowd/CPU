@@ -1,0 +1,123 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity control_unit_tb is
+end entity control_unit_tb;
+
+architecture testbench of control_unit_tb is
+    -- Component Declaration for the Unit Under Test (UUT)
+    component control_unit
+        port (
+            op_code: in std_logic_vector(4 downto 0);
+            push_pop: out std_logic;
+            int_or_rti: out std_logic;
+            sp_wen: out std_logic;
+            Mem_addr: out std_logic;
+            zero_neg_flag_en: out std_logic;
+            carry_flag_en: out std_logic;
+            reg_write: out std_logic;
+            is_jmp: out std_logic;
+            mem_read: out std_logic;
+            mem_write: out std_logic;
+            imm_used: out std_logic;
+            imm_loc: out std_logic;
+            out_wen: out std_logic;
+            from_in: out std_logic;
+            mem_wr_data: out std_logic;
+            alu_op_code: out std_logic_vector(2 downto 0);
+            which_jmp: out std_logic_vector(1 downto 0)
+        );
+    end component;
+
+    -- Inputs
+    signal op_code : std_logic_vector(4 downto 0) := (others => '0');
+
+    -- Outputs
+    signal push_pop : std_logic;
+    signal int_or_rti : std_logic;
+    signal sp_wen : std_logic;
+    signal Mem_addr : std_logic;
+    signal zero_neg_flag_en : std_logic;
+    signal carry_flag_en : std_logic;
+    signal reg_write : std_logic;
+    signal is_jmp : std_logic;
+    signal mem_read : std_logic;
+    signal mem_write : std_logic;
+    signal imm_used : std_logic;
+    signal imm_loc : std_logic;
+    signal out_wen : std_logic;
+    signal from_in : std_logic;
+    signal mem_wr_data : std_logic;
+    signal alu_op_code : std_logic_vector(2 downto 0);
+    signal which_jmp : std_logic_vector(1 downto 0);
+
+    -- Simulation process
+    signal stop_simulation : boolean := false;
+
+begin
+    -- Instantiate the Unit Under Test (UUT)
+    uut: control_unit PORT MAP (
+        op_code => op_code,
+        push_pop => push_pop,
+        int_or_rti => int_or_rti,
+        sp_wen => sp_wen,
+        Mem_addr => Mem_addr,
+        zero_neg_flag_en => zero_neg_flag_en,
+        carry_flag_en => carry_flag_en,
+        reg_write => reg_write,
+        is_jmp => is_jmp,
+        mem_read => mem_read,
+        mem_write => mem_write,
+        imm_used => imm_used,
+        imm_loc => imm_loc,
+        out_wen => out_wen,
+        from_in => from_in,
+        mem_wr_data => mem_wr_data,
+        alu_op_code => alu_op_code,
+        which_jmp => which_jmp
+    );
+
+    -- Stimulus process
+    stim_proc: process
+    begin
+        -- Iterate through all possible 5-bit op_code values
+        for i in 0 to 31 loop
+            op_code <= std_logic_vector(to_unsigned(i, 5));
+            wait for 10 ns;
+
+            -- Print out the current op_code and all outputs for verification
+            report "Op Code: " & to_string(op_code) & 
+                   " | Push/Pop: " & to_string(push_pop) & 
+                   " | Int/RTI: " & to_string(int_or_rti) & 
+                   " | SP WEN: " & to_string(sp_wen) & 
+                   " | Mem Addr: " & to_string(Mem_addr) & 
+                   " | Zero/Neg Flag EN: " & to_string(zero_neg_flag_en) & 
+                   " | Carry Flag EN: " & to_string(carry_flag_en) & 
+                   " | Reg Write: " & to_string(reg_write) & 
+                   " | Is Jump: " & to_string(is_jmp) & 
+                   " | Mem Read: " & to_string(mem_read) & 
+                   " | Mem Write: " & to_string(mem_write) & 
+                   " | Imm Used: " & to_string(imm_used) & 
+                   " | Imm Loc: " & to_string(imm_loc) & 
+                   " | Out WEN: " & to_string(out_wen) & 
+                   " | From In: " & to_string(from_in) & 
+                   " | Mem WR Data: " & to_string(mem_wr_data) & 
+                   " | ALU Op Code: " & to_string(alu_op_code) & 
+                   " | Which Jump: " & to_string(which_jmp);
+        end loop;
+
+        stop_simulation <= true;
+        wait;
+    end process;
+
+    -- Optional: Watchdog to stop simulation if it runs too long
+    watchdog: process
+    begin
+        wait for 1 ms;
+        if not stop_simulation then
+            report "Simulation timed out" severity failure;
+        end if;
+        wait;
+    end process;
+end architecture testbench;
