@@ -314,6 +314,15 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling entity tb_Add_signed
 -- Compiling architecture arch_tb_Add_signed of tb_Add_signed
 
+} {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Processor/processor.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity processor
+-- Compiling architecture arch_processor of processor
+
 } {} {}} {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd} {1 {vcom -work work -2002 -explicit -stats=none {//Mac/Home/Desktop/ARCH project/CPU/single_pipeline/Fetch Stage v2/Instruction_memory.vhd}
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD

@@ -6,7 +6,8 @@ entity processor is
     port (
 		my_clk: in std_logic; 
         in_peripheral: in std_logic_vector(15 downto 0);
-        out_peripheral: out std_logic_vector(15 downto 0)
+        out_peripheral: out std_logic_vector(15 downto 0);
+        reset: in std_logic
     );
 end entity processor;
 
@@ -22,7 +23,7 @@ architecture arch_processor of processor is
 
     component Fetch_Block is
         port (
-            clk: in std_logic; -- Clock signal
+            clk, latest_bit, eden_hazard_from_unit: in std_logic; -- Clock signal
             --control signals
             ret_rti_sig: in std_logic; 
             call_sig:    in std_logic;
@@ -45,14 +46,16 @@ architecture arch_processor of processor is
             -- outputs of fetch stage
             current_pc: out std_logic_vector(15 downto 0); -- Current PC address
             next_pc: out std_logic_vector(15 downto 0); --  PC+1 address
-            instruction: out std_logic_vector(15 downto 0) -- Instruction output
+            instruction: out std_logic_vector(15 downto 0); -- Instruction output
+            traversing_fetch: out std_logic -- Clock signal
+
     
         );
     end component Fetch_Block;
 
     component decode is
         port (
-            clk : in std_logic; 
+            clk, traversing, reset_sig : in std_logic; 
             wb_reg_write: in std_logic; 
             pipe_IF_out : in  std_logic_vector(4 downto 0); 
             in_read_addr_1: in std_logic_vector(2 downto 0); 
@@ -137,6 +140,7 @@ architecture arch_processor of processor is
 
     component Exception_Unit IS 
         PORT (
+            clk : IN std_logic;
             Mem_read_en : IN std_logic; -- read enable from inst.
             Mem_write_en : IN std_logic; -- write enable from inst.
             push : IN std_logic; -- 1 for push inst.
@@ -206,7 +210,8 @@ architecture arch_processor of processor is
     end component Write_Back;
     component hazardUnit IS
     PORT (
-        memRead : IN std_logic;   
+
+        memRead, ret_or_rti_hazard : IN std_logic;   
         Rdst : IN std_logic_vector (2 DOWNTO 0); 
         Rsrc1, Rsrc2 : IN std_logic_vector (2 DOWNTO 0);  
         Rsrc1Used, Rsrc2Used : IN std_logic; 
@@ -231,8 +236,8 @@ architecture arch_processor of processor is
         -----------------------------------------------------------------------
     signal fetch_pc, fetch_next_pc, fetch_instruction : std_logic_vector(15 downto 0);
         ----------------------------- IFID pipeline -----------------------------
-    signal d_ifid : std_logic_vector(47 downto 0);
-    signal q_ifid: std_logic_vector(47 downto 0) := (others => '0');
+    signal d_ifid : std_logic_vector(48 downto 0);
+    signal q_ifid: std_logic_vector(48 downto 0) := (others => '0');
     --------------------------------- Decode Signals ----------------------------
     signal decode_pc, decode_next_pc, decode_instruction : std_logic_vector(15 downto 0);
     signal out_decode_push_pop, out_decode_int_or_rti, out_decode_sp_wen, out_decode_Mem_addr, out_decode_zero_neg_flag_en,
@@ -269,17 +274,17 @@ architecture arch_processor of processor is
     signal pcOutFromMemory: std_logic;
     signal dataOutFromMemory, writeBackOut: std_logic_vector(15 downto 0);
     signal writeFlagsFromMemory: std_logic;
-    signal reset : std_logic := '0'; -- TODO: handle this
+    signal reset_sig : std_logic := '0'; -- TODO: handle this
     signal temp: std_logic := '0';
-    signal stall_signal: std_logic:='0';
+    signal stall_signal, traversing_from_fetch: std_logic:='0';
     begin
         out_peripheral <= exec_Rsrc1Forwarded when (q_idie(12) = '1' and eden_hazard = '0');
         stall_signal <= (eden_hazard or q_idie(17));
-        d_ifid <= fetch_pc & fetch_next_pc & fetch_instruction;        ----instruction 0 to 15, next pc 16 to 31 
+        d_ifid <= traversing_from_fetch & fetch_pc & fetch_next_pc & fetch_instruction;        ----instruction 0 to 15, next pc 16 to 31 
         decode_pc <= q_ifid(47 downto 32);
         decode_next_pc <= q_ifid(31 downto 16);
         decode_instruction <= q_ifid(15 downto 0);
-
+        reset_sig <= reset;
         d_idie <= (
             out_decode_write_enable_ex_mem_pipe -- 168
             & out_decode_push -- 167
@@ -354,6 +359,9 @@ architecture arch_processor of processor is
         );
 
         fetch_stage: Fetch_Block port map (
+            eden_hazard_from_unit => eden_hazard,
+            latest_bit => q_ifid(0),
+            traversing_fetch => traversing_from_fetch,
             clk => my_clk,
             ret_rti_sig => pcOutFromMemory,
             call_sig => q_idie(15),
@@ -361,7 +369,7 @@ architecture arch_processor of processor is
             hazard_sig => stall_signal, --For stalling after int
             exception_sig => exception_sig,
             pc_en => '1', -- unused now
-            rst => reset,
+            rst => reset_sig,
             call_pc => exec_Rsrc1Forwarded,
             jmp_pc => exec_Rsrc1Forwarded, -- TODO: handle this
             ret_pc => dataOutFromMemory, -- TODO: handle this
@@ -373,7 +381,7 @@ architecture arch_processor of processor is
             instruction => fetch_instruction 
         );
 
-        If_ID: my_nDFF generic map (48) port map (
+        If_ID: my_nDFF generic map (49) port map (
             Clk => my_clk,
             Rst => '0',
             writeEN => '1',
@@ -382,6 +390,8 @@ architecture arch_processor of processor is
         );
 
         decode_stage: decode port map ( 
+            reset_sig => reset_sig,
+            traversing => q_ifid(48),
             clk => my_clk,
             wb_reg_write => q_mem_wb(36), -- TODO: come from wb
             pipe_IF_out => decode_instruction(15 downto 11),
@@ -447,6 +457,7 @@ architecture arch_processor of processor is
         );
         
         thorgan_hazard_unit: hazardUnit port map (
+            ret_or_rti_hazard => q_idie(19), -- from decode
             memRead => q_idie(8),   -- from execute
             Rdst => q_idie(91 downto 89),-- from execute
             Rsrc1 => decode_instruction(7 downto 5), -- from decode
@@ -457,6 +468,7 @@ architecture arch_processor of processor is
         );
 
         except_unit: Exception_Unit port map (
+            clk => my_clk,
             Mem_read_en => q_ex_mem(2), 
             Mem_write_en => q_ex_mem(3),
             push => out_decode_push, -- 1 for push inst.

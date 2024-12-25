@@ -108,17 +108,17 @@ BEGIN
     zeroFlagOutput <= zeroFlagOUT;
     negativeFlagOutput <= negativeFlagOUT;
     ---- resetting after jumpCondition
-    if (isJump = '1' and whichJump = "01" and zeroFlagOUT = '1') then
+    if (isJump = '1' and whichJump = "01" and zeroFlagOUT = '1' and rising_edge(clk)) then
         resetZero <= '1';
     else
         resetZero <= '0';
     end if;
-    if (isJump = '1' and whichJump = "10" and negativeFlagOUT = '1') then
+    if (isJump = '1' and whichJump = "10" and negativeFlagOUT = '1' and rising_edge(clk)) then
         resetNegative <= '1';
     else
         resetNegative <= '0';
     end if;
-    if (isJump = '1' and whichJump = "11" and carryFlagOUT = '1') then
+    if (isJump = '1' and whichJump = "11" and carryFlagOUT = '1' and rising_edge(clk)) then
         resetCarry <= '1';
     else
         resetCarry <= '0';

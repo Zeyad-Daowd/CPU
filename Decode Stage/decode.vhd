@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity decode is
     port (
-        clk : in std_logic; 
+        clk, traversing, reset_sig : in std_logic; 
         wb_reg_write: in std_logic;
         pipe_IF_out : in  std_logic_vector(4 downto 0); 
         in_read_addr_1: in std_logic_vector(2 downto 0); 
@@ -88,6 +88,7 @@ architecture arch_decode of decode is
 
     component control_unit is 
         port (
+            flush: in std_logic;
             op_code: in std_logic_vector(4 downto 0);
             push_pop: out std_logic;
             int_or_rti: out std_logic;
@@ -154,7 +155,7 @@ architecture arch_decode of decode is
 
 begin
     
-    flush_condition <= '1' when (counter_flush = "00" and jump_from_exec = '0' and hazard_detected = '0') else '0';  
+    flush_condition <= '1' when (reset_sig = '0' and traversing = '0' and counter_flush = "00" and jump_from_exec = '0' and hazard_detected = '0') else '0';  
     decode_int_or_rti <= sim_int_or_rti and flush_condition;
     decode_push_pop <= sim_push_pop and flush_condition;
     sp_sim_write_for_exception <= sim_sp_wen and flush_condition;
@@ -204,6 +205,7 @@ begin
             end if;
             if jump_from_exec = '1' or hazard_detected = '1'then
                 counter_flush <= "00";
+                signal_stop_writing <= "00";
             elsif counter_flush = "00" then
                 -- decode_write_enable_ex_mem_pipe_sig <= '1';
                 if local_decode_int = '1' or local_decode_call = '1' or latest_bit = '1' then
@@ -288,6 +290,7 @@ begin
     
     control: control_unit 
         port map(
+            flush => flush_condition,
             op_code => pipe_IF_out,
             push_pop => sim_push_pop,
             int_or_rti => sim_int_or_rti,

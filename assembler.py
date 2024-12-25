@@ -39,9 +39,11 @@ class Assembler:
             return f"{int(value):0{bits}b}"
     
     @staticmethod
-    def assemble(line):
+    def assemble(line, printErrors=True):
         line = line.strip().lower()
+        line = line.replace("  ", " ")
         instruction = line.split(" ")[0]
+        
         if instruction in Assembler.noOperands:
             return Assembler.toBinary(Assembler.noOperands[instruction], 5) + "0"*11
         if instruction in Assembler.dstSrc:
@@ -70,22 +72,22 @@ class Assembler:
             return Assembler.toBinary(Assembler.src[instruction], 5) + "0" * 3 + Assembler.Registers[src] + "0"*5
         if instruction == "iadd":
             line = line.replace(",", " ").replace("  ", " ")
-            dst, src, imm = line.split(" ")[1:]
+            dst, src, imm = line.split(" ")[1:4]
             line1 = Assembler.toBinary(12, 5) + Assembler.Registers[dst] + Assembler.Registers[src] + "0" * 4 + "1"
-            line2 = Assembler.toBinary(int(imm), 16)
+            line2 = Assembler.toBinary(int(imm, 16), 16)
             return line1 + "\n" + line2
         if instruction == "ldm":
             line = line.replace(",", "")
-            dst, imm = line.split(" ")[1:]
+            dst, imm = line.split(" ")[1:3]
             line1 = Assembler.toBinary(18, 5) + Assembler.Registers[dst] + "0"*7 + "1"
-            line2 = Assembler.toBinary(int(imm), 16)
+            line2 = Assembler.toBinary(int(imm, 16), 16)
             return line1 + "\n" + line2
         if instruction == "ldd":
             line = line.replace(" (", "(")
             offset = re.search(r"[0-9]+\(", line).group()
             dst = re.search(r"r[0-7]\,", line).group()
             src = re.search(r"r[0-7]\)", line).group()
-            offset = int(offset[:-1])
+            offset = int(offset[:-1], 16)
             src = src[:-1]
             dst = dst[:-1]
             line1 = Assembler.toBinary(19, 5) + Assembler.Registers[dst] + Assembler.Registers[src] + "0" * 4 + "1"
@@ -96,15 +98,22 @@ class Assembler:
             offset = re.search(r"[0-9]+\(", line).group()
             src1 = re.search(r"r[0-7]\,", line).group()
             src2 = re.search(r"r[0-7]\)", line).group()
-            offset = int(offset[:-1])
+            offset = int(offset[:-1], 16)
             src1 = src1[:-1]
             src2 = src2[:-1]
             line1 = Assembler.toBinary(20, 5) + "000" + Assembler.Registers[src1] + Assembler.Registers[src2] + "0" * 1 + "1"
             line2 = Assembler.toBinary(offset, 16)
             return line1 + "\n" + line2
-        print(f"Error: {instruction} not found")
-        print("line: ", line)
-        return ""
+        if (printErrors):
+            print(f"Error: {instruction} not found")
+            print("line: ", line)
+        return -1
+def is_hexadecimal(s):
+    try:
+        int(s, 16)
+        return True
+    except ValueError:
+        return False
 filename = "input.txt"
 outFile = "result.mem"
 if os.path.exists(outFile):
@@ -113,10 +122,20 @@ dictionary = OrderedDict()
 initial = 0
 with open(filename, "r") as f:
     for line in f:
-        if (line.lower().split()[0] == ".org"):
+        line = line.strip()
+        line = line.replace("\t", " ")
+        if (not line or line == "\n" or line[0] == "#"):
+            continue
+        if (line.lower().split() and line.lower().split()[0] == ".org"):
             hexa = line.lower().split()[1]
             initial = int(hexa, 16)
             continue
+        temp = Assembler.assemble(line, False)
+        if (temp == -1 and line.strip().split() and is_hexadecimal(line.strip().split()[0])):
+            dictionary[initial] = Assembler.toBinary(int(line.strip().split()[0], 16), 16)
+            initial += 1
+            continue
+            
         assembled = Assembler.assemble(line)
         for x in assembled.split("\n"):
             dictionary[initial] = x
@@ -127,6 +146,6 @@ maxKey = max(dictionary.keys())
 with open(outFile, "w") as f:
     for i in range(maxKey+1):
         if i in dictionary:
-            f.write(dictionary[i] + "\n")
+            f.write(dictionary[i] + "\n")  
         else:
             f.write("0"*16 + "\n")

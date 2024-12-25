@@ -18,14 +18,16 @@ BEGIN
     Q <= Q_temp; 
     PROCESS (clk, rst)
     BEGIN
-			if rst = '1' then
+        if rst = '1' then
 				Q_temp <= '0';
-        elsif falling_edge(clk) THEN
-            --if rst = '1' then
+        end if;
+        if falling_edge(clk) THEN
+            -- if rst = '1' then
             --    Q_temp <= '0';
+            -- els
             if enable = '1' THEN
                 Q_temp <= D;  
             END IF;
-        END IF;
+        end if;
     END PROCESS;
 END mybehavior;

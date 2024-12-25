@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 
 entity control_unit is 
     port (
+        flush: in std_logic;
         op_code: in std_logic_vector(4 downto 0);
         push_pop: out std_logic;
         int_or_rti: out std_logic;
@@ -38,44 +39,45 @@ end entity;
 
 architecture arch_control_unit of control_unit is 
 begin
-    push_pop <= (op_code(4) and not op_code(0)) and ((not op_code(3) and not op_code(2) and not op_code(1)) 
+    push_pop <= ((op_code(4) and not op_code(0)) and ((not op_code(3) and not op_code(2) and not op_code(1)) 
                 or
                 (op_code(3) and op_code(2) and op_code(1))
                 or
-                (op_code(3) and op_code(2) and not op_code(1)));
-    int_or_rti <= op_code(4) and op_code(3) and op_code(2) and op_code(1); 
-    sp_wen <= op_code(4) and (
+                (op_code(3) and op_code(2) and not op_code(1)))) and flush;
+    int_or_rti <= (op_code(4) and op_code(3) and op_code(2) and op_code(1)) and flush; 
+    sp_wen <= (op_code(4) and (
             (op_code(3) and op_code(2)) or
             (not op_code(3) and not op_code(2) and not op_code(1))
-          );
-    Mem_addr <= op_code(4) and (
+          )) and flush;
+    Mem_addr <= (op_code(4) and (
         (op_code(3) and op_code(2)) or
         (not op_code(3) and not op_code(2) and not op_code(1))
-      ); 
-    zero_neg_flag_en <= (not op_code(4) and op_code(3) and (op_code(2) or op_code(1) or op_code(0))) or
+      )) and flush; 
+    zero_neg_flag_en <= ((not op_code(4) and op_code(3) and (op_code(2) or op_code(1) or op_code(0))) or
                         (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0)) or
-                        (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0));
+                        (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0))
+                        or (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and op_code(0))) and flush;
                         
-    carry_flag_en <= (not op_code(4) and op_code(3) and (op_code(2) xor op_code(1) xor op_code(0))) or
+    carry_flag_en <= ((not op_code(4) and op_code(3) and (op_code(2) xor op_code(1) xor op_code(0))) or
                     (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0)) or
                     (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and not op_code(0)) or
-                    (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0));
+                    (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0))) and flush;
     
-    set_carry <= (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and not op_code(0));
+    set_carry <= ((not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and not op_code(0))) and flush;
     
-    reg_write <= (op_code(4) and not op_code(3) and not op_code(2) and op_code(1)) or
+    reg_write <= ((op_code(4) and not op_code(3) and not op_code(2) and op_code(1)) or
                  (not op_code(4) and op_code(3)) or
                  (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and op_code(0)) or
                  (not op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and op_code(0)) or
                  (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and not op_code(0)) or
-                 (not op_code(4) and not op_code(3) and op_code(2) and op_code(1) and not op_code(0));
+                 (not op_code(4) and not op_code(3) and op_code(2) and op_code(1) and not op_code(0))) and flush;
 
-    is_jmp <= (op_code(4) and op_code(3) and not op_code(2));
+    is_jmp <= ((op_code(4) and op_code(3) and not op_code(2))) and flush;
 
-    mem_read <= (op_code(4) and not op_code(3) and not op_code(2) and op_code(0)) or
-                (op_code(4) and op_code(3) and op_code(2) and op_code(0));
+    mem_read <= ((op_code(4) and not op_code(3) and not op_code(2) and op_code(0)) or
+                (op_code(4) and op_code(3) and op_code(2) and op_code(0))) and flush;
 
-    mem_write <= (op_code(4) and (
+    mem_write <= ((op_code(4) and (
                     (op_code(3) and op_code(2) and (
                         (op_code(1) and not op_code(0)) or  
                         (not op_code(1) and not op_code(0)) 
@@ -84,39 +86,39 @@ begin
                         (op_code(2) and not op_code(1) and not op_code(0)) or  
                         (not op_code(2) and not op_code(1) and not op_code(0)) 
                     ))
-                ));
+                ))) and flush;
             
-    imm_used <= (op_code(4) and not op_code(3) and (
+    imm_used <= ((op_code(4) and not op_code(3) and (
                     (not op_code(2) and op_code(1)) or  
                     (op_code(2) and not op_code(1) and not op_code(0)) 
                 )) or
-                (not op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0));  -- 01100
+                (not op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0))) and flush;  -- 01100
             
-    imm_loc <=  (not op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0)) or
-                (op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and op_code(0));
+    imm_loc <= ( (not op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0)) or
+                (op_code(4) and not op_code(3) and not op_code(2) and op_code(1) and op_code(0))) and flush;
             
-    out_wen <= (not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and op_code(0));
+    out_wen <= ((not op_code(4) and not op_code(3) and op_code(2) and not op_code(1) and op_code(0))) and flush;
                     
-    from_in <= (not op_code(4) and not op_code(3) and op_code(2) and op_code(1) and not op_code(0));
+    from_in <= ((not op_code(4) and not op_code(3) and op_code(2) and op_code(1) and not op_code(0))) and flush;
                     
-    mem_wr_data <= (op_code(4) and op_code(3) and op_code(2));
+    mem_wr_data <= ((op_code(4) and op_code(3) and op_code(2))) and flush;
 
-    call <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0));
+    call <= ((op_code(4) and op_code(3) and op_code(2) and not op_code(1) and not op_code(0))) and flush;
 
-    ret <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0));
+    ret <= ((op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0))) and flush;
 
-    int <= (op_code(4) and op_code(3) and op_code(2) and op_code(1) and not op_code(0));
+    int <= ((op_code(4) and op_code(3) and op_code(2) and op_code(1) and not op_code(0))) and flush;
 
-    rti <= (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0));
+    rti <= ((op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0))) and flush;
 
-    ret_or_rti <= (op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0)) or
-                    (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0));
+    ret_or_rti <= ((op_code(4) and op_code(3) and op_code(2) and not op_code(1) and op_code(0)) or
+                    (op_code(4) and op_code(3) and op_code(2) and op_code(1) and op_code(0))) and flush;
     
-    mem_to_reg <= (op_code(4) and not op_code(3) and not op_code(2)) and (op_code(0));  --- zeyad editted
+    mem_to_reg <= ((op_code(4) and not op_code(3) and not op_code(2)) and (op_code(0))) and flush;  --- zeyad editted
 
-    push <= (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and not op_code(0));
+    push <= ((op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and not op_code(0))) and flush;
 
-    pop <= (op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and op_code(0));
+    pop <= ((op_code(4) and not op_code(3) and not op_code(2) and not op_code(1) and op_code(0))) and flush;
 
     process(op_code) begin
         case op_code is

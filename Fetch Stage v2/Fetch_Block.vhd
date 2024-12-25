@@ -4,7 +4,7 @@ use IEEE.numeric_std.ALL;
 
 entity Fetch_Block is
     port (
-        clk: in std_logic; -- Clock signal
+        clk, latest_bit, eden_hazard_from_unit: in std_logic; -- Clock signal
         --control signals
         ret_rti_sig: in std_logic; 
         call_sig:    in std_logic;
@@ -27,8 +27,8 @@ entity Fetch_Block is
         --outputs of fetch stage
         current_pc: out std_logic_vector(15 downto 0); -- Current PC address
         next_pc: out std_logic_vector(15 downto 0); --  PC+1 address
-        instruction: out std_logic_vector(15 downto 0) -- Instruction output
-
+        instruction: out std_logic_vector(15 downto 0); -- Instruction output
+        traversing_fetch: out std_logic
     );
 end Fetch_Block;
 
@@ -71,36 +71,53 @@ architecture Fetch_Block_arch OF Fetch_Block is
     signal INT_CTRL_sig: std_logic;
     signal HLT : std_logic;
     signal index: std_logic_vector(15 downto 0);
+    signal traversing: std_logic := '0';
 
 
 
 begin
 
-    INT_CTRL_sig <= '1' when (instruction_tmp(15 downto 11) = "11110" and rst ='0') else '0';
-    HLT <= '1' when (instruction_tmp(15 downto 11) = "00001" and rst = '0') else '0';
+    INT_CTRL_sig <= '1' when (instruction_tmp(15 downto 11) = "11110" and rst ='0' and latest_bit = '0') else '0';
+    HLT <= '1' when (instruction_tmp(15 downto 11) = "00001" and rst = '0' and latest_bit = '0') else '0';
     index <= "0000000000000010" when instruction_tmp(7) = '1' else "0000000000000000";
-
-    process(call_sig, jmp_sig, ret_rti_sig, INT_CTRL_sig, HLT, hazard_sig, exception_sig, rst, pc_address_in_tmp,pc_address_out_tmp, next_pc_tmp, call_pc,jmp_pc, ret_pc, int_pc, clk)
+    traversing_fetch <= traversing;
+    process(call_sig, jmp_sig, ret_rti_sig, INT_CTRL_sig, HLT, hazard_sig, exception_sig, rst,pc_address_out_tmp, next_pc_tmp, call_pc,jmp_pc, ret_pc, int_pc, clk, eden_hazard_from_unit)
     begin
         --choosing a pc
-        if (call_sig = '1') then
-            pc_address_in_tmp <= call_pc;
-        elsif (jmp_sig = '1') then
-            pc_address_in_tmp <= jmp_pc; 
-        elsif (ret_rti_sig = '1') then
-            pc_address_in_tmp <= ret_pc;
-        elsif (INT_CTRL_sig = '1') then
-            pc_address_in_tmp <= int_pc;
-        elsif (rst = '1') then --rst
-            pc_address_in_tmp <= "0000000000000000"; 
-        elsif (HLT = '1' or hazard_sig = '1') then --hlt or stall when hazard
+        if (eden_hazard_from_unit = '1' and exception_sig = "00") then
             pc_address_in_tmp <= pc_address_out_tmp;
-        elsif (exception_sig = "01") then 
-            pc_address_in_tmp <= "0000000000000011";
-        elsif (exception_sig = "10") then 
-            pc_address_in_tmp <= "0000000000000010";
-        else
-            pc_address_in_tmp <= next_pc_tmp; --pc=pc+1
+            traversing <= '0';
+        elsif (call_sig = '1' and (not (pc_address_in_tmp = call_pc)) and exception_sig = "00") then
+                pc_address_in_tmp <= call_pc;
+                traversing <= '0';
+        elsif (jmp_sig = '1' and (not (pc_address_in_tmp = jmp_pc)) and exception_sig = "00") then
+                pc_address_in_tmp <= jmp_pc; 
+                traversing <= '0';
+        elsif (ret_rti_sig = '1' and (not (pc_address_in_tmp = ret_pc)) and exception_sig = "00") then
+                pc_address_in_tmp <= ret_pc;
+                traversing <= '0';
+        elsif (rising_edge(clk)) then
+            if (traversing = '1') then
+                pc_address_in_tmp <= instruction_tmp;
+                traversing <= '0';
+            elsif (INT_CTRL_sig = '1') then
+                pc_address_in_tmp <= int_pc;
+                traversing <= '1';
+            elsif (rst = '1') then --rst
+                pc_address_in_tmp <= "0000000000000000"; 
+                traversing <= '1';
+            elsif (HLT = '1' or hazard_sig = '1') then --hlt or stall when hazard
+                pc_address_in_tmp <= pc_address_out_tmp;
+            elsif (exception_sig = "01") then 
+                pc_address_in_tmp <= "0000000000000010";
+                traversing <= '1';
+            elsif (exception_sig = "10") then 
+                pc_address_in_tmp <= "0000000000000001";
+                traversing <= '1';
+            else
+                traversing <= '0';
+                pc_address_in_tmp <= next_pc_tmp; --pc=pc+1
+            end if;
         end if;
     end process;
 

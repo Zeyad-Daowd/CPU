@@ -4,6 +4,7 @@ USE IEEE.NUMERIC_STD.ALL;
 
 ENTITY Exception_Unit IS 
     PORT (
+        clk : IN std_logic; -- Clock signal
         Mem_read_en : IN std_logic; -- read enable from inst.
         Mem_write_en : IN std_logic; -- write enable from inst.
         push : IN std_logic; -- 1 for push inst.
@@ -37,9 +38,11 @@ ARCHITECTURE excep_arch OF Exception_Unit IS
 BEGIN
 
     -- Exception detection logic
-    PROCESS (mem_address, sp, push, pop, Mem_read_en, Mem_write_en)
+    PROCESS (mem_address, sp, push, pop, Mem_read_en, Mem_write_en, clk)
     BEGIN
         -- Default values
+        if (falling_edge(clk)) then
+  
         invalid_address <= '0';
         stack_full <= '0';
         stack_empty <= '0';
@@ -64,6 +67,8 @@ BEGIN
         else 
             stack_empty <= '0';
         end if;
+        end if;
+
     END PROCESS;
 
     PROCESS (invalid_address, stack_full, stack_empty, Mem_read_en, Mem_write_en, pc_memory,pc_decode)
