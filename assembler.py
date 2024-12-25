@@ -115,7 +115,7 @@ def is_hexadecimal(s):
     except ValueError:
         return False
 filename = "input.txt"
-outFile = "result.mem"
+outFile = "result.txt"
 if os.path.exists(outFile):
     os.remove(outFile)
 dictionary = OrderedDict()

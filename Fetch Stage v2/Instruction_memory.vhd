@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.ALL;
+use std.textio.all;
+use ieee.std_logic_textio.all;
 
 entity Instruction_Memory is
     port (
@@ -18,17 +20,23 @@ end Instruction_Memory;
 architecture Behavioral of Instruction_Memory is
     -- memory array
     type memory_array is array (0 to 4095) of std_logic_vector(15 downto 0);
-    signal memory: memory_array := (
-        0 => "1000000000000000", -- 00010|xxxxxxxxxx|0
-        1 => "1000001001100000", -- 00011|010|011|xxxx|0
-        2 => "1000001100000000", -- 00110|011|xxxxxxx|0
-        3 => "1000010101000000", -- 01001|101 010 000|x|0 
-        4 => "1000000001000000", -- push
-        5 => "1000100000000000", -- pop
-        6 => "1111111111111111",
-        7 => "1110101001100000",
-        others => (others => '0')   -- Initialize the rest of the memory to 0
-    );
+    
+    impure function init_instruction_mem return memory_array is
+        file text_file : text open read_mode is "/home/zizo/CMP Year three/Semester 1/Architecture/Project/CPU/Fetch Stage v2/result.txt";
+        variable text_line : line;
+        variable ram_content : memory_array;
+        variable bv : bit_vector(ram_content(0)'range);
+        variable i : integer := 0;
+        begin
+            while not endfile(text_file) loop
+            readline(text_file, text_line);
+            read(text_line, bv);
+            ram_content(i) := to_stdlogicvector(bv);
+            i := i + 1;
+            end loop;
+            return ram_content;
+    end function;
+    signal memory: memory_array := init_instruction_mem;
 
     signal instruction_reg: std_logic_vector(15 downto 0); -- Register for instruction output
 begin
