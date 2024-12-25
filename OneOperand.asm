@@ -38,7 +38,7 @@
 .ORG 0A00
     NOP
     RTI
-
+.org 200
 NOT R1, R1     #R1 =FFFF , C--> no change, N --> 1, Z --> 0
 NOP            #No change
 INC R1, R1     #R1 =0000 , C --> 1 , N --> 0 , Z --> 1
