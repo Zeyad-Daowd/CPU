@@ -279,7 +279,7 @@ architecture arch_processor of processor is
     signal stall_signal, traversing_from_fetch: std_logic:='0';
     begin
         out_peripheral <= exec_Rsrc1Forwarded when (q_idie(12) = '1' and eden_hazard = '0');
-        stall_signal <= (eden_hazard or q_idie(17));
+        stall_signal <= (eden_hazard);-- or q_idie(17));
         d_ifid <= traversing_from_fetch & fetch_pc & fetch_next_pc & fetch_instruction;        ----instruction 0 to 15, next pc 16 to 31 
         decode_pc <= q_ifid(47 downto 32);
         decode_next_pc <= q_ifid(31 downto 16);
