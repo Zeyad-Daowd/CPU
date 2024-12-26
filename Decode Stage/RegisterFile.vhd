@@ -11,18 +11,11 @@ ENTITY Register_File IS
         write_addr: IN std_logic_vector(2 downto 0);
         write_data: IN std_logic_vector(15 downto 0);
         read_data_1: OUT std_logic_vector(15 downto 0);
-        read_data_2: OUT std_logic_vector(15 downto 0);
-        reg_file_r_1 : out std_logic_vector(15 downto 0);
-        reg_file_r_2 : out std_logic_vector(15 downto 0);
-        reg_file_r_3 : out std_logic_vector(15 downto 0)
+        read_data_2: OUT std_logic_vector(15 downto 0)
     );
 END ENTITY Register_File;
 
 ARCHITECTURE Register_File_Arch OF Register_File IS
-	 constant first_addr : std_logic_vector (2 downto 0) := "000";
-	 constant sec_addr : std_logic_vector (2 downto 0) := "000";
-	 constant third_addr : std_logic_vector (2 downto 0) := "000";
-
     TYPE reg_file is Array(0 TO 7) of std_logic_vector(15 DOWNTO 0);
     signal my_reg_file: reg_file := (
         0 => "0000000000000111",
@@ -46,8 +39,5 @@ BEGIN
 
     read_data_1 <= my_reg_file(to_integer(unsigned(read_addr_1)));
     read_data_2 <= my_reg_file(to_integer(unsigned(read_addr_2)));
-    reg_file_r_1 <= my_reg_file(to_integer(unsigned(first_addr)));
-    reg_file_r_2 <= my_reg_file(to_integer(unsigned(sec_addr)));
-    reg_file_r_3 <= my_reg_file(to_integer(unsigned(third_addr)));
     
 END Register_File_Arch;

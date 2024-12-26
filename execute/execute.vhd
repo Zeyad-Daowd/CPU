@@ -56,7 +56,6 @@ signal carryFlagIN, zeroFlagIN, negativeFlagIN : std_logic;
 signal carryFlagOUT, zeroFlagOUT, negativeFlagOUT : std_logic;
 signal resetCarry, resetZero, resetNegative : std_logic;
 BEGIN
-    
     PROCESS (RegA, RegB, ALUop, imm_used, imm_loc, imm_value, memForward1, memForward2, execForward1, execForward2, memForwardData, execForwardData, fromIn, inData, isJump, whichJump, carryFlagEn, zeroFlagEn, negativeFlagEn, RTI, set_C, carryFlagMem, zeroFlagMem, negativeFlagMem, aluRes, negativeFlagOUT, zeroFlagOUT, carryFlagOUT, clk)
     BEGIN
     ----- setting ALU INPUTS
@@ -109,22 +108,20 @@ BEGIN
     zeroFlagOutput <= zeroFlagOUT;
     negativeFlagOutput <= negativeFlagOUT;
     ---- resetting after jumpCondition
-    if rising_edge(clk) then
-        if (isJump = '1' and whichJump = "01" and zeroFlagOUT = '1') then
-            resetZero <= '1';
-        else
-            resetZero <= '0';
-        end if;
-        if (isJump = '1' and whichJump = "10" and negativeFlagOUT = '1') then
-            resetNegative <= '1';
-        else
-            resetNegative <= '0';
-        end if;
-        if (isJump = '1' and whichJump = "11" and carryFlagOUT = '1') then
-            resetCarry <= '1';
-        else
-            resetCarry <= '0';
-        end if;
+    if (isJump = '1' and whichJump = "01" and zeroFlagOUT = '1' and rising_edge(clk)) then
+        resetZero <= '1';
+    else
+        resetZero <= '0';
+    end if;
+    if (isJump = '1' and whichJump = "10" and negativeFlagOUT = '1' and rising_edge(clk)) then
+        resetNegative <= '1';
+    else
+        resetNegative <= '0';
+    end if;
+    if (isJump = '1' and whichJump = "11" and carryFlagOUT = '1' and rising_edge(clk)) then
+        resetCarry <= '1';
+    else
+        resetCarry <= '0';
     end if;
     ---- setting jumpCondition
 

@@ -7,9 +7,6 @@ entity processor is
 		my_clk: in std_logic; 
         in_peripheral: in std_logic_vector(15 downto 0);
         out_peripheral: out std_logic_vector(15 downto 0);
-        r_1_out: out std_logic_vector(15 downto 0);
-        r_2_out: out std_logic_vector(15 downto 0);
-        r_3_out: out std_logic_vector(15 downto 0);
         reset: in std_logic
     );
 end entity processor;
@@ -97,10 +94,7 @@ architecture arch_processor of processor is
             decode_which_jmp: out std_logic_vector(1 downto 0);
             decode_which_r_src: out std_logic_vector(1 downto 0);
             out_read_data_1: out std_logic_vector(15 downto 0); 
-            out_read_data_2: out std_logic_vector(15 downto 0);
-            decode_r_1 : out std_logic_vector(15 downto 0);
-            decode_r_2 : out std_logic_vector(15 downto 0);
-            decode_r_3 : out std_logic_vector(15 downto 0)
+            out_read_data_2: out std_logic_vector(15 downto 0) 
         );
     end component decode;
 
@@ -283,9 +277,6 @@ architecture arch_processor of processor is
     signal reset_sig : std_logic := '0'; -- TODO: handle this
     signal temp: std_logic := '0';
     signal stall_signal, traversing_from_fetch: std_logic:='0';
-
-
-    signal out_decode_r_1, out_decode_r_2, out_decode_r_3 : std_logic_vector(15 downto 0) := (others => '0');
     begin
         out_peripheral <= exec_Rsrc1Forwarded when (q_idie(12) = '1' and eden_hazard = '0');
         stall_signal <= (eden_hazard or q_idie(17));
@@ -294,10 +285,6 @@ architecture arch_processor of processor is
         decode_next_pc <= q_ifid(31 downto 16);
         decode_instruction <= q_ifid(15 downto 0);
         reset_sig <= reset;
-
-        r_1_out <= out_decode_r_1;
-        r_2_out <= out_decode_r_2;
-        r_3_out <= out_decode_r_3;
         d_idie <= (
             out_decode_write_enable_ex_mem_pipe -- 168
             & out_decode_push -- 167
@@ -447,10 +434,7 @@ architecture arch_processor of processor is
             decode_which_jmp => out_decode_which_jmp,
             decode_which_r_src => out_decode_which_r_src,
             out_read_data_1 => out_decode_read_data_1, 
-            out_read_data_2 => out_decode_read_data_2,
-            decode_r_1 => out_decode_r_1,
-            decode_r_2 => out_decode_r_2,
-            decode_r_3 => out_decode_r_3
+            out_read_data_2 => out_decode_read_data_2
         );
 
         ID_IE: my_nDFF generic map (169) port map (

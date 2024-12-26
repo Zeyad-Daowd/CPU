@@ -20,7 +20,8 @@ BEGIN
     BEGIN
         if rst = '1' then
 				Q_temp <= '0';
-        elsif falling_edge(clk) THEN
+        end if;
+        if falling_edge(clk) THEN
             -- if rst = '1' then
             --    Q_temp <= '0';
             -- els

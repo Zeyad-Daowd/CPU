@@ -43,10 +43,7 @@ entity decode is
         decode_which_jmp: out std_logic_vector(1 downto 0);
         decode_which_r_src: out std_logic_vector(1 downto 0);
         out_read_data_1: out std_logic_vector(15 downto 0); 
-        out_read_data_2: out std_logic_vector(15 downto 0);
-        decode_r_1 : out std_logic_vector(15 downto 0);
-        decode_r_2 : out std_logic_vector(15 downto 0);
-        decode_r_3 : out std_logic_vector(15 downto 0)
+        out_read_data_2: out std_logic_vector(15 downto 0)
     );
 end entity decode;
 architecture arch_decode of decode is
@@ -85,10 +82,7 @@ architecture arch_decode of decode is
             write_addr: in std_logic_vector(2 downto 0);
             write_data: in std_logic_vector(15 downto 0);
             read_data_1: out std_logic_vector(15 downto 0);
-            read_data_2: out std_logic_vector(15 downto 0);
-            reg_file_r_1 : out std_logic_vector(15 downto 0);
-            reg_file_r_2 : out std_logic_vector(15 downto 0);
-            reg_file_r_3 : out std_logic_vector(15 downto 0)
+            read_data_2: out std_logic_vector(15 downto 0)
         );
     end component Register_File;
 
@@ -291,10 +285,7 @@ begin
         write_addr => in_write_addr,
         write_data => in_write_data,
         read_data_1 => out_read_data_1,
-        read_data_2 => out_read_data_2,
-        reg_file_r_1 => decode_r_1,
-        reg_file_r_2 => decode_r_2,
-        reg_file_r_3 => decode_r_3
+        read_data_2 => out_read_data_2
     );
     
     control: control_unit 
