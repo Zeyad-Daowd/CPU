@@ -7,6 +7,8 @@ entity processor is
 		my_clk: in std_logic; 
         in_peripheral: in std_logic_vector(15 downto 0);
         out_peripheral: out std_logic_vector(15 downto 0);
+        in_peripheral: in std_logic_vector(15 downto 0);
+        out_peripheral: out std_logic_vector(15 downto 0);
         reset: in std_logic
     );
 end entity processor;
@@ -94,6 +96,7 @@ architecture arch_processor of processor is
             decode_which_jmp: out std_logic_vector(1 downto 0);
             decode_which_r_src: out std_logic_vector(1 downto 0);
             out_read_data_1: out std_logic_vector(15 downto 0); 
+            out_read_data_2: out std_logic_vector(15 downto 0) 
             out_read_data_2: out std_logic_vector(15 downto 0) 
         );
     end component decode;
@@ -294,6 +297,7 @@ architecture arch_processor of processor is
             & out_decode_which_jmp -- [163, 162]
             & fetch_instruction -- [161 -> 146] 
             & in_peripheral -- [130 -> 145]
+            & in_peripheral -- [130 -> 145]
             & out_decode_read_data_2 -- [114 -> 129]
             & out_decode_read_data_1 -- [98 -> 113]
             & decode_instruction(4 downto 2) -- [95 -> 97]
@@ -434,6 +438,7 @@ architecture arch_processor of processor is
             decode_which_jmp => out_decode_which_jmp,
             decode_which_r_src => out_decode_which_r_src,
             out_read_data_1 => out_decode_read_data_1, 
+            out_read_data_2 => out_decode_read_data_2
             out_read_data_2 => out_decode_read_data_2
         );
 

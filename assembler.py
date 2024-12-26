@@ -114,14 +114,15 @@ def is_hexadecimal(s):
         return True
     except ValueError:
         return False
-filename = "input.txt"
-outFile = "result.txt"
+filename = "TestCase1.asm"
+outFile = "result.mem"
 if os.path.exists(outFile):
     os.remove(outFile)
 dictionary = OrderedDict()
 initial = 0
 with open(filename, "r") as f:
     for line in f:
+        line = line.replace(",", ", ").replace("  ", " ")
         line = line.strip()
         line = line.replace("\t", " ")
         if (not line or line == "\n" or line[0] == "#"):
